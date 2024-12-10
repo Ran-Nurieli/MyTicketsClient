@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:LoginPageViewModel"
+             x:Class="MyTicketsClient.Views.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout Padding="20">
+
+        <Label 
+            Text="דף התחברות"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            TextColor="Black"
+            BackgroundColor="White"
+            FontSize="Large"
+            
+            />
+
+        <Entry
+            x:Name="Username"
+            Placeholder="הזן שם משתמש"
+            TextColor="Black"   
+            HorizontalOptions="Center"
+            VerticalOptions="Center" 
+            />
+
+        <Entry
+            Placeholder="הזן סיסמה"
+            TextColor="Black"
+            IsPassword="True"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"     
+            />
+
+
+
+
+        <Button
+            Text="Login"
+            VerticalOptions="Center" HorizontalOptions="Center"
+            Command="{Binding LoginCommand}"  IsEnabled="{Binding NotInServerCall}"
+            />
+
+
+
+
+        <Button Text="שכחתי סיסמה"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
