@@ -5,9 +5,35 @@
              xmlns:viewmodel="clr-namespace:MyTicketsClient.ViewModels"
              Title="Register">
     <VerticalStackLayout>
+
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Register"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            TextColor="Black"
+            BackgroundColor="White"
+            FontSize="Large"
+            
+            />
+
+
+        <Entry
+            x:Name="Username"
+            Placeholder="הזן שם משתמש"
+            TextColor="Black"   
+            HorizontalOptions="Center"
+            VerticalOptions="Center" 
+            />
+
+        <Entry
+            Placeholder="הזן סיסמה"
+            TextColor="Black"
+            IsPassword="True"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"     
+            />
+
+
+
     </VerticalStackLayout>
 </ContentPage>
