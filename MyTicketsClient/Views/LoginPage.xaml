@@ -43,8 +43,6 @@
             />
 
 
-
-
         <Button Text="שכחתי סיסמה"
                 VerticalOptions="Center"
                 HorizontalOptions="Center" />

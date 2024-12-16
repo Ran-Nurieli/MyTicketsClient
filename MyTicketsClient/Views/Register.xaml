@@ -32,6 +32,21 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"     
             />
+        <Entry
+            Placeholder="מייל"
+            TextColor="Black"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
+
+        <Button
+            Text="Register"
+            VerticalOptions="Center" HorizontalOptions="Center"
+            Command="{Binding RegisterCommand}"  IsEnabled="{Binding NotInServerCall}"
+            />
+
+
+
 
 
 
