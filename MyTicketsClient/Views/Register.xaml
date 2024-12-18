@@ -39,6 +39,8 @@
             HorizontalOptions="Center"
             />
 
+        
+
         <Button
             Text="Register"
             VerticalOptions="Center" HorizontalOptions="Center"

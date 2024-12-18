@@ -1,10 +1,12 @@
-﻿using MyTicketsClient.Models;
+﻿//using Android.Telecom;
+using MyTicketsClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using MyTicketsClient.ViewModels;
 
 namespace MyTicketsClient.Services
 {
@@ -142,6 +144,12 @@ namespace MyTicketsClient.Services
 
         public async Task<User> LoginAsync(LoginInfo userInfo)
         {
+            
+
+
+
+
+
             //Set URI to the specific function API
             string url = $"{this.baseUrl}login";
             try
