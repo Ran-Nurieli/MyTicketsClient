@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyTicketsClient.Views;
 using MyTicketsClient.ViewModels;
+using MyTicketsClient.Services;
 
 namespace MyTicketsClient
 {
@@ -21,6 +22,8 @@ namespace MyTicketsClient
 
             builder.Services.AddSingleton<Register>();
             builder.Services.AddSingleton<RegisterViewModel>();
+
+            builder.Services.AddSingleton<MyTicketServerClientApi>();
 
 
 #if DEBUG

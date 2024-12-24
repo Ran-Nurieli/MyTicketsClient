@@ -7,7 +7,7 @@ namespace MyTicketsClient
     {
 
 
-        public User? LoggedInUser { get; set; }
+        public User? LoggedInUser { get; set; } = null!;
         public App()
         {
 
