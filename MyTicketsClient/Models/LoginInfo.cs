@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyTicketsClient.Models
 {
-    class LoginInfo
+    public class LoginInfo
     {
 
         public string Email { get; set; }
