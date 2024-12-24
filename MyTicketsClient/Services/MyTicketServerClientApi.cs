@@ -22,8 +22,8 @@ namespace MyTicketsClient.Services
         private JsonSerializerOptions jsonSerializerOptions;
 
         // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
-        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5021.uks1.devtunnels.ms/api/" : "http://localhost:5021/api/";
-        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5021.uks1.devtunnels.ms/images/" : "http://localhost:5021/images/";
+        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5198.uks1.devtunnels.ms/api/" : "http://localhost:5198/api/";
+        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5198.uks1.devtunnels.ms/images/" : "http://localhost:5198/images/";
 
         // אובייקט של מחלקת השירות שמכיל את כתובת הבסיס לשרת
         private string baseUrl;
@@ -142,45 +142,40 @@ namespace MyTicketsClient.Services
             }
         }
 
-        public async Task<User> LoginAsync(LoginInfo userInfo)
-        {
-            
+        //public async Task<User> LoginAsync(LoginInfo userInfo)
+        //{
 
-
-
-
-
-            //Set URI to the specific function API
-            string url = $"{this.baseUrl}login";
-            try
-            {
-                //Call the server API
-                string json = JsonSerializer.Serialize(userInfo);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, content);
-                //Check status
-                if (response.IsSuccessStatusCode)
-                {
-                    //Extract the content as string
-                    string resContent = await response.Content.ReadAsStringAsync();
-                    //Desrialize result
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    User? result = JsonSerializer.Deserialize<User>(resContent, options);
-                    return result;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
+        //    //Set URI to the specific function API
+        //    string url = $"{this.baseUrl}login";
+        //    try
+        //    {
+        //        //Call the server API
+        //        string json = JsonSerializer.Serialize(userInfo);
+        //        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+        //        HttpResponseMessage response = await client.PostAsync(url, content);
+        //        //Check status
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            //Extract the content as string
+        //            string resContent = await response.Content.ReadAsStringAsync();
+        //            //Desrialize result
+        //            JsonSerializerOptions options = new JsonSerializerOptions
+        //            {
+        //                PropertyNameCaseInsensitive = true
+        //            };
+        //            User? result = JsonSerializer.Deserialize<User>(resContent, options);
+        //            return result;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
 
 
 

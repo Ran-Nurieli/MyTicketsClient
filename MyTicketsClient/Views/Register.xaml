@@ -46,6 +46,8 @@
             VerticalOptions="Center" HorizontalOptions="Center"
             Command="{Binding RegisterCommand}"  IsEnabled="{Binding NotInServerCall}"
             />
+        
+        
 
 
 
