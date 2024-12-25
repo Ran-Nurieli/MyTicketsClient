@@ -8,7 +8,7 @@
     <VerticalStackLayout Padding="20">
 
         <Label 
-            Text="דף התחברות"
+            Text="Login Page"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             TextColor="Black"
@@ -18,11 +18,13 @@
             />
 
         <Entry
-            x:Name="Username"
-            Placeholder="הזן שם משתמש"
+            x:Name="Email"
+            Placeholder="Enter Email"
             TextColor="Black"   
             HorizontalOptions="Center"
             VerticalOptions="Center" 
+            Text="{Binding Email}"
+            IsEnabled="{Binding NotInServerCall}"
             />
 
         <Entry
@@ -30,7 +32,9 @@
             TextColor="Black"
             IsPassword="True"
             VerticalOptions="Center"
-            HorizontalOptions="Center"     
+            HorizontalOptions="Center"  
+            Text="{Binding Password}"
+            IsEnabled="{Binding NotInServerCall}"
             />
 
 
@@ -42,9 +46,22 @@
             Command="{Binding LoginCommand}"  IsEnabled="{Binding NotInServerCall}"
             />
 
+        <Label
+            Text="{Binding ErrorMsg}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
 
-        <Button Text="שכחתי סיסמה"
+
+
+
+
+        <Button Text="Forgot Password? Click!"
                 VerticalOptions="Center"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                IsEnabled="{Binding NotInServerCall}"
+                
+                />
     </VerticalStackLayout>
 </ContentPage>

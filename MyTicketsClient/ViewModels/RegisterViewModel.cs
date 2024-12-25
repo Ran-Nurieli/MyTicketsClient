@@ -290,8 +290,55 @@ namespace MyTicketsClient.ViewModels
         }
         #endregion
 
+        #region BirthDateValidation
+
+        private bool showDateOfBirthError;
+        public bool ShowDateOfBirthError
+        {
+            get => showDateOfBirthError;
+            set
+            {
+                showDateOfBirthError = value; OnPropertyChanged("ShowDateOfBirthError");
+            }
+        }
+        private DateTime dateOfBirth;
+        public DateTime DateOfBirth
+        {
+            get => dateOfBirth;
+            set
+            {
+                dateOfBirth = value;
+                ValidateDateOfBirth();
+                OnPropertyChanged("DateOfBirth");
+            }
+        }
+
+        private DateTime minDate;
+        public DateTime MinDate
+        {
+            get => DateTime.Now.AddYears(-14);
+        }
+
+        private string dateOfBirthError;
+        public string DateOfBirthError
+        {
+            get => dateOfBirthError;
+            set
+            {
+                dateOfBirthError = value; OnPropertyChanged("DateOfBirthError");
+            }
+        }
+        private void ValidateDateOfBirth()
+        {
+
+            this.ShowDateOfBirthError = false;
+
+        }
 
 
+        #endregion 
+
+        //recently added birthday validation - check it
 
 
 

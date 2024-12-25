@@ -25,30 +25,84 @@
             HorizontalOptions="Center"
             VerticalOptions="Center" 
             />
+        <Label
+            Text="{Binding NameError}" IsVisible="{Binding ShowNameError}"            
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
 
         <Entry
-            Placeholder="הזן סיסמה"
+            Placeholder="Enter Password"
             TextColor="Black"
             IsPassword="True"
             VerticalOptions="Center"
-            HorizontalOptions="Center"     
+            HorizontalOptions="Center"
             />
+        <Label
+            Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+
         <Entry
-            Placeholder="מייל"
+            Placeholder="Enter Email"
             TextColor="Black"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             />
+        <Label
+            Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+        <DatePicker
+            x:Name="BirthdayPicker"
+            Margin="0,10"
+            BackgroundColor="Black"
+            Date="{Binding DateOfBirth}"
+            MaximumDate="{Binding MinDate}"
+            MinimumDate="1950-01-01"
+            />
+
+
+        <Picker x:Name="Gender" Title="Select Gender">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Female</x:String>
+                    <x:String>Male</x:String>
+                    <x:String>Other</x:String>
+
+                </x:Array>
+                
+            </Picker.ItemsSource>
+            
+        </Picker>
+        
+        
+        
 
         
+
+        
+        
+
+
+
 
         <Button
             Text="Register"
             VerticalOptions="Center" HorizontalOptions="Center"
             Command="{Binding RegisterCommand}"  IsEnabled="{Binding NotInServerCall}"
             />
-        
-        
+
+
+
+
 
 
 
