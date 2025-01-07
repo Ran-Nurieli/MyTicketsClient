@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:RegisterViewModel"
              x:Class="MyTicketsClient.Views.Register"  
-             xmlns:viewmodel="clr-namespace:MyTicketsClient.ViewModels"
-             x:DataType="viewmodel:RegisterViewModel"
              Title="Register">
     <VerticalStackLayout>
 
@@ -19,6 +19,7 @@
 
 
         <Entry
+            Text="{Binding Username}"
             x:Name="Username"
             Placeholder="הזן שם משתמש"
             TextColor="Black"   
@@ -33,6 +34,7 @@
             />
 
         <Entry
+            Text="{Binding Password}"
             Placeholder="Enter Password"
             TextColor="Black"
             IsPassword="True"
@@ -48,6 +50,7 @@
 
 
         <Entry
+            Text="{Binding Email}"
             Placeholder="Enter Email"
             TextColor="Black"
             VerticalOptions="Center"
@@ -63,14 +66,16 @@
         <DatePicker
             x:Name="BirthdayPicker"
             Margin="0,10"
-            BackgroundColor="Black"
+            BackgroundColor="White"
             Date="{Binding DateOfBirth}"
             MaximumDate="{Binding MinDate}"
             MinimumDate="1950-01-01"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             />
 
 
-        <Picker x:Name="Gender" Title="Select Gender">
+        <Picker x:Name="Gender" Title="Select Gender" HorizontalOptions="Center" VerticalOptions="Center" SelectedItem="{Binding Gender}">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Female</x:String>

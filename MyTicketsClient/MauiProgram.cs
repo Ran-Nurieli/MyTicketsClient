@@ -17,13 +17,16 @@ namespace MyTicketsClient
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<LoginPageViewModel>();
-
-            builder.Services.AddSingleton<Register>();
-            builder.Services.AddSingleton<RegisterViewModel>();
 
             builder.Services.AddSingleton<MyTicketServerClientApi>();
+
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<Register>();
+
+            builder.Services.AddTransient<LoginPageViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+
+            
 
 
 #if DEBUG

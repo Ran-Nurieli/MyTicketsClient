@@ -14,12 +14,13 @@ using MyTicketsClient.Models;
 
 namespace MyTicketsClient.ViewModels
 {
-    class RegisterViewModel : ViewModelBase
+    public class RegisterViewModel : ViewModelBase
     {
         private MyTicketServerClientApi proxy;
 
+        private IServiceProvider serviceProvider;
 
-        public RegisterViewModel(MyTicketServerClientApi proxy)
+        public RegisterViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
             RegisterCommand = new Command(OnRegister);
@@ -29,6 +30,7 @@ namespace MyTicketsClient.ViewModels
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
             NameError = "Name is required";
             EmailError = "Email is required";
+            this.serviceProvider = serviceProvider;
         }
 
         #region UsernameValidation
@@ -44,7 +46,7 @@ namespace MyTicketsClient.ViewModels
             }
         }
 
-        private string name;
+        private string? name;
 
         public string Name
         {
@@ -70,49 +72,50 @@ namespace MyTicketsClient.ViewModels
         }
 
 
-        private string usererror;
-        private string username;
+        private string? usererror;
+        private string? username;
 
-        private string password;
-        private string passworderror;
+        private string? password;
+        private string? passworderror;
         
 
 
-        public string Username
+        public string? Username
         {
             get
             {
-                return Username;
+                return username;
             }
             set
             {
-                Username = value;
+                username = value;
                 usererror = ""; // איפוס שגיאת שם המשתמש
                 OnPropertyChanged(nameof(Username));
                
 
-                if (!string.IsNullOrEmpty(Username))
+                if (!string.IsNullOrEmpty(username))
 
                 {
-                    if (char.IsDigit(Username[0]))
+                    if (char.IsDigit(username[0]))
                     {
                         usererror = "!!שם המשתמש לא יכול להתחיל בספרה!!";
-                        OnPropertyChanged(nameof(Username));
+                        OnPropertyChanged(nameof(username));
                     }
 
                 }
             }
         }
 
+        private string userError;
         public string UserError
         {
             get
             {
-                return UserError;
+                return userError;
             }
             set
             {
-                UserError = value;
+                userError = value;
                 OnPropertyChanged(nameof(UserError));
             }
         }
@@ -153,7 +156,7 @@ namespace MyTicketsClient.ViewModels
 
         }
 
-        public string PasswordError
+        public string? PasswordError
         {
             get { return passworderror; }
             set
@@ -308,6 +311,7 @@ namespace MyTicketsClient.ViewModels
             set
             {
                 dateOfBirth = value;
+                age = (DateTime.Now.Year - dateOfBirth.Year);
                 ValidateDateOfBirth();
                 OnPropertyChanged("DateOfBirth");
             }
@@ -352,6 +356,19 @@ namespace MyTicketsClient.ViewModels
 
 
         private string gender;
+        public string Gender
+        {
+            get => gender;
+            set
+            {
+                if(gender != value)
+                {
+                    gender = value;
+                    OnPropertyChanged(nameof(gender));
+                }
+            }
+        }
+
 
         private int age;
 
@@ -360,18 +377,21 @@ namespace MyTicketsClient.ViewModels
         {
            ValidatePassword();
             ValidateName();
-            ValidateEmail();    
+            ValidateEmail();
+            ValidateDateOfBirth();
 
-            if(!ShowNameError && !ShowEmailError && !ShowPasswordError)
+            if(!ShowNameError && !ShowEmailError && !ShowPasswordError && !ShowDateOfBirthError)
             {
   
-                //var User = new User { Username = Name, Password = Password, Email = Email, IsAdmin = false, Age = age, Gender = gender };
-
-                
-
+                var user = new User { Username = Username, Password = Password, Email = Email, IsAdmin = false, Age = age, Gender = gender };
+                int? u = await this.proxy.Register(user);
+                if(u != null)
+                {
+                    await Shell.Current.GoToAsync("Login");
+                }
             }
 
-
+           
 
 
         }

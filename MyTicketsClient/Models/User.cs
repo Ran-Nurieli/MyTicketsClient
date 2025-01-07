@@ -18,6 +18,8 @@ namespace MyTicketsClient.Models
         public bool IsAdmin { get; set; }
 
 
+        public User() { }
+
         public User(Models.User user)
         {
             this.Username = Username;

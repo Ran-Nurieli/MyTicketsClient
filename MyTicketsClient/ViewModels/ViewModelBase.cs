@@ -21,7 +21,7 @@ namespace MyTicketsClient.ViewModels
         #endregion
 
         #region In Server Call Indication!
-        private bool inServerCall;
+        private bool inServerCall = false;
         public bool InServerCall
         {
             get

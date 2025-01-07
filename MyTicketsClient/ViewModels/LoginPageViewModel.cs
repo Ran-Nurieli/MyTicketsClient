@@ -29,7 +29,6 @@ public class LoginPageViewModel : ViewModelBase
         RegisterCommand = new Command(OnRegister);
         email = "";
         password = "";
-        InServerCall = false;
         errorMsg = "";
     }
 
