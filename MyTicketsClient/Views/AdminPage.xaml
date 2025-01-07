@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:Class="MyTicketsClient.Views.AdminPage"
+             x:DataType="ViewModel:AdminPageViewModel"
+             Title="Admin Page"
+             >
+
+
+    <VerticalStackLayout Padding="20">
+        <Label
+            Text="Search for Users:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            TextColor="Black"
+            BackgroundColor="White"
+            FontSize="Large"
+            />
+
+
+        <Entry
+            Placeholder="Enter Username"
+            TextColor="Black"
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Text="{Binding Name}"
+            
+            />
+
+        <Button
+            Text="Search"
+            Command="{Binding SearchUserName}"
+            WidthRequest="150"
+            />
+
+
+
+        <Entry
+           Text="{Binding ShowAdminProfile}" 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
+
+        <Picker
+
+
+    </VerticalStackLayout>
+
+    
+    
+    
+</ContentPage>
+    
