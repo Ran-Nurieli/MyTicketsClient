@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:ProfilePageViewModel"
+             x:Class="MyTicketsClient.Views.ProfilePage"
+             Title="Profile">
+
+
+
+    <Grid>
+        <VerticalStackLayout Padding="20">
+
+
+            <!-- First Name -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="First Name" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+            </Grid>
+            <Entry Placeholder="Type First Name" Text="{Binding Name}" Style="{StaticResource entryStyle}" />
+
+
+            <!-- Email -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Email" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+            </Grid>
+            <Entry Placeholder="Type Email" Text="{Binding Email}" Style="{StaticResource entryStyle}" />
+
+            <!-- Password -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Password" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Placeholder="Type Password" Text="{Binding Password}" IsPassword="{Binding IsPassword}" Style="{StaticResource entryStyle}" />
+                <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordeye.jpg" Command="{Binding ShowPasswordCommand}" />
+            </Grid>
+
+            <!-- Save and Cancel Buttons -->
+            <Button Text="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding NotInServerCall}"  Style="{StaticResource buttonStyle}" />
+
+
+        </VerticalStackLayout>
+
+        <!-- Centered ActivityIndicator -->
+        <ActivityIndicator IsRunning="{Binding InServerCall}" 
+         Color="Red" 
+         VerticalOptions="Center" 
+         HorizontalOptions="Center" />
+
+    </Grid>
+    
+
+</ContentPage>

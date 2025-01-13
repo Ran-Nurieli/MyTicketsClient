@@ -57,11 +57,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Remove="Views\AdminPage.xaml" />
+	  <MauiXaml Remove="Views\ProfilePage.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Views\AdminPage.xaml">
+	  <EmbeddedResource Include="Views\ProfilePage.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </EmbeddedResource>
 	</ItemGroup>

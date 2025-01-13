@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MyTicketsClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdminPage : ContentPage
+    public partial class ProfilePage : ContentPage
     {
-        public AdminPage()
+        public ProfilePage()
         {
             InitializeComponent();
         }
