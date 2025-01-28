@@ -387,7 +387,7 @@ namespace MyTicketsClient.ViewModels
                 int? u = await this.proxy.Register(user);
                 if(u != null)
                 {
-                    await Shell.Current.GoToAsync("Login");
+                    await Shell.Current.GoToAsync("///Login");
                 }
             }
 

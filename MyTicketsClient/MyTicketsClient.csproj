@@ -60,11 +60,7 @@
 	  <MauiXaml Remove="Views\ProfilePage.xaml" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <EmbeddedResource Include="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	  </EmbeddedResource>
-	</ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
