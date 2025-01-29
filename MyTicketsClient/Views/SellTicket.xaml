@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyTicketsClient.Views.SellTicket"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+    Title="Sell Ticket"
+    x:DataType="ViewModel:SellTicketViewModel">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label
+            BackgroundColor="White"
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="Upload the file!"
+            TextColor="Black"
+            VerticalOptions="Center" />
+
+
+        <Button
+            Command="{Binding PickFileCommand}"
+            HorizontalOptions="Center"
+            Text="Upload a File" />
+
+        <!--  Button to upload the selected file  -->
+        <Button
+            Command="{Binding UploadFileCommand}"
+            HorizontalOptions="Center"
+            Text="Upload File" />
+
+        <!--  Label to show status message  -->
+        <Label
+            HorizontalOptions="CenterAndExpand"
+            LineBreakMode="WordWrap"
+            MaxLines="5"
+            Text="{Binding StatusMessage}"
+            VerticalOptions="CenterAndExpand" />
+
+
+        <Label
+            BackgroundColor="White"
+            Text="Maximum price for a ticket is:"
+            TextColor="Black" />
+        <Label
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            Text="{Binding MaxTicketPrice}"
+            TextColor="Black"
+            VerticalOptions="Center" />
+
+        <Label
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            Text="Warning! selling a ticket for more than the original ticket price will get you banned!"
+            TextColor="Red"
+            VerticalOptions="Center" />
+
+        <Button
+            BackgroundColor="White"
+            Command="{Binding PublishTicket}"
+            Text="publish ticket"
+            TextColor="Blue" />
+
+
+    </VerticalStackLayout>
+</ContentPage>

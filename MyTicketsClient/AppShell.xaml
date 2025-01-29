@@ -4,19 +4,37 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MyTicketsClient.Views"
-   
-    Shell.FlyoutBehavior="Disabled"
-    Title="MyTicketsClient">
+    Title="MyTicketsClient"
+    Shell.FlyoutBehavior="Disabled">
     <TabBar>
 
+
         <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="Login" />
+            Title="Home Page"
+            ContentTemplate="{DataTemplate local:HomePage}"
+            Route="Home Page" />
+
         <ShellContent
-        Title="Register"
-        ContentTemplate="{DataTemplate local:Register}"
-        Route="Register" />
+            Title="Login"
+            ContentTemplate="{DataTemplate local:LoginPage}"
+            Route="Login" />
+
+        <ShellContent
+            Title="Register"
+            ContentTemplate="{DataTemplate local:Register}"
+            Route="Register" />
+
+        <ShellContent
+            Title="Sell Ticket"
+            ContentTemplate="{DataTemplate local:SellTicket}"
+            Route="Sell Ticket" />
+
+        <ShellContent
+            Title="Profile"
+            ContentTemplate="{DataTemplate local:ProfilePage}"
+            Route="Profile" />
+
+
 
 
 
