@@ -29,10 +29,10 @@
             ContentTemplate="{DataTemplate local:SellTicket}"
             Route="Sell Ticket" />
 
-        <ShellContent
+        <!--<ShellContent
             Title="Profile"
             ContentTemplate="{DataTemplate local:ProfilePage}"
-            Route="Profile" />
+            Route="Profile" />-->
 
 
 

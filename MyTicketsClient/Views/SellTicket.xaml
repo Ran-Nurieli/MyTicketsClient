@@ -56,7 +56,7 @@
 
         <Button
             BackgroundColor="White"
-            Command="{Binding PublishTicket}"
+            Command="{Binding PublishFileCommand}"
             Text="publish ticket"
             TextColor="Blue" />
 

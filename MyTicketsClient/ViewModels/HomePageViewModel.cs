@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyTicketsClient.ViewModels
 {
-    internal class HomePageViewModel
+    public class HomePageViewModel
     {
+
     }
 }
