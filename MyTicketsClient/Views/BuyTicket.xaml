@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTicketsClient.Views.BuyTicket"
+             Title="Buy Ticket!">
+
+    <ScrollView Margin="10">
+        <StackLayout>
+            <Grid
+    ColumnDefinitions="*"
+    HorizontalOptions="Center"
+    RowDefinitions="auto"
+    RowSpacing="2">
+                <HorizontalStackLayout
+        Margin="0,5,0,0"
+        HorizontalOptions="Center"
+        Spacing="10">
+                    <Button
+            BackgroundColor="Green"
+            Command="{Binding LoadTicketsCommand}"
+            CornerRadius="40"
+            Text="Load Ticket"
+            WidthRequest="110" />
+                    <Button
+            Command="{Binding ClearTicketsCommand}"
+            CornerRadius="40"
+            Text="Delete Ticket"
+            WidthRequest="110" />
+                </HorizontalStackLayout>
+            </Grid>
+
+
+            <CollectionView Margin="10" ItemsSource="{Binding Tickets}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical"/>
+
+
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <StackLayout
+                       Margin="10"
+                       BackgroundColor="LightBlue"
+                       HeightRequest="200"
+                       VerticalOptions="Start">
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                
+
+
+            </CollectionView>
+
+            <Picker
+            Title="בחר חודש"
+                 ItemsSource="{Binding Months}"
+                 SelectedIndex="{Binding SelectedIndex}"
+                 SelectedItem="{Binding SelectedMonth}" />
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Button Command="{Binding FilterCommand}" Text="סנן" />
+                <Button Command="{Binding ClearFilterCommand}" Text="נקה סינון" />
+            </HorizontalStackLayout>
+
+        </StackLayout>
+        
+    </ScrollView>
+ 
+    
+</ContentPage>

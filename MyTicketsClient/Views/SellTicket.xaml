@@ -19,7 +19,7 @@
         <Button
             Command="{Binding PickFileCommand}"
             HorizontalOptions="Center"
-            Text="Upload a File" />
+            Text="choose a File" />
 
         <!--  Button to upload the selected file  -->
         <Button

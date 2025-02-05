@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyTicketsClient.Views;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace MyTicketsClient.ViewModels
 {
-    public class SellTicketViewModel:ViewModelBase
+    public class SellTicketViewModel : ViewModelBase
     {
 
         private string _statusMessage;
@@ -37,7 +40,7 @@ namespace MyTicketsClient.ViewModels
         // Command to trigger file picking
         public Command PickFileCommand => new Command(async () => await PickFileAsync());
 
-        // Command to trigger file uploading
+        // Command to trigger file uploading (now saves to local storage)
         public Command UploadFileCommand => new Command(async () => await UploadFileAsync());
 
         public Command PublishFileCommand => new Command(async () => await PublishFileAsync());
@@ -70,7 +73,7 @@ namespace MyTicketsClient.ViewModels
             }
         }
 
-        // Function to upload the selected file
+        // Function to upload the selected file and save it to a local folder
         private async Task UploadFileAsync()
         {
             if (_selectedFile == null)
@@ -81,46 +84,31 @@ namespace MyTicketsClient.ViewModels
 
             try
             {
-                // Use HttpClient to upload the file to a server
-                using (var httpClient = new HttpClient())
+                // Set the path where you want to save the file within your project (adjust path as necessary)
+                string localDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UploadedFiles");
+                Directory.CreateDirectory(localDirectory); // Create directory if it doesn't exist
+
+                // Define the full file path to save the file
+                string filePath = Path.Combine(localDirectory, _selectedFile.FileName);
+
+                // Open the file stream and save it to the local directory
+                using (var fileStream = await _selectedFile.OpenReadAsync())
                 {
-                    // Read the file stream into a byte array
-                    using (var fileStream = await _selectedFile.OpenReadAsync())
+                    using (var localFileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                     {
-                        var fileBytes = new byte[fileStream.Length];
-                        await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
-
-                        var fileContent = new ByteArrayContent(fileBytes);
-
-                        // Set the content headers
-                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-
-                        // Create the multipart form data content
-                        var formData = new MultipartFormDataContent();
-                        formData.Add(fileContent, "file", _selectedFile.FileName);
-
-                        // Replace with your actual API endpoint
-                        var apiEndpoint = "https://yourserver.com/upload";
-
-                        var response = await httpClient.PostAsync(apiEndpoint, formData);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            StatusMessage = "File uploaded successfully!";
-                        }
-                        else
-                        {
-                            StatusMessage = "File upload failed. Try again.";
-                        }
+                        await fileStream.CopyToAsync(localFileStream); // Copy the content to the new file
                     }
                 }
+
+                StatusMessage = $"File saved successfully at {filePath}";
             }
             catch (Exception ex)
             {
-                StatusMessage = "Error uploading file: " + ex.Message;
+                StatusMessage = "Error saving file: " + ex.Message;
             }
         }
 
+        // Function to publish the selected file (same as before, but you can adjust it to local publishing if needed)
         private async Task PublishFileAsync()
         {
             if (_selectedFile == null)
@@ -128,7 +116,6 @@ namespace MyTicketsClient.ViewModels
                 StatusMessage = "Please select a file";
                 return;
             }
-
 
             try
             {
@@ -142,11 +129,8 @@ namespace MyTicketsClient.ViewModels
                         await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
 
                         var fileContent = new ByteArrayContent(fileBytes);
+                        fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-                        // Set the content headers
-                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-
-                        // Create the multipart form data content
                         var formData = new MultipartFormDataContent();
                         formData.Add(fileContent, "file", _selectedFile.FileName);
 
@@ -171,9 +155,6 @@ namespace MyTicketsClient.ViewModels
                 StatusMessage = "Error publishing file: " + ex.Message;
                 Console.WriteLine(ex);  // Log the exception to see full stack trace
             }
-
-
         }
-
     }
 }
