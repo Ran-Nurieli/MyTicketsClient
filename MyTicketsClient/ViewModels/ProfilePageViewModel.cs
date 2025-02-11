@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 
 namespace MyTicketsClient.ViewModels
 {
-    public class ProfilePageViewModel:ViewModelBase
+    public class ProfilePageViewModel : ViewModelBase
     {
 
         private IServiceProvider serviceProvider;
@@ -222,7 +222,7 @@ namespace MyTicketsClient.ViewModels
             ValidateName();
             ValidatePassword();
 
-            if(!ShowEmailError && !ShowNameError && !ShowPasswordError)
+            if (!ShowEmailError && !ShowNameError && !ShowPasswordError)
             {
                 User user = ((App)App.Current).LoggedInUser;
                 user.Username = Name;

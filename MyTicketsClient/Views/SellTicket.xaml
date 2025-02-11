@@ -55,10 +55,9 @@
             VerticalOptions="Center" />
 
         <Button
-            BackgroundColor="White"
             Command="{Binding PublishFileCommand}"
             Text="publish ticket"
-            TextColor="Blue" />
+            TextColor="White" />
 
 
     </VerticalStackLayout>

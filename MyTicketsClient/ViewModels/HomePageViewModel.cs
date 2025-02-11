@@ -9,5 +9,6 @@ namespace MyTicketsClient.ViewModels
     public class HomePageViewModel
     {
 
+
     }
 }

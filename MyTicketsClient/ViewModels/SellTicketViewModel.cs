@@ -156,5 +156,6 @@ namespace MyTicketsClient.ViewModels
                 Console.WriteLine(ex);  // Log the exception to see full stack trace
             }
         }
+
     }
 }

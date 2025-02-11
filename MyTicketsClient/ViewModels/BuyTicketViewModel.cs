@@ -15,17 +15,8 @@ namespace MyTicketsClient.ViewModels
     {
         
 
-        public ObservableCollection<Ticket> Gates;
-        public object SelectedTicket;
-        private int selectedIndex;
-        public int SelectedIndex { get =>  selectedIndex; set { selectedIndex = value; OnPropertyChanged(); }  }
+  
 
-        public ICommand FilterCommand { get; private set; }
-
-
-        private List<Ticket> ticketList;
-
-        public ObservableCollection<Ticket> tickets;
 
 
 
