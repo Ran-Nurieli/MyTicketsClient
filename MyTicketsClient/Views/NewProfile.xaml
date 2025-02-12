@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:ProfilePageViewModel"
+             x:Class="MyTicketsClient.Views.NewProfile"
+             Title="Profile">
+    <VerticalStackLayout Padding="20">
+
+
+        <Label
+            Text="enter new Username:"
+            BackgroundColor="White"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Entry
+            Text="{Binding Name}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
+            BackgroundColor="White"
+            />
+        <Label
+            Text="{Binding NameError}" IsVisible="{Binding ShowNameError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+
+        <Label
+            Text="enter new Email"
+            BackgroundColor="White"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Entry
+            Text="{Binding Email}"
+            BackgroundColor="White"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Label
+            Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+        <Label
+            Text="Enter new Password"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Entry
+            Text="{Binding Password}" IsVisible="{Binding PasswordError}"
+            TextColor="Black"
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Label
+            Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+
+
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -30,7 +30,7 @@ namespace MyTicketsClient.ViewModels
             Password = user.Password;
             EmailError = "Email is required";
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
-            //SaveCommand = new Command(OnSave);
+            SaveCommand = new Command(OnSave);
             ShowPasswordCommand = new Command(OnShowPassword);
 
         }
@@ -213,9 +213,68 @@ namespace MyTicketsClient.ViewModels
         }
         #endregion
 
+        //#region Photo
+
+        //private string photoURL;
+
+        //public string PhotoURL
+        //{
+        //    get => photoURL;
+        //    set
+        //    {
+        //        photoURL = value;
+        //        OnPropertyChanged("PhotoURL");
+        //    }
+        //}
+
+        //private string localPhotoPath;
+
+        //public string LocalPhotoPath
+        //{
+        //    get => localPhotoPath;
+        //    set
+        //    {
+        //        localPhotoPath = value;
+        //        OnPropertyChanged("LocalPhotoPath");
+        //    }
+        //}
+
+        //public Command UploadPhotoCommand { get; }
+        ////This method open the file picker to select a photo
+        //private async void OnUploadPhoto()
+        //{
+        //    try
+        //    {
+        //        var result = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+        //        {
+        //            Title = "Please select a photo",
+        //        });
+
+        //        if (result != null)
+        //        {
+        //            // The user picked a file
+        //            this.LocalPhotoPath = result.FullPath;
+        //            this.PhotoURL = result.FullPath;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+
+        //}
+
+        //private void UpdatePhotoURL(string virtualPath)
+        //{
+        //    Random r = new Random();
+        //    PhotoURL = proxy.GetImagesBaseAddress() + virtualPath + "?v=" + r.Next();
+        //    LocalPhotoPath = "";
+        //}
+
+        //#endregion
 
 
 
+        public Command SaveCommand { get; }
         public async void OnSave()
         {
             ValidateEmail();
@@ -229,8 +288,21 @@ namespace MyTicketsClient.ViewModels
                 user.Password = Password;
                 user.Email = Email;
 
+                InServerCall = true;
+                bool success = await proxy.UpdateUser(user);
+                if (success)
+                {
+                    InServerCall = false;
+                    await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
 
-
+                }
+                else
+                {
+                    InServerCall = false;
+                    //If the registration failed, display an error message
+                    string errorMsg = "Save Profile failed. Please try again.";
+                    await Shell.Current.DisplayAlert("Save Profile", errorMsg, "ok");
+                }
 
             }
         }

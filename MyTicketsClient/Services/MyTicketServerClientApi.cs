@@ -205,6 +205,34 @@ namespace MyTicketsClient.Services
             }
         }
 
+        public async Task<Ticket> SellTicket(Ticket ticket)
+        {
+            string url = $"{this.baseUrl}SellTicket";
+            try
+            {
+                string json = JsonSerializer.Serialize(ticket);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return ticket;
+                }
+                else
+                {
+                    return null ;
+                }
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
+
+
+
 
 
 

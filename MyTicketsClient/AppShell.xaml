@@ -28,6 +28,12 @@
             Title="Sell Ticket"
             ContentTemplate="{DataTemplate local:SellTicket}"
             Route="Sell Ticket" />
+        <ShellContent
+            Title="Profile Page"
+            ContentTemplate="{DataTemplate local:NewProfile}"
+            Route="NewProfile"
+            />
+
 
 
 
