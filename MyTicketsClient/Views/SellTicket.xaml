@@ -35,6 +35,32 @@
             Text="{Binding StatusMessage}"
             VerticalOptions="CenterAndExpand" />
 
+        <Entry
+            Text="{Binding TicketPrice}"
+            x:Name="price"
+            Placeholder="enter ticket price"
+            TextColor="Black"   
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Entry
+            Text="{Binding Row}"
+            x:Name="Row"
+            Placeholder="enter the row"
+            TextColor="Black"   
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Entry
+            Text="{Binding Gate}"
+            x:Name="Gate"
+            Placeholder="enter the gate"
+            TextColor="Black"   
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+
+
 
         <Label
             BackgroundColor="White"

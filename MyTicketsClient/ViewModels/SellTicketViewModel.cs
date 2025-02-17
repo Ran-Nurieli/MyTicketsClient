@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyTicketsClient.Views;
+using MyTicketsClient.Services;
+using MyTicketsClient.ViewModels;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+//using Java.Security;
 
 namespace MyTicketsClient.ViewModels
 {
@@ -156,6 +159,32 @@ namespace MyTicketsClient.ViewModels
                 Console.WriteLine(ex);  // Log the exception to see full stack trace
             }
         }
+
+
+        private int ticketPrice {  get; set; }
+        public int TicketPrice { get => ticketPrice; set {  ticketPrice = value; OnPropertyChanged("Price"); } }
+         
+
+
+        private int row {  get; set; }
+        public int Row
+        {
+            get => row; set { row = value; OnPropertyChanged("Row"); }
+
+
+
+        }
+
+        private int gate {  get; set; }
+        public int Gate { get => gate;set { gate = value; OnPropertyChanged("Gate"); } }
+
+
+
+
+
+
+
+
 
     }
 }
