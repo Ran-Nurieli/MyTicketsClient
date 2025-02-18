@@ -31,8 +31,9 @@
         <ShellContent
             Title="Profile Page"
             ContentTemplate="{DataTemplate local:NewProfile}"
-            Route="NewProfile"
+            Route="New Profile"
             />
+
 
 
 

@@ -14,8 +14,14 @@ namespace MyTicketsClient.ViewModels
     public class BuyTicketViewModel:ViewModelBase
     {
         
+        /////filter-price range//gate options
+       
+        //swipe right if you want to buy ticket from the user
+
 
   
+
+
 
 
 

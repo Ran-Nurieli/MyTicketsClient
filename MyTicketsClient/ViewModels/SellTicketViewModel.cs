@@ -16,6 +16,7 @@ namespace MyTicketsClient.ViewModels
     public class SellTicketViewModel : ViewModelBase
     {
 
+
         private string _statusMessage;
         private FileResult _selectedFile;
 
@@ -48,10 +49,17 @@ namespace MyTicketsClient.ViewModels
 
         public Command PublishFileCommand => new Command(async () => await PublishFileAsync());
 
-        public SellTicketViewModel()
+
+
+
+        public SellTicketViewModel(MyTicketServerClientApi proxy,IServiceProvider serviceProvider)
         {
             StatusMessage = "Select a file to upload.";
+            
         }
+
+
+
 
         // Function to pick a file using the file picker
         private async Task PickFileAsync()
@@ -161,12 +169,12 @@ namespace MyTicketsClient.ViewModels
         }
 
 
-        private int ticketPrice {  get; set; }
-        public int TicketPrice { get => ticketPrice; set {  ticketPrice = value; OnPropertyChanged("Price"); } }
-         
+        private int ticketPrice { get; set; }
+        public int TicketPrice { get => ticketPrice; set { ticketPrice = value; OnPropertyChanged("Price"); } }
 
 
-        private int row {  get; set; }
+
+        private int row { get; set; }
         public int Row
         {
             get => row; set { row = value; OnPropertyChanged("Row"); }
@@ -175,8 +183,25 @@ namespace MyTicketsClient.ViewModels
 
         }
 
-        private int gate {  get; set; }
-        public int Gate { get => gate;set { gate = value; OnPropertyChanged("Gate"); } }
+        private int gate { get; set; }
+        public int Gate { get => gate; set { gate = value; OnPropertyChanged("Gate"); } }
+
+        //ticket validation
+
+        //is price valid?
+        //showPriceError
+
+        //is gate valid?
+        //show gate error
+
+        //put in constructor-example on register vm
+
+
+
+
+
+
+
 
 
 

@@ -24,12 +24,14 @@ namespace MyTicketsClient
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<SellTicket>();
             builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<NewProfile>();
 
 
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<SellTicketViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
+            builder.Services.AddTransient<ProfilePageViewModel>();
 
 
 #if DEBUG

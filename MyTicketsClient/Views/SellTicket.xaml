@@ -35,6 +35,13 @@
             Text="{Binding StatusMessage}"
             VerticalOptions="CenterAndExpand" />
 
+        <Label
+            Text="enter the price of the ticket"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
+            />
+
         <Entry
             Text="{Binding TicketPrice}"
             x:Name="price"
@@ -42,6 +49,13 @@
             TextColor="Black"   
             HorizontalOptions="Center"
             VerticalOptions="Center"
+            />
+
+        <Label
+            Text="enter row"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
             />
         <Entry
             Text="{Binding Row}"
@@ -51,6 +65,13 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"
             />
+
+        <Label
+            Text="enter gate number"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
+            />
         <Entry
             Text="{Binding Gate}"
             x:Name="Gate"
@@ -59,19 +80,6 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"
             />
-
-
-
-        <Label
-            BackgroundColor="White"
-            Text="Maximum price for a ticket is:"
-            TextColor="Black" />
-        <Label
-            BackgroundColor="White"
-            HorizontalOptions="Center"
-            Text="{Binding MaxTicketPrice}"
-            TextColor="Black"
-            VerticalOptions="Center" />
 
         <Label
             BackgroundColor="White"
