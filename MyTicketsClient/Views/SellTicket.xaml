@@ -51,6 +51,7 @@
             VerticalOptions="Center"
             />
 
+
         <Label
             Text="enter row"
             HorizontalOptions="Center"
@@ -66,12 +67,29 @@
             VerticalOptions="Center"
             />
 
+
+        <Label
+            Text="enter seats"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
+            />
+        <Entry
+            Text="{Binding Seats}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="Black"
+            />
+
         <Label
             Text="enter gate number"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             TextColor="Black"
             />
+ 
+        
+        
         <Entry
             Text="{Binding Gate}"
             x:Name="Gate"
@@ -81,6 +99,8 @@
             VerticalOptions="Center"
             />
 
+        
+        
         <Label
             BackgroundColor="White"
             HorizontalOptions="Center"

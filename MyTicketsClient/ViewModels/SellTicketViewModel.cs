@@ -16,7 +16,7 @@ namespace MyTicketsClient.ViewModels
     public class SellTicketViewModel : ViewModelBase
     {
 
-
+        private MyTicketServerClientApi proxy;
         private string _statusMessage;
         private FileResult _selectedFile;
 
@@ -52,11 +52,7 @@ namespace MyTicketsClient.ViewModels
 
 
 
-        public SellTicketViewModel(MyTicketServerClientApi proxy,IServiceProvider serviceProvider)
-        {
-            StatusMessage = "Select a file to upload.";
-            
-        }
+
 
 
 
@@ -95,27 +91,73 @@ namespace MyTicketsClient.ViewModels
 
             try
             {
-                // Set the path where you want to save the file within your project (adjust path as necessary)
-                string localDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UploadedFiles");
-                Directory.CreateDirectory(localDirectory); // Create directory if it doesn't exist
+                // Read and encode the file to Base64
+                string base64File = await EncodeFileToBase64Async();
 
-                // Define the full file path to save the file
-                string filePath = Path.Combine(localDirectory, _selectedFile.FileName);
-
-                // Open the file stream and save it to the local directory
-                using (var fileStream = await _selectedFile.OpenReadAsync())
+                if (base64File != null)
                 {
-                    using (var localFileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                    {
-                        await fileStream.CopyToAsync(localFileStream); // Copy the content to the new file
-                    }
+                    // Send the Base64 encoded file to the server
+                    await SendToServer(base64File);
                 }
-
-                StatusMessage = $"File saved successfully at {filePath}";
             }
             catch (Exception ex)
             {
-                StatusMessage = "Error saving file: " + ex.Message;
+                StatusMessage = "Error uploading file: " + ex.Message;
+            }
+        }
+
+        // Function to read the selected file and encode it to Base64
+        private async Task<string> EncodeFileToBase64Async()
+        {
+            if (_selectedFile == null)
+            {
+                StatusMessage = "Please select a file first.";
+                return null;
+            }
+
+            try
+            {
+                // Open the file stream to read the file content
+                using (var fileStream = await _selectedFile.OpenReadAsync())
+                {
+                    // Create byte array to store file content
+                    byte[] fileBytes = new byte[fileStream.Length];
+
+                    // Read the file content into the byte array
+                    await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
+
+                    // Encode the byte array to Base64
+                    string base64Encoded = Convert.ToBase64String(fileBytes);
+
+                    StatusMessage = "File encoded successfully to Base64.";
+                    return base64Encoded;
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Error encoding file to Base64: " + ex.Message;
+                return null;
+            }
+        }
+
+        // Function to send the Base64 encoded file to the server
+        private async Task SendToServer(string base64File)
+        {
+            var client = new HttpClient();
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("file", base64File)
+            });
+
+            var response = await client.PostAsync("https://yourserver.com/upload", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                StatusMessage = "File uploaded successfully!";
+            }
+            else
+            {
+                StatusMessage = "Error uploading file to server.";
             }
         }
 
@@ -168,6 +210,12 @@ namespace MyTicketsClient.ViewModels
             }
         }
 
+ 
+
+
+
+
+
 
         private int ticketPrice { get; set; }
         public int TicketPrice { get => ticketPrice; set { ticketPrice = value; OnPropertyChanged("Price"); } }
@@ -186,7 +234,31 @@ namespace MyTicketsClient.ViewModels
         private int gate { get; set; }
         public int Gate { get => gate; set { gate = value; OnPropertyChanged("Gate"); } }
 
+        private int seats {  get; set; }
+        public int Seats { get => seats; set { seats = value;OnPropertyChanged("Seats"); } }
+
+
+
+        public SellTicketViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
+        {
+            this.proxy = proxy;
+            StatusMessage = "Select a file to upload.";
+            
+
+        }
+
+
+
+
+
         //ticket validation
+        #region ticketvalidation
+
+
+        #endregion
+
+
+
 
         //is price valid?
         //showPriceError
