@@ -243,7 +243,7 @@ namespace MyTicketsClient.ViewModels
         {
             this.proxy = proxy;
             StatusMessage = "Select a file to upload.";
-            
+            PriceError = "you cant sell a ticket for more than its original price";
 
         }
 
@@ -253,6 +253,32 @@ namespace MyTicketsClient.ViewModels
 
         //ticket validation
         #region ticketvalidation
+        private bool showPriceError;
+        public bool ShowPriceError { get => showPriceError; set { showPriceError = value; OnPropertyChanged("ShowPriceError"); } }
+
+        private string priceError;
+        public string PriceError { get => priceError; set { priceError = value; OnPropertyChanged($"{nameof(PriceError)}"); } }
+
+
+        private int price;
+        public int Price
+        {
+            get => price;
+            set
+            {
+                price = value;
+                priceError = "";
+                OnPropertyChanged(nameof(Price));
+                if (price < 0 || price > 70)
+                {
+                    priceError = "price is not valid";
+                }
+            }
+        }
+
+
+
+
 
 
         #endregion
