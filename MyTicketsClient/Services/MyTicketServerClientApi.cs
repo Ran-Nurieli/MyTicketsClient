@@ -228,6 +228,24 @@ namespace MyTicketsClient.Services
             }
         }
 
+        private List<Ticket> tickets;
+        public async Task<List<Ticket>> GetTickets()  //need to write in controller
+        {
+            await Task.Delay(1000);
+            return tickets.ToList();
+        }
+        public async Task RemoveTicket(Ticket ticket)
+        {
+            await Task.Delay (1000);
+            var tck = tickets.Where(x => x.Seats == ticket.Seats && x.Row == ticket.Row).FirstOrDefault();
+            if(tck != null)
+            {
+                tickets.Remove(tck);
+            }
+        }
+
+
+
 
 
 
