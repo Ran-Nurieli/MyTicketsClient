@@ -26,7 +26,7 @@ namespace MyTicketsClient.ViewModels
 
         private List<Ticket> _ticketList;
         private Ticket selectedTicket;
-        public object SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
+        public Ticket SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
         private int selectedIndex {  get; set; }//מיקום הכרטיס ברשימה
         public ObservableCollection<int> Seats { get; set; } //מקומות
 
@@ -57,10 +57,25 @@ namespace MyTicketsClient.ViewModels
             TicketList = new ObservableCollection<Ticket>();
             Seats = new ObservableCollection<int>();
 
-            //LoadTicketsCommand = new Command(async () => await LoadTickets());
-            //ClearTicketsCommand = new Command();
 
+            LoadTicketsCommand = new Command(async () => await LoadTickets());
+            ClearTicketsCommand = new Command(ClearTickets, () => Tickets.Count > 0);
+
+            FilterCommand = new Command(() =>
+            {
+                try
+                {
+                    
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+            );
         }
+        
 
         private async Task LoadTickets()
         {
@@ -87,6 +102,16 @@ namespace MyTicketsClient.ViewModels
                 Seats.Add(x);
             }
             selectedIndex = -1;
+        }
+        private void ClearTickets()
+        {
+            Tickets.Clear();
+            Seats.Clear();
+            fullist.Clear();
+
+            ((Command)ClearTicketsCommand).ChangeCanExecute();
+            ((Command)LoadTicketsCommand).ChangeCanExecute();
+            ((Command)ClearFilterCommand).ChangeCanExecute();
         }
 
 
