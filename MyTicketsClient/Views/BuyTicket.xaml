@@ -25,9 +25,11 @@
                         Text="Load Ticket"
                         WidthRequest="110" />
                     <Button
+                        BackgroundColor="Beige"
                         Command="{Binding ClearTicketsCommand}"
                         CornerRadius="40"
-                        Text="Delete Ticket"
+                        Text="Clear Tickets"
+                        TextColor="Black"
                         WidthRequest="110" />
                 </HorizontalStackLayout>
             </Grid>
@@ -52,7 +54,7 @@
             </CollectionView>
 
             <Picker
-                Title="בחר חודש"
+                Title="Select Gate"
                 ItemsSource="{Binding Place}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedItem="{Binding SelectedTicket}" />

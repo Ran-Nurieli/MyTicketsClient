@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
 using MyTicketsClient.ViewModels;
 using MyTicketsClient.Services;
-using AndroidX.Annotations;
+//using AndroidX.Annotations;
 //using Java.Security;
 using MyTicketsClient.Models;
 
