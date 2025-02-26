@@ -53,7 +53,7 @@
 
             <Picker
                 Title="בחר חודש"
-                ItemsSource="{Binding Gates}"
+                ItemsSource="{Binding Place}"
                 SelectedIndex="{Binding SelectedIndex}"
                 SelectedItem="{Binding SelectedTicket}" />
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
