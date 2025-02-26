@@ -28,7 +28,7 @@ namespace MyTicketsClient.ViewModels
         private Ticket selectedTicket;
         public Ticket SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
         private int selectedIndex {  get; set; }//מיקום הכרטיס ברשימה
-        public ObservableCollection<int> Seats { get; set; } //מקומות
+        public ObservableCollection<int> Place { get; set; } //מקומות
 
         public ObservableCollection<Ticket> TicketList;//אוסף כרטיסים
         public ICommand ClearTicketsCommand { get; private set; }  //ריקון הרשימה
@@ -55,25 +55,34 @@ namespace MyTicketsClient.ViewModels
             this.service = s;
             _ticketList = new List<Ticket>();
             TicketList = new ObservableCollection<Ticket>();
-            Seats = new ObservableCollection<int>();
+            Place = new ObservableCollection<int>();
 
 
             LoadTicketsCommand = new Command(async () => await LoadTickets());
             ClearTicketsCommand = new Command(ClearTickets, () => Tickets.Count > 0);
 
-            FilterCommand = new Command(() =>
+            FilterCommand = new Command(async () =>
             {
                 try
                 {
-                    
+                    var isOnSelectedSeat = fullist.Where(x => x.Place == selectedTicket.Place).ToList();
+                    Tickets.Clear();
+
+                    foreach (var ticket in isOnSelectedSeat)
+                    {
+                        Tickets.Add(ticket);
+                    }
                 }
                 catch (Exception ex)
                 {
-
+                    //binding error message
+                    
                 }
+            });
 
-            }
-            );
+            
+            
+            
         }
         
 
@@ -86,27 +95,27 @@ namespace MyTicketsClient.ViewModels
                 Tickets.Add(ticket);
             }
 
-            UpdateSeats();
+            UpdatePlace();
             ((Command)ClearTicketsCommand).ChangeCanExecute();
             ((Command)LoadTicketsCommand).ChangeCanExecute();
             ((Command)ClearFilterCommand).ChangeCanExecute();
 
         }
 
-        private void UpdateSeats()
+        private void UpdatePlace()
         {
-            Seats.Clear();
+            Place.Clear();
             var m = fullist.Select(x => x.Seats).Distinct().OrderBy(x => x);
             foreach(var x in m)
             {
-                Seats.Add(x);
+                Place.Add(x);
             }
             selectedIndex = -1;
         }
         private void ClearTickets()
         {
             Tickets.Clear();
-            Seats.Clear();
+            Place.Clear();
             fullist.Clear();
 
             ((Command)ClearTicketsCommand).ChangeCanExecute();

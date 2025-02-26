@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MyTicketsClient.ViewModels;
+//using Android.Content;
 
 namespace MyTicketsClient.Services
 {
