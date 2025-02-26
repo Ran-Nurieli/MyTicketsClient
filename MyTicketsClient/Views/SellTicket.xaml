@@ -36,71 +36,63 @@
             VerticalOptions="CenterAndExpand" />
 
         <Label
+            HorizontalOptions="Center"
             Text="enter the price of the ticket"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
             TextColor="Black"
-            />
+            VerticalOptions="Center" />
 
         <Entry
-            Text="{Binding TicketPrice}"
             x:Name="price"
+            HorizontalOptions="Center"
             Placeholder="enter ticket price"
-            TextColor="Black"   
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            Text="{Binding TicketPrice}"
+            TextColor="Black"
+            VerticalOptions="Center" />
 
 
         <Label
+            HorizontalOptions="Center"
             Text="enter row"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
             TextColor="Black"
-            />
+            VerticalOptions="Center" />
         <Entry
-            Text="{Binding Row}"
             x:Name="Row"
+            HorizontalOptions="Center"
             Placeholder="enter the row"
-            TextColor="Black"   
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            Text="{Binding Row}"
+            TextColor="Black"
+            VerticalOptions="Center" />
 
 
         <Label
+            HorizontalOptions="Center"
             Text="enter seats"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
             TextColor="Black"
-            />
+            VerticalOptions="Center" />
         <Entry
-            Text="{Binding Seats}"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
+            Text="{Binding Seats}"
             TextColor="Black"
-            />
+            VerticalOptions="Center" />
 
         <Label
+            HorizontalOptions="Center"
             Text="enter gate number"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
             TextColor="Black"
-            />
- 
-        
-        
-        <Entry
-            Text="{Binding Gate}"
-            x:Name="Gate"
-            Placeholder="enter the gate"
-            TextColor="Black"   
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            VerticalOptions="Center" />
 
-        
-        
+
+
+        <Entry
+            x:Name="Gate"
+            HorizontalOptions="Center"
+            Placeholder="enter the gate"
+            Text="{Binding Gate}"
+            TextColor="Black"
+            VerticalOptions="Center" />
+
+
+
         <Label
             BackgroundColor="White"
             HorizontalOptions="Center"

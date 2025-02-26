@@ -23,6 +23,10 @@
             Title="Register"
             ContentTemplate="{DataTemplate local:Register}"
             Route="Register" />
+        <ShellContent
+            Title="Buy Ticket"
+            ContentTemplate="{DataTemplate local:BuyTicket}"
+            Route="Buy Ticket" />
 
         <ShellContent
             Title="Sell Ticket"
@@ -31,8 +35,8 @@
         <ShellContent
             Title="Profile Page"
             ContentTemplate="{DataTemplate local:NewProfile}"
-            Route="New Profile"
-            />
+            Route="New Profile" />
+
 
 
 

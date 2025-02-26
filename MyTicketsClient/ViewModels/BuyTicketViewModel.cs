@@ -28,6 +28,7 @@ namespace MyTicketsClient.ViewModels
         private Ticket selectedTicket;
         public Ticket SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
         private int selectedIndex {  get; set; }//מיקום הכרטיס ברשימה
+        public int SelectedIndex { get => selectedIndex; set { selectedIndex = value; OnPropertyChanged(); } }
         public ObservableCollection<int> Place { get; set; } //מקומות
 
         public ObservableCollection<Ticket> TicketList;//אוסף כרטיסים
