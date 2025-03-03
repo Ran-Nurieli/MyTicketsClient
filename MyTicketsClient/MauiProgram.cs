@@ -26,6 +26,7 @@ namespace MyTicketsClient
             builder.Services.AddTransient<SellTicket>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<NewProfile>();
+            builder.Services.AddTransient<AdminPage>();
 
 
             builder.Services.AddTransient<LoginPageViewModel>();
@@ -34,6 +35,7 @@ namespace MyTicketsClient
             builder.Services.AddTransient<SellTicketViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<ProfilePageViewModel>();
+            builder.Services.AddTransient<AdminPageViewModel>();
 
 
 #if DEBUG

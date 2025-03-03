@@ -36,6 +36,11 @@
             Title="Profile Page"
             ContentTemplate="{DataTemplate local:NewProfile}"
             Route="New Profile" />
+        <ShellContent
+            Title="AdminPage"
+            ContentTemplate="{DataTemplate local:AdminPage}"
+            Route="Admin Page"
+            />
 
 
 

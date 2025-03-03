@@ -245,6 +245,21 @@ namespace MyTicketsClient.Services
             }
         }
 
+        private List<User> users;
+        public async Task<List<User>> GetUsers()
+        {
+            return users.ToList();
+        }
+
+        public async Task RemoveUser(User user)
+        {
+            var us = users.Where(x => x.Email == user.Email).FirstOrDefault();
+            if(us != null)
+            {
+                users.Remove(us);
+            }
+        }
+
 
 
 

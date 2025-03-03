@@ -2,11 +2,59 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyTicketsClient.Views.AdminPage"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:AdminPageViewModel"
              Title="AdminPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView Margin="10">
+        <StackLayout>
+            <Grid>
+                <HorizontalStackLayout                   
+                    Margin="15"
+                    HorizontalOptions="Center"
+                    Spacing="10">
+                    <Button
+                        BackgroundColor="Blue"
+                        Command="{Binding LoadUsersCommand}"
+                        CornerRadius="40"
+                        Text="load users"
+                        WidthRequest="110" />
+                    <Button
+                        Command="{Binding DeleteUserCommand}"
+                        CornerRadius="40"
+                        Text="delete user"
+                        WidthRequest="110" 
+                        BackgroundColor="Red"
+                        />
+              
+                </HorizontalStackLayout>
+            </Grid>
+
+            <CollectionView
+                x:Name="colview"
+                ItemsSource="{Binding Users}"
+                SelectedItem="{Binding SelectedUser}"
+                SelectionMode="Single"
+                >
+
+                <!--  עיצוב הפריסה של הפריטים  -->
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <!--  תצוגה כשאין פריטים  -->
+                <CollectionView.EmptyView>
+                    <StackLayout
+                            Margin="10"
+                            BackgroundColor="LightBlue"
+                            HeightRequest="200"
+                            VerticalOptions="Start">
+
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                
+
+            </CollectionView>
+            
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
