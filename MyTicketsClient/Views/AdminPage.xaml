@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyTicketsClient.Views.AdminPage"
-             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
-             x:DataType="ViewModel:AdminPageViewModel"
-             Title="AdminPage">
+<ContentPage
+    x:Class="MyTicketsClient.Views.AdminPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+    Title="AdminPage"
+    x:DataType="ViewModel:AdminPageViewModel">
 
     <ScrollView Margin="10">
         <StackLayout>
             <Grid>
-                <HorizontalStackLayout                   
+                <HorizontalStackLayout
                     Margin="15"
                     HorizontalOptions="Center"
                     Spacing="10">
@@ -18,15 +19,16 @@
                         Command="{Binding LoadUsersCommand}"
                         CornerRadius="40"
                         Text="load users"
+                        TextColor="White"
                         WidthRequest="110" />
                     <Button
+                        BackgroundColor="Red"
                         Command="{Binding DeleteUserCommand}"
                         CornerRadius="40"
                         Text="delete user"
-                        WidthRequest="110" 
-                        BackgroundColor="Red"
-                        />
-              
+                        TextColor="White"
+                        WidthRequest="110" />
+
                 </HorizontalStackLayout>
             </Grid>
 
@@ -34,8 +36,7 @@
                 x:Name="colview"
                 ItemsSource="{Binding Users}"
                 SelectedItem="{Binding SelectedUser}"
-                SelectionMode="Single"
-                >
+                SelectionMode="Single">
 
                 <!--  עיצוב הפריסה של הפריטים  -->
                 <CollectionView.ItemsLayout>
@@ -44,17 +45,18 @@
                 <!--  תצוגה כשאין פריטים  -->
                 <CollectionView.EmptyView>
                     <StackLayout
-                            Margin="10"
-                            BackgroundColor="LightBlue"
-                            HeightRequest="200"
-                            VerticalOptions="Start">
-
-                    </StackLayout>
+                        Margin="10"
+                        BackgroundColor="LightBlue"
+                        HeightRequest="200"
+                        VerticalOptions="Start" />
                 </CollectionView.EmptyView>
-                
+
 
             </CollectionView>
-            
+
+
+
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
