@@ -6,6 +6,7 @@
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
     Title="Sell Ticket"
     x:DataType="ViewModel:SellTicketViewModel">
+
     <VerticalStackLayout Padding="20" Spacing="20">
         <Label
             BackgroundColor="White"

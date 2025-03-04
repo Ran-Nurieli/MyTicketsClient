@@ -57,7 +57,7 @@ namespace MyTicketsClient.ViewModels
             _ticketList = new List<Ticket>();
             TicketList = new ObservableCollection<Ticket>();
             Place = new ObservableCollection<int>();
-
+            errorMessage = "not valid ticket";
 
             LoadTicketsCommand = new Command(async () => await LoadTickets());
             ClearTicketsCommand = new Command(ClearTickets, () => Tickets.Count > 0);
@@ -77,7 +77,7 @@ namespace MyTicketsClient.ViewModels
                 catch (Exception ex)
                 {
                     //binding error message
-                    
+                    errorMessage = "not valid ticket";
                 }
             });
 
@@ -85,7 +85,21 @@ namespace MyTicketsClient.ViewModels
             
             
         }
-        
+
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { errorMessage = value; OnPropertyChanged(); }
+        }
+
+        private bool showErrorMessage;
+        public bool ShowErrorMessage
+        {
+            get => showErrorMessage; set { showErrorMessage = value; OnPropertyChanged(); }
+        }
+
+
 
         private async Task LoadTickets()
         {

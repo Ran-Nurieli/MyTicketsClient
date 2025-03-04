@@ -39,8 +39,8 @@ namespace MyTicketsClient.ViewModels
             fullist = new List<User>();
             Users = new ObservableCollection<User>();
 
-            LoadUsersCommand = new Command((object obj) => { User u = (User)obj; Users.Remove(u); fullist.Remove(u); OnPropertyChanged(); });
-            DeleteUserCommand = new Command(async () => await LoadStudents());
+            DeleteUserCommand = new Command((object obj) => { User u = (User)obj; Users.Remove(u); fullist.Remove(u); OnPropertyChanged(); });
+            LoadUsersCommand = new Command(async () => await LoadStudents());
 
         
         }

@@ -63,9 +63,19 @@
                 <Button Command="{Binding ClearFilterCommand}" Text="נקה סינון" />
             </HorizontalStackLayout>
 
+            <Label
+                HorizontalOptions="Center"
+                IsVisible="{Binding ShowErrorMessage}"
+                Text="{Binding ErrorMessage}"
+                TextColor="Red"
+                VerticalOptions="Center" />
+
         </StackLayout>
 
+
+
     </ScrollView>
+
 
 
 </ContentPage>

@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:MyTicketsClient.Views"
     Title="MyTicketsClient"
     Shell.FlyoutBehavior="Disabled">
-    <TabBar>
 
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
 
         <ShellContent
             Title="Home Page"
@@ -39,8 +40,9 @@
         <ShellContent
             Title="AdminPage"
             ContentTemplate="{DataTemplate local:AdminPage}"
-            Route="Admin Page"
-            />
+            Route="Admin Page" />
+
+    </FlyoutItem>
 
 
 
@@ -51,5 +53,6 @@
 
 
 
-    </TabBar>
+
+
 </Shell>
