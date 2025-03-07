@@ -9,6 +9,9 @@ using MyTicketsClient.ViewModels;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.Maui.Graphics;
+using ZXing;
+using ZXing.Common;
 //using Java.Security;
 
 namespace MyTicketsClient.ViewModels
@@ -68,6 +71,15 @@ namespace MyTicketsClient.ViewModels
                 if (_selectedFile != null)
                 {
                     StatusMessage = $"File selected: {_selectedFile.FileName}";
+                    var skbitmap = SkiaSharp.SKBitmap.Decode(_selectedFile.FullPath);
+                    var reader = new ZXing.SkiaSharp.BarcodeReader();
+                    // detect and decode the barcode inside the bitmap
+                    var result = reader.Decode(skbitmap);
+                    // do something with the result
+                    if(result != null)
+                    {
+                        var ticketValue = result.Text;
+                    }
                 }
                 else
                 {
@@ -79,6 +91,8 @@ namespace MyTicketsClient.ViewModels
                 StatusMessage = "Error selecting file: " + ex.Message;
             }
         }
+
+
 
         // Function to upload the selected file and save it to a local folder
         private async Task UploadFileAsync()
@@ -211,6 +225,8 @@ namespace MyTicketsClient.ViewModels
         }
 
  
+
+
 
 
 
