@@ -269,7 +269,16 @@ namespace MyTicketsClient.ViewModels
 
 
         public Command PublishTicket {  get; private set; }
-
+        public async void OnPublish()
+        {
+            ValidateGate();
+            ValidatePrice();
+            if(!ShowGateError && !ShowPriceError)
+            {
+ 
+                //look at onregister + userDTO 
+            }
+        }
 
         //ticket validation
         #region ticketvalidation
@@ -342,16 +351,16 @@ namespace MyTicketsClient.ViewModels
         private int teamId {  get; set; }
         public int TeamId { get => teamId; set { teamId = value; OnPropertyChanged("TeamId"); } }
 
-        public async void OnPublish()
-        {
-            ValidateGate();
-            ValidatePrice();
+        //public async void OnPublish()
+        //{
+        //    ValidateGate();
+        //    ValidatePrice();
 
-            if(!ShowGateError && !ShowPriceError)
-            {
-                //var ticket = new Ticket(TicketId = ticketId,Price = price, Gate = gate,Row = row,Seats = seats,TeamId = 0);
-            }
-        }
+        //    if(!ShowGateError && !ShowPriceError)
+        //    {
+        //        //var ticket = new Ticket(TicketId = ticketId,Price = price, Gate = gate,Row = row,Seats = seats,TeamId = 0);
+        //    }
+        //}
 
         #endregion
 
