@@ -248,7 +248,30 @@ namespace MyTicketsClient.Services
         private List<User> users;
         public async Task<List<User>> GetUsers()
         {
-            return users.ToList();
+            try
+            {
+                string url = $"{this.baseUrl}GetUsers";
+
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    List<User> result = JsonSerializer.Deserialize<List<User>>(resContent, jsonSerializerOptions);
+
+                    // Store the logged-in user details for further use
+                    
+                    // Return the logged-in user details
+                    return result;
+                }
+                return null;
+            }
+            catch(Exception ex )
+            {
+                return new List<User>();
+            }
+
+
         }
 
         public async Task RemoveUser(User user)
