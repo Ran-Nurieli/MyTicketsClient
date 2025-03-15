@@ -18,10 +18,10 @@ namespace MyTicketsClient.ViewModels
 
         private List<User> fullist;
         
-        private User selectedUser;
-        public User SelectedUser { get => selectedUser; set {  selectedUser = value; OnPropertyChanged(); } }
+        private UserDisp selectedUser;
+        public UserDisp SelectedUser { get => selectedUser; set {  selectedUser = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<UserDisp> Users { get; set; }
 
         public ICommand DeleteUserCommand { get; private set; }
         public ICommand LoadUsersCommand { get; private set; }
@@ -37,17 +37,17 @@ namespace MyTicketsClient.ViewModels
         {
             this.proxy = proxy;
             fullist = new List<User>();
-            Users = new ObservableCollection<User>();
+            Users = new ObservableCollection<UserDisp>();
 
-            DeleteUserCommand = new Command((object obj) => { User u = (User)obj; Users.Remove(u); fullist.Remove(u); OnPropertyChanged(); });
-            LoadUsersCommand = new Command(async () => await LoadStudents());
+            //DeleteUserCommand = new Command();
+            LoadUsersCommand = new Command(LoadStudents);
 
         
         }
 
 
 
-        private async Task LoadStudents()
+        private async void LoadStudents()
         {
             IsRefreshing = true;
 
@@ -55,7 +55,9 @@ namespace MyTicketsClient.ViewModels
             Users.Clear();
             foreach (User user in fullist)
             {
-                Users.Add(user);
+                UserDisp u = new UserDisp();
+                u.Username = user.Username;
+                Users.Add(u);
             }
 
         }
@@ -64,6 +66,11 @@ namespace MyTicketsClient.ViewModels
 
 
 
+    }
 
+
+    public class UserDisp
+    {
+        public string Username { get; set; }
     }
 }

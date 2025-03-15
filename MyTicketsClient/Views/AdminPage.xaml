@@ -20,7 +20,9 @@
                         CornerRadius="40"
                         Text="load users"
                         TextColor="White"
-                        WidthRequest="110" />
+                        WidthRequest="110" 
+                        IsEnabled="True"
+                        />
                     <Button
                         BackgroundColor="Red"
                         Command="{Binding DeleteUserCommand}"
@@ -37,6 +39,13 @@
                 ItemsSource="{Binding Users}"
                 SelectedItem="{Binding SelectedUser}"
                 SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Username}" FontSize="Medium" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
                 <!--  עיצוב הפריסה של הפריטים  -->
                 <CollectionView.ItemsLayout>
