@@ -12,6 +12,9 @@ using System.Net.Http.Headers;
 using Microsoft.Maui.Graphics;
 using ZXing;
 using ZXing.Common;
+using System.Diagnostics.Contracts;
+//using Javax.Xml.Transform;
+using MyTicketsClient.Models;
 //using Java.Security;
 
 namespace MyTicketsClient.ViewModels
@@ -247,8 +250,6 @@ namespace MyTicketsClient.ViewModels
 
         }
 
-        private int gate { get; set; }
-        public int Gate { get => gate; set { gate = value; OnPropertyChanged("Gate"); } }
 
         private int seats {  get; set; }
         public int Seats { get => seats; set { seats = value;OnPropertyChanged("Seats"); } }
@@ -258,14 +259,26 @@ namespace MyTicketsClient.ViewModels
         public SellTicketViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
+            
             StatusMessage = "Select a file to upload.";
             PriceError = "you cant sell a ticket for more than its original price";
+            GateError = "this gate does not exist";
 
         }
 
 
 
-
+        public Command PublishTicket {  get; private set; }
+        public async void OnPublish()
+        {
+            ValidateGate();
+            ValidatePrice();
+            if(!ShowGateError && !ShowPriceError)
+            {
+ 
+                //look at onregister + userDTO 
+            }
+        }
 
         //ticket validation
         #region ticketvalidation
@@ -274,6 +287,37 @@ namespace MyTicketsClient.ViewModels
 
         private string priceError;
         public string PriceError { get => priceError; set { priceError = value; OnPropertyChanged($"{nameof(PriceError)}"); } }
+
+
+        private bool showGateError;
+        public bool ShowGateError { get => showGateError; set { showGateError = value;OnPropertyChanged("ShowGateError"); } }
+
+        private string gateError;
+        public string GateError { get => gateError; set { gateError = value;OnPropertyChanged($"{nameof(GateError)}"); } }
+
+
+        public void ValidatePrice()
+        {
+            if(price > 50 ||  price < 0)
+            {
+                this.showPriceError = true;
+            }
+            else
+            {
+                this.showPriceError= false;
+            }
+        }
+        public void ValidateGate()
+        {
+            if(gate < 1 || gate > 12)
+            {
+                this.ShowGateError = true;
+            }
+            else
+            {
+                this.ShowGateError = false;
+            }
+        }
 
 
         private int price;
@@ -293,9 +337,30 @@ namespace MyTicketsClient.ViewModels
         }
 
 
+        private int gate { get; set; }
+        public int Gate { get => gate; set { Gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
+            if(gate < 1 || gate > 12)
+                {
+                    GateError = "gate is not valid";
+                }
+            }
+        }
+        private int ticketId {  get; set; }
+        public int TicketId { get => ticketId;set { ticketId = value;OnPropertyChanged("TicketId"); } }
 
+        private int teamId {  get; set; }
+        public int TeamId { get => teamId; set { teamId = value; OnPropertyChanged("TeamId"); } }
 
+        //public async void OnPublish()
+        //{
+        //    ValidateGate();
+        //    ValidatePrice();
 
+        //    if(!ShowGateError && !ShowPriceError)
+        //    {
+        //        //var ticket = new Ticket(TicketId = ticketId,Price = price, Gate = gate,Row = row,Seats = seats,TeamId = 0);
+        //    }
+        //}
 
         #endregion
 

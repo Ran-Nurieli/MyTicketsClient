@@ -102,6 +102,20 @@ namespace MyTicketsClient.Services
             }
         }
 
+
+        //public async Task<int?> PublishTicket(Ticket ticket)
+        //{
+        //    string url = $"{this.baseUrl}publishTicket";
+        //    try
+        //    {
+        //        string json = JsonSerializer.Serialize(ticket);
+        //        StringContent content = new StringContent(json, Encoding.UTF8, );
+
+                
+        //    }
+        //}
+
+
         public async Task<int?> Register(User user)
         {
             // Set the URL to point to the specific API endpoint for registering a user
