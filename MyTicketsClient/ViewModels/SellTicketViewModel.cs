@@ -55,7 +55,7 @@ namespace MyTicketsClient.ViewModels
 
         public Command PublishFileCommand => new Command(async () => await PublishFileAsync());
 
-
+       // public Command SellCommand => new Command(async () => await SellTicketAsync());
 
 
 
@@ -236,6 +236,7 @@ namespace MyTicketsClient.ViewModels
 
 
 
+
         private int ticketPrice { get; set; }
         public int TicketPrice { get => ticketPrice; set { ticketPrice = value; OnPropertyChanged("Price"); } }
 
@@ -259,7 +260,8 @@ namespace MyTicketsClient.ViewModels
         public SellTicketViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
-            
+     
+
             StatusMessage = "Select a file to upload.";
             PriceError = "you cant sell a ticket for more than its original price";
             GateError = "this gate does not exist";
@@ -276,6 +278,10 @@ namespace MyTicketsClient.ViewModels
             if(!ShowGateError && !ShowPriceError)
             {
  
+                if(!ShowPriceError && !ShowGateError && !showSeatsError && showRowError)
+                {
+
+                }
                 //look at onregister + userDTO 
             }
         }
@@ -295,6 +301,13 @@ namespace MyTicketsClient.ViewModels
         private string gateError;
         public string GateError { get => gateError; set { gateError = value;OnPropertyChanged($"{nameof(GateError)}"); } }
 
+        private bool showSeatsError;
+        public bool ShowSeatsError { get => showSeatsError; set { showSeatsError = value; OnPropertyChanged("ShowSeatsError"); } }
+
+        private bool showRowError;
+        private bool ShowRowError { get => showRowError; set { showRowError = value; OnPropertyChanged("ShowRowError"); } }
+
+        
 
         public void ValidatePrice()
         {

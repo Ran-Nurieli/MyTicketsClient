@@ -40,7 +40,7 @@
                 SelectedItem="{Binding SelectedUser}"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="ViewModel:UserDisp">
                         <StackLayout Padding="10">
                             <Label Text="{Binding Username}" FontSize="Medium" />
                         </StackLayout>

@@ -30,7 +30,10 @@ namespace MyTicketsClient.Models
             this.Row = ticket.Row;
             this.Seats = ticket.Seats;
             this.TeamId = ticket.TeamId;
-            this.TeamId = 0;
+        }
+        public Models.Ticket ToModel()
+        {
+            return new Models.Ticket(this);
         }
     }
 }

@@ -106,6 +106,12 @@
             Text="publish ticket"
             TextColor="White" />
 
+        <!--<Button
+            Command="{Binding SellCommand}"
+            Text="sell ticket"
+            TextColor="Blue"
+            />-->
+        
 
     </VerticalStackLayout>
 </ContentPage>
