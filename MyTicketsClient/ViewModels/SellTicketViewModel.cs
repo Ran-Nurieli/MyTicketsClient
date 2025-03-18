@@ -260,11 +260,10 @@ namespace MyTicketsClient.ViewModels
         public SellTicketViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
-     
-
             StatusMessage = "Select a file to upload.";
             PriceError = "you cant sell a ticket for more than its original price";
             GateError = "this gate does not exist";
+            PublishTicket = new Command(OnPublish);
 
         }
 
@@ -275,15 +274,15 @@ namespace MyTicketsClient.ViewModels
         {
             ValidateGate();
             ValidatePrice();
-            if(!ShowGateError && !ShowPriceError)
+            ValidateRow();
+            ValidateSeats();    
+            if (!ShowGateError && !ShowPriceError && !ShowRowError && !showSeatsError)
             {
- 
-                if(!ShowPriceError && !ShowGateError && !showSeatsError && showRowError)
-                {
 
-                }
-                //look at onregister + userDTO 
             }
+
+                //look at onregister + userDTO 
+
         }
 
         //ticket validation
@@ -348,6 +347,31 @@ namespace MyTicketsClient.ViewModels
                 }
             }
         }
+        public void ValidateRow()
+        {
+            if (row < 1 || row > 16)
+            {
+                this.ShowRowError = true;
+            }
+            else
+            {
+                this.ShowRowError = false;
+            }
+        }
+
+        public void ValidateSeats()
+        {
+            if (seats < 1 || seats > 40)
+            {
+                this.ShowSeatsError = true;
+            }
+            else
+            {
+                this.ShowSeatsError = false;
+            }
+        }
+
+    
 
 
         private int gate { get; set; }

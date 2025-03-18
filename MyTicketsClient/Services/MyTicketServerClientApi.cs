@@ -115,8 +115,10 @@ namespace MyTicketsClient.Services
         //    }
         //}
 
+  
 
-        public async Task<int?> Register(User user)
+
+            public async Task<int?> Register(User user)
         {
             // Set the URL to point to the specific API endpoint for registering a user
             string url = $"{this.baseUrl}register";
@@ -193,8 +195,31 @@ namespace MyTicketsClient.Services
             }
         }
 
+        public async Task<bool> AddTicket(Ticket ticket)
+        {
+            string url = $"{this.baseUrl}addticket";
+            try
+            {
+                string json = JsonSerializer.Serialize(ticket);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if(response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
 
-        public async Task<bool> UpdateUser(User user)
+
+            public async Task<bool> UpdateUser(User user)
         {
             //Set URI to the specific function API
             string url = $"{this.baseUrl}updateuser";
