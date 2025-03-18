@@ -375,7 +375,7 @@ namespace MyTicketsClient.ViewModels
 
 
         private int gate { get; set; }
-        public int Gate { get => gate; set { Gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
+        public int Gate { get => gate; set { gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
             if(gate < 1 || gate > 12)
                 {
                     GateError = "gate is not valid";

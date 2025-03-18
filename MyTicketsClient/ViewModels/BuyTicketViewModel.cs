@@ -8,6 +8,7 @@ using MyTicketsClient.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MyTicketsClient.Models;
+using System.Linq.Expressions;
 
 namespace MyTicketsClient.ViewModels
 {
@@ -27,8 +28,10 @@ namespace MyTicketsClient.ViewModels
         private List<Ticket> _ticketList;
         private Ticket selectedTicket;
         public Ticket SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
+
         private int selectedIndex {  get; set; }//מיקום הכרטיס ברשימה
         public int SelectedIndex { get => selectedIndex; set { selectedIndex = value; OnPropertyChanged(); } }
+
         public ObservableCollection<int> Place { get; set; } //מקומות
 
         public ObservableCollection<Ticket> TicketList;//אוסף כרטיסים
@@ -37,10 +40,11 @@ namespace MyTicketsClient.ViewModels
         public ICommand ShowTicketsCommand { get; private set; }//הוספת כרטיס
 
         public ICommand DeleteTicketCommand { get; private set; }//מחיקת כרטיס
-
-
         public ICommand FilterCommand { get; private set; }//סינון
         public ICommand ClearFilterCommand { get; private set; }    //ניקוי סינון
+
+        public ICommand BuyTicketCommand { get; private set; }//קניית כרטיס
+
 
 
         private List<Ticket> fullist; // רשימת הכרטיסים
@@ -58,7 +62,7 @@ namespace MyTicketsClient.ViewModels
             TicketList = new ObservableCollection<Ticket>();
             Place = new ObservableCollection<int>();
             errorMessage = "not valid ticket";
-
+            BuyTicketCommand = new Command(async () => await BuyTicket(), () => SelectedTicket != null);
             LoadTicketsCommand = new Command(async () => await LoadTickets());
             ClearTicketsCommand = new Command(ClearTickets, () => Tickets.Count > 0);
 
@@ -66,10 +70,9 @@ namespace MyTicketsClient.ViewModels
             {
                 try
                 {
-                    var isOnSelectedSeat = fullist.Where(x => x.Place == selectedTicket.Place).ToList();
+                    var isSelectedPlace = fullist.Where(x => x.Place == selectedTicket.Place).ToList();
                     Tickets.Clear();
-
-                    foreach (var ticket in isOnSelectedSeat)
+                    foreach (var ticket in isSelectedPlace)
                     {
                         Tickets.Add(ticket);
                     }
@@ -77,13 +80,16 @@ namespace MyTicketsClient.ViewModels
                 catch (Exception ex)
                 {
                     //binding error message
-                    errorMessage = "not valid ticket";
+                    errorMessage = "not valid Gate";
                 }
-            });
+            }
+                );
+        }
 
+        private async Task BuyTicket()
+        {
             
-            
-            
+
         }
 
         private string errorMessage;

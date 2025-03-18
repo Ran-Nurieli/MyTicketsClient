@@ -17,16 +17,13 @@
                     <Button
                         BackgroundColor="Blue"
                         Command="{Binding LoadUsersCommand}"
-                        CornerRadius="40"
+                        IsEnabled="True"
                         Text="load users"
                         TextColor="White"
-                        WidthRequest="110" 
-                        IsEnabled="True"
-                        />
+                        WidthRequest="110" />
                     <Button
                         BackgroundColor="Red"
                         Command="{Binding DeleteUserCommand}"
-                        CornerRadius="40"
                         Text="delete user"
                         TextColor="White"
                         WidthRequest="110" />
@@ -42,7 +39,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ViewModel:UserDisp">
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Username}" FontSize="Medium" />
+                            <Label FontSize="Medium" Text="{Binding Username}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

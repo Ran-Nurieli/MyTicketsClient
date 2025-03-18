@@ -21,13 +21,11 @@
                     <Button
                         BackgroundColor="Green"
                         Command="{Binding LoadTicketsCommand}"
-                        CornerRadius="40"
                         Text="Load Ticket"
                         WidthRequest="110" />
                     <Button
                         BackgroundColor="Beige"
                         Command="{Binding ClearTicketsCommand}"
-                        CornerRadius="40"
                         Text="Clear Tickets"
                         TextColor="Black"
                         WidthRequest="110" />
@@ -70,8 +68,20 @@
                 TextColor="Red"
                 VerticalOptions="Center" />
 
+
+
+            <Button
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="Blue"
+                Text="Buy ticket" 
+                Command="{Binding BuyTicketCommand}"
+                />
+            
+            <!--add binding to buy ticket button-->
         </StackLayout>
 
+        
 
 
     </ScrollView>
