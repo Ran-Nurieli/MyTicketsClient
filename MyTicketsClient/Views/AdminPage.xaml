@@ -40,6 +40,7 @@
                     <DataTemplate x:DataType="ViewModel:UserDisp">
                         <StackLayout Padding="10">
                             <Label FontSize="Medium" Text="{Binding Username}" />
+                            <Label FontSize="Small" Text="{Binding Email}"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

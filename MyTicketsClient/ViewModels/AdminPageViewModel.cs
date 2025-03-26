@@ -57,6 +57,7 @@ namespace MyTicketsClient.ViewModels
             {
                 UserDisp u = new UserDisp();
                 u.Username = user.Username;
+                u.Email = user.Email;
                 Users.Add(u);
             }
 
@@ -72,5 +73,6 @@ namespace MyTicketsClient.ViewModels
     public class UserDisp
     {
         public string Username { get; set; }
+        public string Email { get; set; }
     }
 }
