@@ -30,6 +30,7 @@ namespace MyTicketsClient.ViewModels
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
             NameError = "Name is required";
             EmailError = "Email is required";
+            PhoneError = "Phone Number is required";
             this.serviceProvider = serviceProvider;
         }
 
@@ -45,6 +46,7 @@ namespace MyTicketsClient.ViewModels
                 OnPropertyChanged("ShowNameError");
             }
         }
+       
 
         private string? name;
 
@@ -119,13 +121,56 @@ namespace MyTicketsClient.ViewModels
                 OnPropertyChanged(nameof(UserError));
             }
         }
+       
 
         private void ValidateName()
         {
             this.showNameError =  string.IsNullOrEmpty(Username);
         }
-        #endregion
 
+
+        #endregion
+        #region PhoneValidation
+        private string phone;
+        public string Phone
+        {
+            get => phone;
+            set
+            {
+                phone = value;
+                OnPropertyChanged("Phone");
+            }
+        }
+
+        private string phoneError;
+        public string PhoneError
+        {
+            get => phoneError;
+            set
+            {
+                phoneError = value;
+                OnPropertyChanged("PhoneError");
+            }
+        }
+
+        private bool showPhoneError;
+        public bool ShowPhoneError
+        {
+            get => showPhoneError;
+            set
+            {
+                showPhoneError = value;
+                OnPropertyChanged("ShowPhoneError");
+            }
+        }
+
+
+        private void ValidatePhone()
+        {
+            this.showPhoneError = string.IsNullOrEmpty(Phone);
+        }
+        #endregion
+       
         #region PasswordValidation
         public string? Password
         {
@@ -155,6 +200,7 @@ namespace MyTicketsClient.ViewModels
 
 
         }
+       
 
         public string? PasswordError
         {
@@ -256,7 +302,6 @@ namespace MyTicketsClient.ViewModels
 
 
         }
-
         private string emailError;
 
         public string EmailError
@@ -268,7 +313,6 @@ namespace MyTicketsClient.ViewModels
                 OnPropertyChanged("EmailError");
             }
         }
-
         private void ValidateEmail()
         {
             this.ShowEmailError = string.IsNullOrEmpty(Email);
@@ -370,6 +414,7 @@ namespace MyTicketsClient.ViewModels
         }
 
 
+
         private int age;
 
 
@@ -379,11 +424,12 @@ namespace MyTicketsClient.ViewModels
             ValidateName();
             ValidateEmail();
             ValidateDateOfBirth();
+            ValidatePhone();
 
-            if(!ShowNameError && !ShowEmailError && !ShowPasswordError && !ShowDateOfBirthError)
+            if (!ShowNameError && !ShowEmailError && !ShowPasswordError && !ShowDateOfBirthError && !ShowPhoneError)
             {
   
-                var user = new User { Username = username, Password = password, Email = email, IsAdmin = false, Age = age, Gender = gender };
+                var user = new User { Username = username, Password = password,Phone = phone, Email = email, IsAdmin = false, Age = age, Gender = gender };
                 int? u = await this.proxy.Register(user);
                 if(u != null)
                 {

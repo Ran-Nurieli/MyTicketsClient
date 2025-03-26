@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace MyTicketsClient.ViewModels
 {
-    public class BuyTicketViewModel:ViewModelBase
+    public class BuyTicketViewModel : ViewModelBase
     {
 
         /////filter-price range//gate options
@@ -27,9 +27,9 @@ namespace MyTicketsClient.ViewModels
 
         private List<Ticket> _ticketList;
         private Ticket selectedTicket;
-        public Ticket SelectedTicket { get=>selectedTicket; set { selectedTicket = value; OnPropertyChanged();((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
+        public Ticket SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged(); ((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
 
-        private int selectedIndex {  get; set; }//מיקום הכרטיס ברשימה
+        private int selectedIndex { get; set; }//מיקום הכרטיס ברשימה
         public int SelectedIndex { get => selectedIndex; set { selectedIndex = value; OnPropertyChanged(); } }
 
         public ObservableCollection<int> Place { get; set; } //מקומות
@@ -88,7 +88,7 @@ namespace MyTicketsClient.ViewModels
 
         private async Task BuyTicket()
         {
-            
+            //implement buy ticket
 
         }
 
@@ -127,7 +127,7 @@ namespace MyTicketsClient.ViewModels
         {
             Place.Clear();
             var m = fullist.Select(x => x.Seats).Distinct().OrderBy(x => x);
-            foreach(var x in m)
+            foreach (var x in m)
             {
                 Place.Add(x);
             }
@@ -145,5 +145,12 @@ namespace MyTicketsClient.ViewModels
         }
 
 
+    }
+
+    public class TicketDisp
+    {
+        public string Price { get; set; }
+        public string Place { get; set; }
+        public string Seats { get; set; }
     }
 }

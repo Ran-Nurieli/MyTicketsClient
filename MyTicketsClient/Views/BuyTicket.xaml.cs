@@ -1,9 +1,12 @@
+using MyTicketsClient.ViewModels;
+using System.Runtime.CompilerServices;
 namespace MyTicketsClient.Views;
 
 public partial class BuyTicket : ContentPage
 {
-	public BuyTicket()
+	public BuyTicket(BuyTicketViewModel vm)
 	{
-		InitializeComponent();
+        this.BindingContext = vm;
+        InitializeComponent();
 	}
 }

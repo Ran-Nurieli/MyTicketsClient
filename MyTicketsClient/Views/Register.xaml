@@ -47,7 +47,20 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"
             />
+        <Entry
+            Text="{Binding Phone}"
+            Placeholder="enter phone number"
+            TextColor="Black"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"     
+            />
 
+        <Label
+           Text="{Binding PhoneError}" IsVisible="{Binding ShowPhoneError}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
 
         <Entry
             Text="{Binding Email}"
