@@ -24,22 +24,21 @@ namespace MyTicketsClient.ViewModels
 
         private MyTicketServerClientApi service;
 
-
         private List<Ticket> _ticketList;
-        private Ticket selectedTicket;
-        public Ticket SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged(); ((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
+        private ObservableCollection<TicketDisp> ticketsToDisp;
+        public ObservableCollection<TicketDisp> TicketsToDisp { get => ticketsToDisp; }
+        private string selectedPlace;
+        public string SelectedPlace { get => selectedPlace; set { selectedPlace = value; OnPropertyChanged(); } }
 
-        private int selectedIndex { get; set; }//מיקום הכרטיס ברשימה
-        public int SelectedIndex { get => selectedIndex; set { selectedIndex = value; OnPropertyChanged(); } }
+        private TicketDisp selectedTicket;
+        public TicketDisp SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged(); ((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
 
-        public ObservableCollection<int> Place { get; set; } //מקומות
 
-        public ObservableCollection<Ticket> TicketList;//אוסף כרטיסים
+        public ObservableCollection<string> Places { get; set; } //מקומות
         public ICommand ClearTicketsCommand { get; private set; }  //ריקון הרשימה
         public ICommand LoadTicketsCommand { get; private set; }//טעינה
         public ICommand ShowTicketsCommand { get; private set; }//הוספת כרטיס
 
-        public ICommand DeleteTicketCommand { get; private set; }//מחיקת כרטיס
         public ICommand FilterCommand { get; private set; }//סינון
         public ICommand ClearFilterCommand { get; private set; }    //ניקוי סינון
 
@@ -47,9 +46,6 @@ namespace MyTicketsClient.ViewModels
 
 
 
-        private List<Ticket> fullist; // רשימת הכרטיסים
-
-        public ObservableCollection<Ticket> Tickets { get; private set; }
 
 
         private bool isRefreshing;//רענון מסך
@@ -57,25 +53,33 @@ namespace MyTicketsClient.ViewModels
 
         public BuyTicketViewModel(MyTicketServerClientApi s)
         {
+
             this.service = s;
+            ticketsToDisp = new ObservableCollection<TicketDisp>();
             _ticketList = new List<Ticket>();
-            TicketList = new ObservableCollection<Ticket>();
-            Place = new ObservableCollection<int>();
+            Places = new ObservableCollection<string>();
             errorMessage = "not valid ticket";
             BuyTicketCommand = new Command(async () => await BuyTicket(), () => SelectedTicket != null);
             LoadTicketsCommand = new Command(async () => await LoadTickets());
-            ClearTicketsCommand = new Command(ClearTickets, () => Tickets.Count > 0);
+            ClearFilterCommand = new Command(ClearFilter);
 
             FilterCommand = new Command(async () =>
             {
                 try
                 {
-                    var isSelectedPlace = fullist.Where(x => x.Place == selectedTicket.Place).ToList();
-                    Tickets.Clear();
+                    if (selectedPlace == null)
+                    {
+                        ClearFilter();
+                        return;
+                    }
+                    var isSelectedPlace = _ticketList.Where(x => x.Place == selectedPlace).ToList();
+                    ticketsToDisp.Clear();
                     foreach (var ticket in isSelectedPlace)
                     {
-                        Tickets.Add(ticket);
+                        ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Place, ticket.Seats));
+
                     }
+                    OnPropertyChanged();
                 }
                 catch (Exception ex)
                 {
@@ -84,11 +88,13 @@ namespace MyTicketsClient.ViewModels
                 }
             }
                 );
+            Task.Run(async () => await LoadTickets());
         }
 
         private async Task BuyTicket()
         {
             //implement buy ticket
+            int ticketId = SelectedTicket.TicketId;
 
         }
 
@@ -109,39 +115,35 @@ namespace MyTicketsClient.ViewModels
 
         private async Task LoadTickets()
         {
-            fullist = await service.GetTickets();
-            Tickets.Clear();
-            foreach (var ticket in fullist)
+            _ticketList = await service.GetTickets();
+            ticketsToDisp.Clear();
+            foreach (var ticket in _ticketList)
             {
-                Tickets.Add(ticket);
+                ClearFilter();
             }
 
             UpdatePlace();
-            ((Command)ClearTicketsCommand).ChangeCanExecute();
-            ((Command)LoadTicketsCommand).ChangeCanExecute();
-            ((Command)ClearFilterCommand).ChangeCanExecute();
 
         }
 
         private void UpdatePlace()
         {
-            Place.Clear();
-            var m = fullist.Select(x => x.Seats).Distinct().OrderBy(x => x);
+            Places.Clear();
+            var m = _ticketList.Select(x => x.Place).Distinct().OrderBy(x => x);
             foreach (var x in m)
             {
-                Place.Add(x);
+                Places.Add(x);
             }
-            selectedIndex = -1;
+            selectedPlace = null;
         }
-        private void ClearTickets()
+        private void ClearFilter()
         {
-            Tickets.Clear();
-            Place.Clear();
-            fullist.Clear();
-
-            ((Command)ClearTicketsCommand).ChangeCanExecute();
-            ((Command)LoadTicketsCommand).ChangeCanExecute();
-            ((Command)ClearFilterCommand).ChangeCanExecute();
+            ticketsToDisp.Clear();
+            foreach (var ticket in _ticketList)
+            {
+                ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Place, ticket.Seats));
+            }
+            OnPropertyChanged();
         }
 
 
@@ -149,8 +151,18 @@ namespace MyTicketsClient.ViewModels
 
     public class TicketDisp
     {
-        public string Price { get; set; }
+        public int TicketId { get; set; }
+        public int Price { get; set; }
         public string Place { get; set; }
-        public string Seats { get; set; }
+        public int Seats { get; set; }
+        public string Description { get => $"Gate: {Place},Seat: {Seats}"; }
+        public string PriceDescription { get => $"Price: {Price}"; }
+        public TicketDisp(int ticketId,int price, string place, int seats)
+        {
+            this.TicketId = ticketId;
+            this.Price = price;
+            this.Place = place;
+            this.Seats = seats;
+        }
     }
 }

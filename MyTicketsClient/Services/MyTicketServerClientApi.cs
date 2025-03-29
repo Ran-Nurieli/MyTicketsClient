@@ -271,8 +271,26 @@ namespace MyTicketsClient.Services
         private List<Ticket> tickets;
         public async Task<List<Ticket>> GetTickets()  //need to write in controller
         {
-            await Task.Delay(1000);
-            return tickets.ToList();
+            string url= $"{this.baseUrl}GetTickets";
+            
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    List<Ticket> result = JsonSerializer.Deserialize<List<Ticket>>(resContent, jsonSerializerOptions);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }catch(Exception ex)
+            {
+                return null;
+            }
+
         }
         public async Task RemoveTicket(Ticket ticket)
         {

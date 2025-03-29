@@ -25,20 +25,23 @@
                         WidthRequest="110" />
                     <Button
                         BackgroundColor="Beige"
-                        Command="{Binding ClearTicketsCommand}"
-                        Text="Clear Tickets"
+                        Command="{Binding ClearFilterCommand}"
+                        Text="Clear Filter"
                         TextColor="Black"
                         WidthRequest="110" />
                 </HorizontalStackLayout>
             </Grid>
 
 
-            <CollectionView Margin="10" ItemsSource="{Binding Tickets}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-
-
-                </CollectionView.ItemsLayout>
+            <CollectionView Margin="10" ItemsSource="{Binding TicketsToDisp}" SelectedItem="{Binding SelectedTicket}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModel:TicketDisp">
+                        <StackLayout Padding="10">
+                            <Label FontSize="Medium" Text="{Binding Description}" />
+                            <Label FontSize="Small" Text="{Binding PriceDescription}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>
                     <StackLayout
                         Margin="10"
@@ -53,9 +56,8 @@
 
             <Picker
                 Title="Select Gate"
-                ItemsSource="{Binding Place}"
-                SelectedIndex="{Binding SelectedIndex}"
-                SelectedItem="{Binding SelectedTicket}" />
+                ItemsSource="{Binding Places}"
+                SelectedItem="{Binding SelectedPlace}" />
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                 <Button Command="{Binding FilterCommand}" Text="סנן" />
                 <Button Command="{Binding ClearFilterCommand}" Text="נקה סינון" />

@@ -71,6 +71,9 @@
             VerticalOptions="Center"
             />
 
+        <Button
+            
+            />
 
     </VerticalStackLayout>
 </ContentPage>
