@@ -72,7 +72,11 @@
             />
 
         <Button
-            
+            Text="Edit profile"
+            TextColor="Green"
+            Command="{Binding SaveCommand}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             />
 
     </VerticalStackLayout>
