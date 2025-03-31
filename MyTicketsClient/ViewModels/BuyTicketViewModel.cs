@@ -31,13 +31,13 @@ namespace MyTicketsClient.ViewModels
         public string SelectedPlace { get => selectedPlace; set { selectedPlace = value; OnPropertyChanged(); } }
 
         private TicketDisp selectedTicket;
-        public TicketDisp SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged(); ((Command)ShowTicketsCommand).ChangeCanExecute(); } }//שם כרטיס להוספה
+        public TicketDisp SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged();  } }//שם כרטיס להוספה
 
 
         public ObservableCollection<string> Places { get; set; } //מקומות
         public ICommand ClearTicketsCommand { get; private set; }  //ריקון הרשימה
         public ICommand LoadTicketsCommand { get; private set; }//טעינה
-        public ICommand ShowTicketsCommand { get; private set; }//הוספת כרטיס
+        
 
         public ICommand FilterCommand { get; private set; }//סינון
         public ICommand ClearFilterCommand { get; private set; }    //ניקוי סינון
@@ -59,7 +59,7 @@ namespace MyTicketsClient.ViewModels
             _ticketList = new List<Ticket>();
             Places = new ObservableCollection<string>();
             errorMessage = "not valid ticket";
-            BuyTicketCommand = new Command(async () => await BuyTicket(), () => SelectedTicket != null);
+            BuyTicketCommand = new Command(async () => await BuyTicket());
             LoadTicketsCommand = new Command(async () => await LoadTickets());
             ClearFilterCommand = new Command(ClearFilter);
 
@@ -95,6 +95,16 @@ namespace MyTicketsClient.ViewModels
         {
             //implement buy ticket
             int ticketId = SelectedTicket.TicketId;
+            var result = await service.BuyTicket(ticketId);
+            if (result != null)
+            {
+                await App.Current.MainPage.DisplayAlert("Success", $"to confirm purchase contact- {result}", "OK");
+                await LoadTickets();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Failed to purchase ticket", "OK");
+            }
 
         }
 
@@ -117,12 +127,14 @@ namespace MyTicketsClient.ViewModels
         {
             _ticketList = await service.GetTickets();
             ticketsToDisp.Clear();
-            foreach (var ticket in _ticketList)
+            if(_ticketList == null)
             {
-                ClearFilter();
+                _ticketList = new List<Ticket>();
             }
 
             UpdatePlace();
+            ClearFilter();
+            selectedPlace = null;
 
         }
 

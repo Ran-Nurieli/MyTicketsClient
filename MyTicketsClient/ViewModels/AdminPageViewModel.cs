@@ -40,14 +40,14 @@ namespace MyTicketsClient.ViewModels
             fullist = new List<User>();
             Users = new ObservableCollection<UserDisp>();
 
-            //DeleteUserCommand = new Command();
-            LoadUsersCommand = new Command(LoadStudents);
+            DeleteUserCommand = new Command(async () => await DeleteUser());
+            LoadUsersCommand = new Command(async () => await LoadUsers());
+            Task.Run(async () => await LoadUsers());
 
-        
         }
 
 
-        private async void LoadStudents()
+        private async Task LoadUsers()
         {
             IsRefreshing = true;
 
@@ -63,6 +63,15 @@ namespace MyTicketsClient.ViewModels
 
         }
 
+        private async Task DeleteUser()
+        {
+
+            if (SelectedUser != null)
+            {
+                await proxy.RemoveUser(selectedUser.Email);
+                await LoadUsers();
+            }
+        }
 
 
 

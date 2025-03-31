@@ -2,6 +2,8 @@
 <Shell
     x:Class="MyTicketsClient.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+    x:DataType="ViewModel:AppShellViewModel"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MyTicketsClient.Views"
     Title="MyTicketsClient"
@@ -13,42 +15,46 @@
         <ShellContent
             Title="Home Page"
             ContentTemplate="{DataTemplate local:HomePage}"
+            IsEnabled="{Binding IsGuest}"
             Route="Home Page" />
 
         <ShellContent
             Title="Login"
             ContentTemplate="{DataTemplate local:LoginPage}"
+            IsEnabled="{Binding IsGuest}"
             Route="Login" />
 
         <ShellContent
             Title="Register"
             ContentTemplate="{DataTemplate local:Register}"
+            IsEnabled="{Binding IsGuest}"
             Route="Register" />
         <ShellContent
             Title="Buy Ticket"
             ContentTemplate="{DataTemplate local:BuyTicket}"
+            IsEnabled="{Binding IsLoggedIn}"
             Route="Buy Ticket" />
 
         <ShellContent
             Title="Sell Ticket"
             ContentTemplate="{DataTemplate local:SellTicket}"
+            IsEnabled="{Binding IsLoggedIn}"
             Route="Sell Ticket" />
         <ShellContent
             Title="Profile Page"
             ContentTemplate="{DataTemplate local:NewProfile}"
-            Route="New Profile" />
+            IsEnabled="{Binding IsLoggedIn}"
+            Route="profile" />
         <ShellContent
             Title="AdminPage"
             ContentTemplate="{DataTemplate local:AdminPage}"
+            IsEnabled="{Binding IsManager}"
             Route="Admin Page" />
 
+
+
     </FlyoutItem>
-
-
-
-
-
-
+    <MenuItem Text="Logout" Command="{Binding LogoutCommand}"  />
 
 
 

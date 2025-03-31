@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MyTicketsClient.ViewModels;
+//using Windows.System;
 //using Android.Content;
 
 namespace MyTicketsClient.Services
@@ -292,14 +293,7 @@ namespace MyTicketsClient.Services
             }
 
         }
-        public async Task RemoveTicket(Ticket ticket)
-        {
-            var tck = tickets.Where(x => x.Seats == ticket.Seats && x.Row == ticket.Row).FirstOrDefault();
-            if(tck != null)
-            {
-                tickets.Remove(tck);
-            }
-        }
+
 
         private List<User> users;
         public async Task<List<User>> GetUsers()
@@ -330,12 +324,26 @@ namespace MyTicketsClient.Services
 
         }
 
-        public async Task RemoveUser(User user)
+        public async Task RemoveUser(string email)
         {
-            var us = users.Where(x => x.Email == user.Email).FirstOrDefault();
-            if(us != null)
+            string url = $"{this.baseUrl}RemoveUser";
+
+            try
             {
-                users.Remove(us);
+                string json = JsonSerializer.Serialize(email);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(url),
+                    Content = content
+                };
+                HttpResponseMessage response = await client.SendAsync(request);
+
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
 

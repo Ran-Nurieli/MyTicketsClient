@@ -1,6 +1,8 @@
 ﻿using MyTicketsClient.Models;
 using MyTicketsClient.ViewModels;
 using MyTicketsClient.Services;
+using Microsoft.Extensions.DependencyInjection;
+using MyTicketsClient.Views;
 namespace MyTicketsClient
 {
     public partial class App : Application
@@ -8,14 +10,11 @@ namespace MyTicketsClient
 
 
         public User? LoggedInUser { get; set; } = null!;
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
-
-
-
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new AppShell(serviceProvider.GetService<AppShellViewModel>());
         }
     }
 }

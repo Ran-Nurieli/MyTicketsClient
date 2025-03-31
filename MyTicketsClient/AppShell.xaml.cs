@@ -1,4 +1,5 @@
-﻿using MyTicketsClient.ViewModels;
+﻿//using Microsoft.UI.Xaml.Controls;
+using MyTicketsClient.ViewModels;
 using MyTicketsClient.Views;
 
 namespace MyTicketsClient
@@ -7,15 +8,19 @@ namespace MyTicketsClient
     {
 
         
-        public AppShell()
+        public AppShell(AppShellViewModel vm)
         {
+            this.BindingContext = vm;
             InitializeComponent();
-      
+            
+
 
 
 
 
 
         }
+
+ 
     }
 }

@@ -216,7 +216,7 @@ namespace MyTicketsClient.ViewModels
         public bool ShowPasswordError
         {
             get => showPasswordError;
-            set => showPasswordError = value;
+            set { showPasswordError = value; OnPropertyChanged(nameof(ShowPasswordError)); }
             
 
         }
@@ -254,8 +254,9 @@ namespace MyTicketsClient.ViewModels
             }
             else
             {
-                this.showPasswordError = false;
+                this.ShowPasswordError = false;
             }
+            OnPropertyChanged();
         }
         private bool isPassword = true;
         public bool IsPassword
@@ -334,6 +335,7 @@ namespace MyTicketsClient.ViewModels
             {
                 EmailError = "Email is required";
             }
+            OnPropertyChanged();
         }
         #endregion
 
