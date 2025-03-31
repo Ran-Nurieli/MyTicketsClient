@@ -294,7 +294,6 @@ namespace MyTicketsClient.Services
         }
         public async Task RemoveTicket(Ticket ticket)
         {
-            await Task.Delay (1000);
             var tck = tickets.Where(x => x.Seats == ticket.Seats && x.Row == ticket.Row).FirstOrDefault();
             if(tck != null)
             {
@@ -341,7 +340,36 @@ namespace MyTicketsClient.Services
         }
 
 
+        public async Task<string?> BuyTicket(int ticketId)
+        {
+            string url = $"{this.baseUrl}BuyTicket?ticketId={ticketId}";
 
+            try
+            {
+                // Send an HTTP GET request to the API
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read the response content
+                    string resContent = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize the response to extract the phone number
+                    var result = JsonSerializer.Deserialize<Dictionary<string, string>>(resContent);
+
+                    // Return the phone number if available
+                    return result != null && result.ContainsKey("phoneNumber") ? result["phoneNumber"] : null;
+                }
+                else
+                {
+                    return null; // Return null if the request was not successful
+                }
+            }
+            catch (Exception ex)
+            {
+                return null; // Handle errors gracefully
+            }
+        }
 
 
 

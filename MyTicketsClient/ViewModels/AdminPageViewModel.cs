@@ -7,6 +7,7 @@ using MyTicketsClient.Services;
 using MyTicketsClient.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+//using AVFoundation;
 
 
 namespace MyTicketsClient.ViewModels
@@ -44,7 +45,6 @@ namespace MyTicketsClient.ViewModels
 
         
         }
-
 
 
         private async void LoadStudents()
