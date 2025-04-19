@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+             x:DataType="ViewModel:PurchaseStatusViewModel"
+             xmlns:Model="clr-namespace:MyTicketsClient.Models"
+             x:Class="MyTicketsClient.Views.PurchaseStatus"
+             Title="PurchaseStatus">
+
+    <CollectionView Margin="10" ItemsSource="{Binding tickets}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="ViewModel:MyTicketDisp">
+                <StackLayout Padding="10">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding IsSold}" Value="True">
+                            <Setter Property="BackgroundColor" Value="DarkGray" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <Label FontSize="Medium" Text="{Binding Description}" />
+                    <Label FontSize="Medium" Text="{Binding PriceDescription}"/>
+                    <Label FontSize="Medium" Text="{Binding BuyerDescription}" IsVisible="{Binding IsPurchasePending}"/>
+                    <Button Text="Accept"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}},Path=AcceptedCommand}" 
+                            CommandParameter="{Binding .}"
+                            IsVisible="{Binding IsPurchasePending}"/>
+                    <Button Text="Reject" 
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}},Path=RejectedCommand}" 
+                            IsVisible="{Binding IsPurchasePending}"/>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <StackLayout
+                        Margin="10"
+                        BackgroundColor="LightBlue"
+                        HeightRequest="200"
+                        VerticalOptions="Start" />
+        </CollectionView.EmptyView>
+
+
+
+    </CollectionView>
+</ContentPage>

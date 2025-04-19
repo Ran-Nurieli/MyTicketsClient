@@ -268,6 +268,57 @@ namespace MyTicketsClient.Services
                 return null;
             }
         }
+        public async Task<bool> SetPurchaseStatus(int ticketId,bool IsAccepted)
+        {
+            string url = $"{this.baseUrl}SetPurchaseStatus";
+            try
+            {
+                PurchaseRequestUpdate requestUpdate = new PurchaseRequestUpdate
+                {
+                    TicketId = ticketId,
+                    IsAccepted = IsAccepted
+                };
+                string json = JsonSerializer.Serialize(requestUpdate);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<MyTicket>> GetMyTickets()
+        {
+            string url = $"{this.baseUrl}GetMyTickets";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    List<MyTicket> result = JsonSerializer.Deserialize<List<MyTicket>>(resContent, jsonSerializerOptions);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
         private List<Ticket> tickets;
         public async Task<List<Ticket>> GetTickets()  //need to write in controller

@@ -49,7 +49,12 @@
             Title="AdminPage"
             ContentTemplate="{DataTemplate local:AdminPage}"
             IsEnabled="{Binding IsManager}"
-            Route="Admin Page" />
+            Route="Admin Page" />       
+        <ShellContent
+            Title="PurchaseStatus"
+            ContentTemplate="{DataTemplate local:PurchaseStatus}"
+            IsEnabled="{Binding IsLoggedIn}"
+            Route="Purchase Status" />
 
 
 
