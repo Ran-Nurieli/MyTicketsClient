@@ -56,8 +56,8 @@
 
             <Picker
                 Title="Select Gate"
-                ItemsSource="{Binding Places}"
-                SelectedItem="{Binding SelectedPlace}" />
+                ItemsSource="{Binding Gates}"
+                SelectedItem="{Binding SelectedGate}" />
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                 <Button Command="{Binding FilterCommand}" Text="סנן" />
                 <Button Command="{Binding ClearFilterCommand}" Text="נקה סינון" />

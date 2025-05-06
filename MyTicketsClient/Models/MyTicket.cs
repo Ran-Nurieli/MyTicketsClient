@@ -12,7 +12,7 @@ namespace MyTicketsClient.Models
         public int TicketId { get; set; }
         public string Username { get; set; } = null!;
         public string? TeamName { get; set; } = null!;
-        public string Place { get; set; } = null!;
+        public int Gate { get; set; }
         public int? Row { get; set; }
         public int? Seats { get; set; } = null!;
         public DateTime Date { get; set; }

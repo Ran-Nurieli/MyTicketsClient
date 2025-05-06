@@ -27,14 +27,14 @@ namespace MyTicketsClient.ViewModels
         private List<Ticket> _ticketList;
         private ObservableCollection<TicketDisp> ticketsToDisp;
         public ObservableCollection<TicketDisp> TicketsToDisp { get => ticketsToDisp; }
-        private string selectedPlace;
-        public string SelectedPlace { get => selectedPlace; set { selectedPlace = value; OnPropertyChanged(); } }
+        private int? selectedGate;
+        public int? SelectedGate { get => selectedGate; set { selectedGate = value; OnPropertyChanged(); } }
 
         private TicketDisp selectedTicket;
         public TicketDisp SelectedTicket { get => selectedTicket; set { selectedTicket = value; OnPropertyChanged();  } }//שם כרטיס להוספה
 
 
-        public ObservableCollection<string> Places { get; set; } //מקומות
+        public ObservableCollection<int> Gates { get; set; } //מקומות
         public ICommand ClearTicketsCommand { get; private set; }  //ריקון הרשימה
         public ICommand LoadTicketsCommand { get; private set; }//טעינה
         
@@ -57,7 +57,7 @@ namespace MyTicketsClient.ViewModels
             this.service = s;
             ticketsToDisp = new ObservableCollection<TicketDisp>();
             _ticketList = new List<Ticket>();
-            Places = new ObservableCollection<string>();
+            Gates = new ObservableCollection<int>();
             errorMessage = "not valid ticket";
             BuyTicketCommand = new Command(async () => await BuyTicket());
             LoadTicketsCommand = new Command(async () => await LoadTickets());
@@ -67,16 +67,16 @@ namespace MyTicketsClient.ViewModels
             {
                 try
                 {
-                    if (selectedPlace == null)
+                    if (selectedGate == null)
                     {
                         ClearFilter();
                         return;
                     }
-                    var isSelectedPlace = _ticketList.Where(x => x.Place == selectedPlace).ToList();
+                    var isSelectedGate = _ticketList.Where(x => x.Gate == selectedGate).ToList();
                     ticketsToDisp.Clear();
-                    foreach (var ticket in isSelectedPlace)
+                    foreach (var ticket in isSelectedGate)
                     {
-                        ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Place, ticket.Seats));
+                        ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats));
 
                     }
                     OnPropertyChanged();
@@ -132,28 +132,28 @@ namespace MyTicketsClient.ViewModels
                 _ticketList = new List<Ticket>();
             }
 
-            UpdatePlace();
+            UpdateGate();
             ClearFilter();
-            selectedPlace = null;
+            selectedGate = null;
 
         }
 
-        private void UpdatePlace()
+        private void UpdateGate()
         {
-            Places.Clear();
-            var m = _ticketList.Select(x => x.Place).Distinct().OrderBy(x => x);
+            Gates.Clear();
+            var m = _ticketList.Select(x => x.Gate).Distinct().OrderBy(x => x);
             foreach (var x in m)
             {
-                Places.Add(x);
+                Gates.Add(x);
             }
-            selectedPlace = null;
+            selectedGate = null;
         }
         private void ClearFilter()
         {
             ticketsToDisp.Clear();
             foreach (var ticket in _ticketList)
             {
-                ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Place, ticket.Seats));
+                ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats));
             }
             OnPropertyChanged();
         }
@@ -165,15 +165,15 @@ namespace MyTicketsClient.ViewModels
     {
         public int TicketId { get; set; }
         public int Price { get; set; }
-        public string Place { get; set; }
+        public int Gate { get; set; }
         public int Seats { get; set; }
-        public string Description { get => $"Gate: {Place},Seat: {Seats}"; }
+        public string Description { get => $"Gate: {Gate},Seat: {Seats}"; }
         public string PriceDescription { get => $"Price: {Price}"; }
-        public TicketDisp(int ticketId,int price, string place, int seats)
+        public TicketDisp(int ticketId,int price, int Gate, int seats)
         {
             this.TicketId = ticketId;
             this.Price = price;
-            this.Place = place;
+            this.Gate = Gate;
             this.Seats = seats;
         }
     }

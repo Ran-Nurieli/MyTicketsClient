@@ -12,7 +12,7 @@ namespace MyTicketsClient.Models
 
         public int Price { get; set; }
 
-        public string Place { get; set; }
+        public int Gate { get; set; }
 
         public int Row { get; set; }
 
@@ -26,10 +26,18 @@ namespace MyTicketsClient.Models
         {
             this.TicketId ++;
             this.Price = ticket.Price;
-            this.Place = ticket.Place;
+            this.Gate = ticket.Gate;
             this.Row = ticket.Row;
             this.Seats = ticket.Seats;
             this.TeamId = ticket.TeamId;
+        }   
+        public Ticket(int price,int Gate,int row,int seats,int teamId)
+        {
+            this.Price = price;
+            this.Gate = Gate;
+            this.Row = row;
+            this.Seats = seats;
+            this.TeamId = teamId;
         }
         public Models.Ticket ToModel()
         {

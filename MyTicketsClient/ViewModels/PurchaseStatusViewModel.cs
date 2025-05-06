@@ -42,7 +42,7 @@ namespace MyTicketsClient.ViewModels
             this.tickets = new ObservableCollection<MyTicketDisp>();
             foreach(var ticket in tickets)
             {
-                this.tickets.Add(new MyTicketDisp(ticket.TicketId, ticket.Price, ticket.Place, (int)ticket.Seats, ticket.BuyerUsername, ticket.BuyerPhone, ticket.IsAccepted));
+                this.tickets.Add(new MyTicketDisp(ticket.TicketId, ticket.Price, ticket.Gate, (int)ticket.Seats, ticket.BuyerUsername, ticket.BuyerPhone, ticket.IsAccepted));
             }
             OnPropertyChanged(nameof(tickets));
         }
@@ -54,9 +54,9 @@ namespace MyTicketsClient.ViewModels
     {
         public int TicketId { get; set; }
         public int Price { get; set; }
-        public string Place { get; set; }
+        public int Gate { get; set; }
         public int Seats { get; set; }
-        public string Description { get => $"Gate: {Place},Seat: {Seats}"; }
+        public string Description { get => $"Gate: {Gate},Seat: {Seats}"; }
         public string PriceDescription { get => $"Price: {Price}"; }
         public bool IsSold { get; set; }
         public bool IsPurchasePending { get; set; }
@@ -64,11 +64,11 @@ namespace MyTicketsClient.ViewModels
         public string BuyerPhone { get; set; }
         public string BuyerDescription { get => $"Buyer: {BuyerUesrname}, Phone: {BuyerPhone}"; }
 
-        public MyTicketDisp(int ticketId, int price, string place, int seats, string buyerUsername, string buyerPhone, bool isSold)
+        public MyTicketDisp(int ticketId, int price, int Gate, int seats, string buyerUsername, string buyerPhone, bool isSold)
         {
             this.TicketId = ticketId;
             this.Price = price;
-            this.Place = place;
+            this.Gate = Gate;
             this.Seats = seats;
             this.BuyerPhone = buyerPhone == null? "": buyerPhone;
             this.BuyerUesrname = buyerUsername == null? "": buyerUsername;

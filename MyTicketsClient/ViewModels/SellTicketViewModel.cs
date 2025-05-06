@@ -251,6 +251,7 @@ namespace MyTicketsClient.ViewModels
 
         }
 
+        public Command SellTicketCommand { get; private set; }
 
         private int seats {  get; set; }
         public int Seats { get => seats; set { seats = value;OnPropertyChanged("Seats"); } }
@@ -264,7 +265,7 @@ namespace MyTicketsClient.ViewModels
             PriceError = "you cant sell a ticket for more than its original price";
             GateError = "this gate does not exist";
             PublishTicket = new Command(OnPublish);
-
+            SellTicketCommand = new Command(OnPublish);
         }
 
 
@@ -278,7 +279,13 @@ namespace MyTicketsClient.ViewModels
             ValidateSeats();    
             if (!ShowGateError && !ShowPriceError && !ShowRowError && !showSeatsError)
             {
-
+                var Ticket = new Ticket(Price, gateNum, Row, Seats, TeamId);
+                var result = await proxy.SellTicket(Ticket);
+                await App.Current.MainPage.DisplayAlert("Success", $"Ticket submitted succesfully", "OK");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", $"Error in submitting ticket", "OK");
             }
 
                 //look at onregister + userDTO 
@@ -321,7 +328,7 @@ namespace MyTicketsClient.ViewModels
         }
         public void ValidateGate()
         {
-            if(gate < 1 || gate > 12)
+            if(IsGateValid)
             {
                 this.ShowGateError = true;
             }
@@ -371,19 +378,23 @@ namespace MyTicketsClient.ViewModels
             }
         }
 
-    
+        private int gateNum;
+        private bool IsGateValid;
 
 
-        private int gate { get; set; }
-        public int Gate { get => gate; set { gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
-            if(gate < 1 || gate > 12)
+        private string gate { get; set; }
+        public string Gate { get => gate; set { gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
+ 
+                if(!int.TryParse(gate,out int gateNum))
                 {
-                    GateError = "gate is not valid";
+                    GateError = "Gate is not valid";
+                    IsGateValid = false;
                 }
+
             }
+           
         }
-        private int ticketId {  get; set; }
-        public int TicketId { get => ticketId;set { ticketId = value;OnPropertyChanged("TicketId"); } }
+
 
         private int teamId {  get; set; }
         public int TeamId { get => teamId; set { teamId = value; OnPropertyChanged("TeamId"); } }
