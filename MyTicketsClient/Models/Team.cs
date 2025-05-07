@@ -19,5 +19,10 @@ namespace MyTicketsClient.Models
         public int PriceForTicket { get; set; }
 
         public Team() { }
+
+        public override string ToString()
+        {
+            return $"{TeamName} {TeamCity}";
+        }
     }
 }

@@ -15,6 +15,7 @@ using ZXing.Common;
 using System.Diagnostics.Contracts;
 //using Javax.Xml.Transform;
 using MyTicketsClient.Models;
+using System.Collections.ObjectModel;
 //using Java.Security;
 
 namespace MyTicketsClient.ViewModels
@@ -25,6 +26,39 @@ namespace MyTicketsClient.ViewModels
         private MyTicketServerClientApi proxy;
         private string _statusMessage;
         private FileResult _selectedFile;
+
+        private Team homeTeam;
+        public Team HomeTeam
+        {
+            get => homeTeam;
+            set
+            {
+                homeTeam = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Team awayTeam;
+        public Team AwayTeam
+        {
+            get => awayTeam;
+            set
+            {
+                awayTeam = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Team> teams;
+        public ObservableCollection<Team> Teams { get => teams; set { teams = value; OnPropertyChanged(); } }
+
+        private Team selectedHomeTeam;
+        public Team SelectedHomeTeam { get => selectedHomeTeam; set { selectedHomeTeam = value; OnPropertyChanged(); } }
+
+        private Team selectedAwayTeam;
+        public Team SelectedAwayTeam { get => selectedAwayTeam; set { selectedAwayTeam = value; OnPropertyChanged(); } }
+
+
 
         public string StatusMessage
         {
@@ -238,7 +272,9 @@ namespace MyTicketsClient.ViewModels
 
 
         private int ticketPrice { get; set; }
-        public int TicketPrice { get => ticketPrice; set { ticketPrice = value; OnPropertyChanged("Price"); } }
+        public int TicketPrice { get => ticketPrice; set { ticketPrice = value;
+
+                OnPropertyChanged("Price"); } }
 
 
 
@@ -261,14 +297,20 @@ namespace MyTicketsClient.ViewModels
         public SellTicketViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
+            this.teams = new ObservableCollection<Team>();
             StatusMessage = "Select a file to upload.";
             PriceError = "you cant sell a ticket for more than its original price";
             GateError = "this gate does not exist";
             PublishTicket = new Command(OnPublish);
             SellTicketCommand = new Command(OnPublish);
+            Task.Run(async () => await LoadTeams());
         }
 
-
+       public async Task LoadTeams()
+        {
+            var teamsList = await proxy.GetTeams();
+            this.Teams = new ObservableCollection<Team>(teamsList);
+        }
 
         public Command PublishTicket {  get; private set; }
         public async void OnPublish()
@@ -279,7 +321,7 @@ namespace MyTicketsClient.ViewModels
             ValidateSeats();    
             if (!ShowGateError && !ShowPriceError && !ShowRowError && !showSeatsError)
             {
-                var Ticket = new Ticket(Price, gateNum, Row, Seats, TeamId);
+                var Ticket = new Ticket(ticketPrice, gateNum, Row, Seats, SelectedHomeTeam.TeamId,SelectedAwayTeam.TeamId);
                 var result = await proxy.SellTicket(Ticket);
                 await App.Current.MainPage.DisplayAlert("Success", $"Ticket submitted succesfully", "OK");
             }
@@ -385,7 +427,7 @@ namespace MyTicketsClient.ViewModels
         private string gate { get; set; }
         public string Gate { get => gate; set { gate = value; GateError = "";OnPropertyChanged(nameof(Gate));
  
-                if(!int.TryParse(gate,out int gateNum))
+                if(!int.TryParse(gate,out gateNum))
                 {
                     GateError = "Gate is not valid";
                     IsGateValid = false;

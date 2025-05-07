@@ -20,6 +20,7 @@ namespace MyTicketsClient.Models
         public bool IsAccepted { get; set; } = false;
         public string? BuyerUsername { get; set; } = null!;
         public string? BuyerPhone { get; set; } = null!;
-
+        public string AwayTeam { get; set; } = null!;
+        public string HomeTeam { get; set; } = null!;
     }
 }

@@ -19,6 +19,9 @@ namespace MyTicketsClient.Models
         public int Seats { get; set; }
 
         public int TeamId { get; set; }
+        public int AwayTeamId { get; set; }
+        public string? HomeTeam { get; set; }
+        public string? AwayTeam { get; set; }
 
         public Ticket() { }
 
@@ -31,13 +34,14 @@ namespace MyTicketsClient.Models
             this.Seats = ticket.Seats;
             this.TeamId = ticket.TeamId;
         }   
-        public Ticket(int price,int Gate,int row,int seats,int teamId)
+        public Ticket(int price,int Gate,int row,int seats,int teamId,int awayTeamId)
         {
             this.Price = price;
             this.Gate = Gate;
             this.Row = row;
             this.Seats = seats;
             this.TeamId = teamId;
+            this.AwayTeamId = awayTeamId;
         }
         public Models.Ticket ToModel()
         {

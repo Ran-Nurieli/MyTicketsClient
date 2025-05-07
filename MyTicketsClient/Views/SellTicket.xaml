@@ -94,9 +94,22 @@
             TextColor="Black"
             VerticalOptions="Center" />
 
+            
+        <Picker
+                Title="Home Team"
+                ItemsSource="{Binding Teams}"
+                SelectedItem="{Binding SelectedHomeTeam}"
+                />
+           
+        <Picker
+                Title="Away Team"
+                ItemsSource="{Binding Teams}"
+                SelectedItem="{Binding SelectedAwayTeam}"
+                />
 
 
-        <Label
+
+            <Label
             BackgroundColor="White"
             HorizontalOptions="Center"
             Text="Warning! selling a ticket for more than the original ticket price will get you banned!"

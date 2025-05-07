@@ -345,6 +345,28 @@ namespace MyTicketsClient.Services
 
         }
 
+        public async Task<List<Team>> GetTeams()
+        {
+            string url = this.baseUrl + "GetTeams";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    string resContent = await response.Content.ReadAsStringAsync();
+                    List<Team> result = JsonSerializer.Deserialize<List<Team>>(resContent, jsonSerializerOptions);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         private List<User> users;
         public async Task<List<User>> GetUsers()
@@ -374,6 +396,8 @@ namespace MyTicketsClient.Services
 
 
         }
+
+
 
         public async Task RemoveUser(string email)
         {

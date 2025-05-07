@@ -42,7 +42,7 @@ namespace MyTicketsClient.ViewModels
             this.tickets = new ObservableCollection<MyTicketDisp>();
             foreach(var ticket in tickets)
             {
-                this.tickets.Add(new MyTicketDisp(ticket.TicketId, ticket.Price, ticket.Gate, (int)ticket.Seats, ticket.BuyerUsername, ticket.BuyerPhone, ticket.IsAccepted));
+                this.tickets.Add(new MyTicketDisp(ticket.TicketId, ticket.Price, ticket.Gate, (int)ticket.Seats, ticket.BuyerUsername, ticket.BuyerPhone, ticket.IsAccepted, ticket.HomeTeam, ticket.AwayTeam));
             }
             OnPropertyChanged(nameof(tickets));
         }
@@ -56,7 +56,9 @@ namespace MyTicketsClient.ViewModels
         public int Price { get; set; }
         public int Gate { get; set; }
         public int Seats { get; set; }
-        public string Description { get => $"Gate: {Gate},Seat: {Seats}"; }
+        public string? HomeTeam { get; set; } = null!;
+        public string? AwayTeam { get; set; } = null!;   
+        public string Description { get => $"Gate: {Gate},Seat: {Seats} Home Team: {HomeTeam} Away Team: {AwayTeam}"; }
         public string PriceDescription { get => $"Price: {Price}"; }
         public bool IsSold { get; set; }
         public bool IsPurchasePending { get; set; }
@@ -64,7 +66,7 @@ namespace MyTicketsClient.ViewModels
         public string BuyerPhone { get; set; }
         public string BuyerDescription { get => $"Buyer: {BuyerUesrname}, Phone: {BuyerPhone}"; }
 
-        public MyTicketDisp(int ticketId, int price, int Gate, int seats, string buyerUsername, string buyerPhone, bool isSold)
+        public MyTicketDisp(int ticketId, int price, int Gate, int seats, string buyerUsername, string buyerPhone, bool isSold,string homeTeam,string awayTeam)
         {
             this.TicketId = ticketId;
             this.Price = price;
@@ -74,6 +76,8 @@ namespace MyTicketsClient.ViewModels
             this.BuyerUesrname = buyerUsername == null? "": buyerUsername;
             this.IsSold = isSold;
             this.IsPurchasePending = !isSold && BuyerUesrname != "";
+            this.HomeTeam = homeTeam;
+            this.AwayTeam = awayTeam;
         }
     }
 }

@@ -76,7 +76,7 @@ namespace MyTicketsClient.ViewModels
                     ticketsToDisp.Clear();
                     foreach (var ticket in isSelectedGate)
                     {
-                        ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats));
+                        ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats, ticket.HomeTeam, ticket.AwayTeam));
 
                     }
                     OnPropertyChanged();
@@ -153,7 +153,7 @@ namespace MyTicketsClient.ViewModels
             ticketsToDisp.Clear();
             foreach (var ticket in _ticketList)
             {
-                ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats));
+                ticketsToDisp.Add(new TicketDisp(ticket.TicketId,ticket.Price, ticket.Gate, ticket.Seats, ticket.HomeTeam, ticket.AwayTeam));
             }
             OnPropertyChanged();
         }
@@ -167,14 +167,18 @@ namespace MyTicketsClient.ViewModels
         public int Price { get; set; }
         public int Gate { get; set; }
         public int Seats { get; set; }
-        public string Description { get => $"Gate: {Gate},Seat: {Seats}"; }
+        public string? HomeTeam { get; set; } = null!;
+        public string? AwayTeam { get; set; } = null!;
+        public string Description { get => $"Gate: {Gate},Seat: {Seats} Home Team: {HomeTeam} Away Team: {AwayTeam}"; }
         public string PriceDescription { get => $"Price: {Price}"; }
-        public TicketDisp(int ticketId,int price, int Gate, int seats)
+        public TicketDisp(int ticketId,int price, int Gate, int seats,string homeTeam,string awayTeam)
         {
             this.TicketId = ticketId;
             this.Price = price;
             this.Gate = Gate;
             this.Seats = seats;
+            this.AwayTeam = awayTeam;
+            this.HomeTeam = homeTeam;
         }
     }
 }
