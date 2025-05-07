@@ -1,94 +1,97 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
-             x:DataType="ViewModel:RegisterViewModel"
-             x:Class="MyTicketsClient.Views.Register"  
-             Title="Register">
+<ContentPage
+    x:Class="MyTicketsClient.Views.Register"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
+    Title="Register"
+    x:DataType="ViewModel:RegisterViewModel">
     <VerticalStackLayout>
 
-        <Label 
-            Text="Register"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            TextColor="Black"
+        <Label
             BackgroundColor="White"
             FontSize="Large"
-            
-            />
+            HorizontalOptions="Center"
+            Text="Register"
+            TextColor="Black"
+            VerticalOptions="Center" />
 
 
         <Entry
-            Text="{Binding Username}"
             x:Name="Username"
+            HorizontalOptions="Center"
             Placeholder="הזן שם משתמש"
-            TextColor="Black"   
-            HorizontalOptions="Center"
-            VerticalOptions="Center" 
-            />
+            Text="{Binding Username}"
+            TextColor="Black"
+            VerticalOptions="Center" />
         <Label
-            Text="{Binding NameError}" IsVisible="{Binding ShowNameError}"            
-            TextColor="Red"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            IsVisible="{Binding ShowNameError}"
+            Text="{Binding NameError}"
+            TextColor="Red"
+            VerticalOptions="Center" />
 
         <Entry
-            Text="{Binding Password}"
-            Placeholder="Enter Password"
-            TextColor="Black"
+            HorizontalOptions="Center"
             IsPassword="True"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            />
+            Placeholder="Enter Password"
+            Text="{Binding Password}"
+            TextColor="Black"
+            VerticalOptions="Center" />
         <Label
-            Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"
-            TextColor="Red"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            IsVisible="{Binding ShowPasswordError}"
+            Text="{Binding PasswordError}"
+            TextColor="Red"
+            VerticalOptions="Center" />
         <Entry
-            Text="{Binding Phone}"
+            HorizontalOptions="Center"
             Placeholder="enter phone number"
+            Text="{Binding Phone}"
             TextColor="Black"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"     
-            />
+            VerticalOptions="Center" />
 
         <Label
-           Text="{Binding PhoneError}" IsVisible="{Binding ShowPhoneError}"
-            TextColor="Red"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            IsVisible="{Binding ShowPhoneError}"
+            Text="{Binding PhoneError}"
+            TextColor="Red"
+            VerticalOptions="Center" />
 
         <Entry
-            Text="{Binding Email}"
+            HorizontalOptions="Center"
             Placeholder="Enter Email"
+            Text="{Binding Email}"
             TextColor="Black"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            />
+            VerticalOptions="Center" />
         <Label
-            Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
-            TextColor="Red"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            IsVisible="{Binding ShowEmailError}"
+            Text="{Binding EmailError}"
+            TextColor="Red"
+            VerticalOptions="Center" />
+        <Picker
+            Title="Favorite Team"
+            ItemsSource="{Binding Teams}"
+            SelectedItem="{Binding SelectedFavoriteTeam}" />
 
         <DatePicker
             x:Name="BirthdayPicker"
             Margin="0,10"
             BackgroundColor="White"
             Date="{Binding DateOfBirth}"
+            HorizontalOptions="Center"
             MaximumDate="{Binding MinDate}"
             MinimumDate="1950-01-01"
+            VerticalOptions="Center" />
+
+
+        <Picker
+            x:Name="Gender"
+            Title="Select Gender"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-
-
-        <Picker x:Name="Gender" Title="Select Gender" HorizontalOptions="Center" VerticalOptions="Center" SelectedItem="{Binding Gender}">
+            SelectedItem="{Binding Gender}"
+            VerticalOptions="Center">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Female</x:String>
@@ -96,27 +99,28 @@
                     <x:String>Other</x:String>
 
                 </x:Array>
-                
+
             </Picker.ItemsSource>
-            
+
         </Picker>
-        
-        
-        
 
-        
 
-        
-        
+
+
+
+
+
+
 
 
 
 
         <Button
+            Command="{Binding RegisterCommand}"
+            HorizontalOptions="Center"
+            IsEnabled="{Binding NotInServerCall}"
             Text="Register"
-            VerticalOptions="Center" HorizontalOptions="Center"
-            Command="{Binding RegisterCommand}"  IsEnabled="{Binding NotInServerCall}"
-            />
+            VerticalOptions="Center" />
 
 
 

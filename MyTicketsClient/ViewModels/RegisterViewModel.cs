@@ -10,6 +10,7 @@ using MyTicketsClient.Services;
 //using AndroidX.Annotations;
 //using Java.Security;
 using MyTicketsClient.Models;
+using System.Collections.ObjectModel;
 
 
 namespace MyTicketsClient.ViewModels
@@ -20,18 +21,45 @@ namespace MyTicketsClient.ViewModels
 
         private IServiceProvider serviceProvider;
 
+        private Team favoriteTeam;
+        public Team FavoriteTeam
+        {
+            get => favoriteTeam;
+            set
+            {
+                FavoriteTeam = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Team> teams;
+        public ObservableCollection<Team> Teams { get => teams; set { teams = value; OnPropertyChanged(); } }
+
+        private Team selectedFavoriteTeam;
+        public Team SelectedFavoriteTeam { get => selectedFavoriteTeam; set { selectedFavoriteTeam = value; OnPropertyChanged(); } }
+
+
+
         public RegisterViewModel(MyTicketServerClientApi proxy, IServiceProvider serviceProvider)
         {
             this.proxy = proxy;
+            this.teams = new ObservableCollection<Team>();
             RegisterCommand = new Command(OnRegister);
             CancelCommand = new Command(OnCancel);
             ShowPasswordCommand = new Command(OnShowPassword);
+            Task.Run(async () => await LoadTeams());
             IsPassword = true;
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
             NameError = "Name is required";
             EmailError = "Email is required";
             PhoneError = "Phone Number is required";
             this.serviceProvider = serviceProvider;
+        }
+
+        public async Task LoadTeams()
+        {
+            var teamsList = await proxy.GetTeams();
+            this.Teams = new ObservableCollection<Team>(teamsList);
         }
 
         #region UsernameValidation
