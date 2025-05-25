@@ -60,6 +60,20 @@
 	  <MauiXaml Remove="Views\ProfilePage.xaml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\ball.jpeg" />
+	  <None Remove="Resources\Images\ballcourt.jpg" />
+	  <None Remove="Resources\Images\ballreferee.jpg" />
+	  <None Remove="Resources\Images\dunk.jfif" />
+	  <None Remove="Resources\Images\icon.jfif" />
+	  <None Remove="Resources\Images\iconnew.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\newprofilepic.png" />
+	  <None Remove="Resources\Images\profilepic.jfif" />
+	  <None Remove="Resources\Images\sloukas.jfif" />
+	  <None Remove="Resources\Images\wnba.jfif" />
+	</ItemGroup>
+
 
 
 	<ItemGroup>

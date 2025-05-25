@@ -7,128 +7,109 @@
     Title="Sell Ticket"
     x:DataType="ViewModel:SellTicketViewModel">
 
-    <ScrollView>
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label
-            BackgroundColor="White"
-            FontSize="Large"
-            HorizontalOptions="Center"
-            Text="Upload the file!"
-            TextColor="Black"
-            VerticalOptions="Center" />
+    <Grid>
 
+        <!-- רקע -->
+        <Image Source="ball.jpeg"
+               Aspect="AspectFill"
+               Opacity="0.3"
+               IsVisible="True" />
 
-        <Button
-            Command="{Binding PickFileCommand}"
-            HorizontalOptions="Center"
-            Text="choose a File" />
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="#66000000">
 
-        <!--  Button to upload the selected file  -->
-        <Button
-            Command="{Binding UploadFileCommand}"
-            HorizontalOptions="Center"
-            Text="Upload File" />
+                <!--<Label Text="Upload the file!"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
 
-        <!--  Label to show status message  -->
-        <Label
-            HorizontalOptions="CenterAndExpand"
-            LineBreakMode="WordWrap"
-            MaxLines="5"
-            Text="{Binding StatusMessage}"
-            VerticalOptions="CenterAndExpand" />
+                <Button Text="Choose a File"
+                        Command="{Binding PickFileCommand}"
+                        BackgroundColor="#3949AB"
+                        TextColor="White"
+                        CornerRadius="10" />
 
-        <Label
-            HorizontalOptions="Center"
-            Text="enter the price of the ticket"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Button Text="Upload File"
+                        Command="{Binding UploadFileCommand}"
+                        BackgroundColor="#1E88E5"
+                        TextColor="White"
+                        CornerRadius="10" />-->
 
-        <Entry
-            x:Name="price"
-            HorizontalOptions="Center"
-            Placeholder="enter ticket price"
-            Text="{Binding TicketPrice}"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Label Text="{Binding StatusMessage}"
+                       HorizontalOptions="CenterAndExpand"
+                       LineBreakMode="WordWrap"
+                       MaxLines="5"
+                       TextColor="White"
+                       FontSize="14" />
 
+                <Entry Placeholder="Enter ticket price"
+                       Text="{Binding TicketPrice}"
+                       Keyboard="Numeric"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E"
+                        />
 
-        <Label
-            HorizontalOptions="Center"
-            Text="enter row"
-            TextColor="Black"
-            VerticalOptions="Center" />
-        <Entry
-            x:Name="Row"
-            HorizontalOptions="Center"
-            Placeholder="enter the row"
-            Text="{Binding Row}"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Entry Placeholder="Enter row"
+                       Text="{Binding Row}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E"
+                        />
 
+                <Entry Placeholder="Enter seats"
+                       Text="{Binding Seats}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E"
+                       />
 
-        <Label
-            HorizontalOptions="Center"
-            Text="enter seats"
-            TextColor="Black"
-            VerticalOptions="Center" />
-        <Entry
-            HorizontalOptions="Center"
-            Text="{Binding Seats}"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Entry Placeholder="Enter gate number"
+                       Text="{Binding Gate}"
+                       Keyboard="Numeric"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E"
+                        />
 
-        <Label
-            HorizontalOptions="Center"
-            Text="enter gate number"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Picker Title="Home Team"
+                        ItemsSource="{Binding Teams}"
+                        SelectedItem="{Binding SelectedHomeTeam}"
+                        BackgroundColor="#283593"
+                        TextColor="White"
+                        TitleColor="LightGray" />
 
+                <Picker Title="Away Team"
+                        ItemsSource="{Binding Teams}"
+                        SelectedItem="{Binding SelectedAwayTeam}"
+                        BackgroundColor="#283593"
+                        TextColor="White"
+                        TitleColor="LightGray" />
 
+                <Label Text="⚠️ Warning! Selling for more than original price will get you banned!"
+                       TextColor="Red"
+                       FontAttributes="Bold"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="10,0" />
 
-        <Entry
-            Keyboard="Numeric"
-            x:Name="Gate"
-            HorizontalOptions="Center"
-            Placeholder="enter the gate"
-            Text="{Binding Gate}"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Button Text="Publish Ticket"
+                        Command="{Binding PublishFileCommand}"
+                        BackgroundColor="#43A047"
+                        TextColor="White"
+                        CornerRadius="10"
+                        FontAttributes="Bold" />
 
-            
-        <Picker
-                Title="Home Team"
-                ItemsSource="{Binding Teams}"
-                SelectedItem="{Binding SelectedHomeTeam}"
-                />
-           
-        <Picker
-                Title="Away Team"
-                ItemsSource="{Binding Teams}"
-                SelectedItem="{Binding SelectedAwayTeam}"
-                />
+                <Button Text="Sell Ticket"
+                        Command="{Binding SellTicketCommand}"
+                        BackgroundColor="#FDD835"
+                        TextColor="Black"
+                        CornerRadius="10"
+                        FontAttributes="Bold" />
 
-
-
-            <Label
-            BackgroundColor="White"
-            HorizontalOptions="Center"
-            Text="Warning! selling a ticket for more than the original ticket price will get you banned!"
-            TextColor="Red"
-            VerticalOptions="Center" />
-
-        <Button
-            Command="{Binding PublishFileCommand}"
-            Text="publish ticket"
-            TextColor="White" />
-
-
-        <Button
-            Command="{Binding SellTicketCommand}"
-            Text="Sell Ticket"
-            TextColor="Black"
-            />
-
-
-    </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

@@ -5,29 +5,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
     Title="AdminPage"
+    BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:AdminPageViewModel">
 
+    <ContentPage.BackgroundImageSource>
+        <!-- תמונה דקה עדינה של קווים ממגרש כדורסל -->
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
+
     <ScrollView Margin="10">
-        <StackLayout>
+        <StackLayout Spacing="20">
+
+            <Image 
+                Source="logo.png"
+                HeightRequest="60" 
+                HorizontalOptions="Center" />
+
             <Grid>
                 <HorizontalStackLayout
                     Margin="15"
                     HorizontalOptions="Center"
-                    Spacing="10">
+                    Spacing="15">
                     <Button
-                        BackgroundColor="Blue"
+                        BackgroundColor="#1E3D59"
+                        CornerRadius="10"
                         Command="{Binding LoadUsersCommand}"
-                        IsEnabled="True"
-                        Text="load users"
+                        Text="Load Users"
                         TextColor="White"
-                        WidthRequest="110" />
+                        WidthRequest="120"
+                        />
                     <Button
-                        BackgroundColor="Red"
+                        BackgroundColor="#FF6B6B"
+                        CornerRadius="10"
                         Command="{Binding DeleteUserCommand}"
-                        Text="delete user"
+                        Text="Delete User"
                         TextColor="White"
-                        WidthRequest="110" />
-
+                        WidthRequest="120"
+                         />
                 </HorizontalStackLayout>
             </Grid>
 
@@ -38,31 +52,43 @@
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ViewModel:UserDisp">
-                        <StackLayout Padding="10">
-                            <Label FontSize="Medium" Text="{Binding Username}" />
-                            <Label FontSize="Small" Text="{Binding Email}"/>
-                        </StackLayout>
+                        <Frame
+                            BorderColor="#D3D3D3"
+                            CornerRadius="12"
+                            Padding="10"
+                            BackgroundColor="#FFFFFF"
+                            HasShadow="True">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image 
+                                    Source="player_icon.png" 
+                                    WidthRequest="30" 
+                                    HeightRequest="30" />
+                                <StackLayout>
+                                    <Label FontSize="Medium" Text="{Binding Username}" TextColor="#1E3D59"/>
+                                    <Label FontSize="Small" Text="{Binding Email}" TextColor="#4B6584"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
-                <!--  עיצוב הפריסה של הפריטים  -->
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                    <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
-                <!--  תצוגה כשאין פריטים  -->
+
                 <CollectionView.EmptyView>
                     <StackLayout
                         Margin="10"
-                        BackgroundColor="LightBlue"
-                        HeightRequest="200"
-                        VerticalOptions="Start" />
+                        BackgroundColor="#E0E0E0"
+                        HeightRequest="180"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Padding="20">
+                        <Image Source="empty_court.png" HeightRequest="80"/>
+                        <Label Text="No users found." TextColor="Gray" HorizontalOptions="Center" />
+                    </StackLayout>
                 </CollectionView.EmptyView>
-
-
             </CollectionView>
-
-
-
 
         </StackLayout>
     </ScrollView>

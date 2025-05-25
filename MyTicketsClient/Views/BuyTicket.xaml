@@ -5,10 +5,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
     Title="Buy Ticket!"
+    BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:BuyTicketViewModel">
 
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
+
     <ScrollView Margin="10">
-        <StackLayout>
+        <StackLayout Spacing="20">
+
+            <Image Source="iconnew.png"
+                   HeightRequest="60"
+                   HorizontalOptions="Center" />
+
             <Grid
                 ColumnDefinitions="*"
                 HorizontalOptions="Center"
@@ -19,48 +29,94 @@
                     HorizontalOptions="Center"
                     Spacing="10">
                     <Button
-                        BackgroundColor="Green"
+                        BackgroundColor="#1E8449"
+                        CornerRadius="10"
+                        TextColor="White"
+                       
                         Command="{Binding LoadTicketsCommand}"
                         Text="Load Ticket"
-                        WidthRequest="110" />
+                        WidthRequest="120" />
                     <Button
-                        BackgroundColor="Beige"
+                        BackgroundColor="#F8C471"
+                        CornerRadius="10"
+                        TextColor="Black"
+                        
                         Command="{Binding ClearFilterCommand}"
                         Text="Clear Filter"
-                        TextColor="Black"
-                        WidthRequest="110" />
+                        WidthRequest="120" />
                 </HorizontalStackLayout>
             </Grid>
 
-
-            <CollectionView Margin="10" ItemsSource="{Binding TicketsToDisp}" SelectedItem="{Binding SelectedTicket}" SelectionMode="Single">
+            <CollectionView Margin="10"
+                            ItemsSource="{Binding TicketsToDisp}"
+                            SelectedItem="{Binding SelectedTicket}"
+                            SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ViewModel:TicketDisp">
-                        <StackLayout Padding="10">
-                            <Label FontSize="Medium" Text="{Binding Description}" />
-                            <Label FontSize="Small" Text="{Binding PriceDescription}"/>
-                        </StackLayout>
+                        <Frame
+                            BorderColor="#D3D3D3"
+                            CornerRadius="12"
+                            BackgroundColor="White"
+                            Padding="10"
+                            HasShadow="True">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="ticket_icon.png"
+                                       WidthRequest="30"
+                                       HeightRequest="30" />
+                                <StackLayout>
+                                    <Label FontSize="Medium"
+                                           Text="{Binding Description}"
+                                           TextColor="#1E3D59" />
+                                    <Label FontSize="Small"
+                                           Text="{Binding PriceDescription}"
+                                           TextColor="#4B6584" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>
                     <StackLayout
                         Margin="10"
-                        BackgroundColor="LightBlue"
-                        HeightRequest="200"
-                        VerticalOptions="Start" />
+                        BackgroundColor="#E0E0E0"
+                        HeightRequest="180"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Padding="20">
+                        <Image Source="empty_tickets.png"
+                               HeightRequest="80"/>
+                        <Label Text="No tickets available."
+                               TextColor="Gray"
+                               HorizontalOptions="Center" />
+                    </StackLayout>
                 </CollectionView.EmptyView>
-
-
-
             </CollectionView>
 
             <Picker
                 Title="Select Gate"
+                TitleColor="#1E3D59"
+                TextColor="Black"
+                BackgroundColor="White"
                 ItemsSource="{Binding Gates}"
                 SelectedItem="{Binding SelectedGate}" />
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                <Button Command="{Binding FilterCommand}" Text="סנן" />
-                <Button Command="{Binding ClearFilterCommand}" Text="נקה סינון" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button
+                    Command="{Binding FilterCommand}"
+                    Text="סנן"
+                    BackgroundColor="#2980B9"
+                    TextColor="White"
+                    CornerRadius="10"
+                    WidthRequest="100"
+                    />
+                <Button
+                    Command="{Binding ClearFilterCommand}"
+                    Text="נקה סינון"
+                    BackgroundColor="#D6EAF8"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    WidthRequest="100"
+                   />
             </HorizontalStackLayout>
 
             <Label
@@ -68,26 +124,20 @@
                 IsVisible="{Binding ShowErrorMessage}"
                 Text="{Binding ErrorMessage}"
                 TextColor="Red"
+                FontAttributes="Bold"
                 VerticalOptions="Center" />
-
-
 
             <Button
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                BackgroundColor="Blue"
-                Text="Buy ticket" 
+                BackgroundColor="#2E86C1"
+                TextColor="White"
+                CornerRadius="10"
+                WidthRequest="150"
+                Text="Buy Ticket"
+                FontAttributes="Bold"
                 Command="{Binding BuyTicketCommand}"
-                />
-            
-            <!--add binding to buy ticket button-->
+               />
         </StackLayout>
-
-        
-
-
     </ScrollView>
-
-
-
 </ContentPage>

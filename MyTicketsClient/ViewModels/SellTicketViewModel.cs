@@ -82,12 +82,12 @@ namespace MyTicketsClient.ViewModels
         }
 
         // Command to trigger file picking
-        public Command PickFileCommand => new Command(async () => await PickFileAsync());
+        //public Command PickFileCommand => new Command(async () => await PickFileAsync());
 
-        // Command to trigger file uploading (now saves to local storage)
-        public Command UploadFileCommand => new Command(async () => await UploadFileAsync());
+        //// Command to trigger file uploading (now saves to local storage)
+        //public Command UploadFileCommand => new Command(async () => await UploadFileAsync());
 
-        public Command PublishFileCommand => new Command(async () => await PublishFileAsync());
+        //public Command PublishFileCommand => new Command(async () => await PublishFileAsync());
 
        // public Command SellCommand => new Command(async () => await SellTicketAsync());
 
@@ -97,169 +97,169 @@ namespace MyTicketsClient.ViewModels
 
 
 
-        // Function to pick a file using the file picker
-        private async Task PickFileAsync()
-        {
-            try
-            {
-                // Use the FilePicker to allow the user to pick a file
-                _selectedFile = await FilePicker.PickAsync();
+        //// Function to pick a file using the file picker
+        //private async Task PickFileAsync()
+        //{
+        //    try
+        //    {
+        //        // Use the FilePicker to allow the user to pick a file
+        //        _selectedFile = await FilePicker.PickAsync();
 
-                if (_selectedFile != null)
-                {
-                    StatusMessage = $"File selected: {_selectedFile.FileName}";
-                    var skbitmap = SkiaSharp.SKBitmap.Decode(_selectedFile.FullPath);
-                    var reader = new ZXing.SkiaSharp.BarcodeReader();
-                    // detect and decode the barcode inside the bitmap
-                    var result = reader.Decode(skbitmap);
-                    // do something with the result
-                    if(result != null)
-                    {
-                        var ticketValue = result.Text;
-                    }
-                }
-                else
-                {
-                    StatusMessage = "No file selected.";
-                }
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = "Error selecting file: " + ex.Message;
-            }
-        }
+        //        if (_selectedFile != null)
+        //        {
+        //            StatusMessage = $"File selected: {_selectedFile.FileName}";
+        //            var skbitmap = SkiaSharp.SKBitmap.Decode(_selectedFile.FullPath);
+        //            var reader = new ZXing.SkiaSharp.BarcodeReader();
+        //            // detect and decode the barcode inside the bitmap
+        //            var result = reader.Decode(skbitmap);
+        //            // do something with the result
+        //            if(result != null)
+        //            {
+        //                var ticketValue = result.Text;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            StatusMessage = "No file selected.";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        StatusMessage = "Error selecting file: " + ex.Message;
+        //    }
+        //}
 
 
 
-        // Function to upload the selected file and save it to a local folder
-        private async Task UploadFileAsync()
-        {
-            if (_selectedFile == null)
-            {
-                StatusMessage = "Please select a file first.";
-                return;
-            }
+        //// Function to upload the selected file and save it to a local folder
+        //private async Task UploadFileAsync()
+        //{
+        //    if (_selectedFile == null)
+        //    {
+        //        StatusMessage = "Please select a file first.";
+        //        return;
+        //    }
 
-            try
-            {
-                // Read and encode the file to Base64
-                string base64File = await EncodeFileToBase64Async();
+        //    try
+        //    {
+        //        // Read and encode the file to Base64
+        //        string base64File = await EncodeFileToBase64Async();
 
-                if (base64File != null)
-                {
-                    // Send the Base64 encoded file to the server
-                    await SendToServer(base64File);
-                }
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = "Error uploading file: " + ex.Message;
-            }
-        }
+        //        if (base64File != null)
+        //        {
+        //            // Send the Base64 encoded file to the server
+        //            await SendToServer(base64File);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        StatusMessage = "Error uploading file: " + ex.Message;
+        //    }
+        //}
 
-        // Function to read the selected file and encode it to Base64
-        private async Task<string> EncodeFileToBase64Async()
-        {
-            if (_selectedFile == null)
-            {
-                StatusMessage = "Please select a file first.";
-                return null;
-            }
+        //// Function to read the selected file and encode it to Base64
+        //private async Task<string> EncodeFileToBase64Async()
+        //{
+        //    if (_selectedFile == null)
+        //    {
+        //        StatusMessage = "Please select a file first.";
+        //        return null;
+        //    }
 
-            try
-            {
-                // Open the file stream to read the file content
-                using (var fileStream = await _selectedFile.OpenReadAsync())
-                {
-                    // Create byte array to store file content
-                    byte[] fileBytes = new byte[fileStream.Length];
+        //    try
+        //    {
+        //        // Open the file stream to read the file content
+        //        using (var fileStream = await _selectedFile.OpenReadAsync())
+        //        {
+        //            // Create byte array to store file content
+        //            byte[] fileBytes = new byte[fileStream.Length];
 
-                    // Read the file content into the byte array
-                    await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
+        //            // Read the file content into the byte array
+        //            await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
 
-                    // Encode the byte array to Base64
-                    string base64Encoded = Convert.ToBase64String(fileBytes);
+        //            // Encode the byte array to Base64
+        //            string base64Encoded = Convert.ToBase64String(fileBytes);
 
-                    StatusMessage = "File encoded successfully to Base64.";
-                    return base64Encoded;
-                }
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = "Error encoding file to Base64: " + ex.Message;
-                return null;
-            }
-        }
+        //            StatusMessage = "File encoded successfully to Base64.";
+        //            return base64Encoded;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        StatusMessage = "Error encoding file to Base64: " + ex.Message;
+        //        return null;
+        //    }
+        //}
 
-        // Function to send the Base64 encoded file to the server
-        private async Task SendToServer(string base64File)
-        {
-            var client = new HttpClient();
-            var content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("file", base64File)
-            });
+        //// Function to send the Base64 encoded file to the server
+        //private async Task SendToServer(string base64File)
+        //{
+        //    var client = new HttpClient();
+        //    var content = new FormUrlEncodedContent(new[]
+        //    {
+        //        new KeyValuePair<string, string>("file", base64File)
+        //    });
 
-            var response = await client.PostAsync("https://yourserver.com/upload", content);
+        //    var response = await client.PostAsync("https://yourserver.com/upload", content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                StatusMessage = "File uploaded successfully!";
-            }
-            else
-            {
-                StatusMessage = "Error uploading file to server.";
-            }
-        }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        StatusMessage = "File uploaded successfully!";
+        //    }
+        //    else
+        //    {
+        //        StatusMessage = "Error uploading file to server.";
+        //    }
+        //}
 
-        // Function to publish the selected file (same as before, but you can adjust it to local publishing if needed)
-        private async Task PublishFileAsync()
-        {
-            if (_selectedFile == null)
-            {
-                StatusMessage = "Please select a file";
-                return;
-            }
+        //// Function to publish the selected file (same as before, but you can adjust it to local publishing if needed)
+        //private async Task PublishFileAsync()
+        //{
+        //    if (_selectedFile == null)
+        //    {
+        //        StatusMessage = "Please select a file";
+        //        return;
+        //    }
 
-            try
-            {
-                // Use HttpClient to publish the file to a server
-                using (var httpClient = new HttpClient())
-                {
-                    // Read the file stream into a byte array
-                    using (var fileStream = await _selectedFile.OpenReadAsync())
-                    {
-                        var fileBytes = new byte[fileStream.Length];
-                        await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
+        //    try
+        //    {
+        //        // Use HttpClient to publish the file to a server
+        //        using (var httpClient = new HttpClient())
+        //        {
+        //            // Read the file stream into a byte array
+        //            using (var fileStream = await _selectedFile.OpenReadAsync())
+        //            {
+        //                var fileBytes = new byte[fileStream.Length];
+        //                await fileStream.ReadAsync(fileBytes, 0, (int)fileStream.Length);
 
-                        var fileContent = new ByteArrayContent(fileBytes);
-                        fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+        //                var fileContent = new ByteArrayContent(fileBytes);
+        //                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-                        var formData = new MultipartFormDataContent();
-                        formData.Add(fileContent, "file", _selectedFile.FileName);
+        //                var formData = new MultipartFormDataContent();
+        //                formData.Add(fileContent, "file", _selectedFile.FileName);
 
-                        // Replace with your actual API endpoint for publishing
-                        var apiEndpoint = "https://yourserver.com/publish";
+        //                // Replace with your actual API endpoint for publishing
+        //                var apiEndpoint = "https://yourserver.com/publish";
 
-                        var response = await httpClient.PostAsync(apiEndpoint, formData);
+        //                var response = await httpClient.PostAsync(apiEndpoint, formData);
 
-                        if (response.IsSuccessStatusCode)
-                        {
-                            StatusMessage = "File published successfully!";
-                        }
-                        else
-                        {
-                            StatusMessage = "File publishing failed. Please try again.";
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = "Error publishing file: " + ex.Message;
-                Console.WriteLine(ex);  // Log the exception to see full stack trace
-            }
-        }
+        //                if (response.IsSuccessStatusCode)
+        //                {
+        //                    StatusMessage = "File published successfully!";
+        //                }
+        //                else
+        //                {
+        //                    StatusMessage = "File publishing failed. Please try again.";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        StatusMessage = "Error publishing file: " + ex.Message;
+        //        Console.WriteLine(ex);  // Log the exception to see full stack trace
+        //    }
+        //}
 
  
 

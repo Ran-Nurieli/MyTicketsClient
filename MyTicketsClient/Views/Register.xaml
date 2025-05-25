@@ -6,130 +6,112 @@
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
     Title="Register"
     x:DataType="ViewModel:RegisterViewModel">
-    <VerticalStackLayout>
 
-        <Label
-            BackgroundColor="White"
-            FontSize="Large"
-            HorizontalOptions="Center"
-            Text="Register"
-            TextColor="Black"
-            VerticalOptions="Center" />
+    <Grid>
+        <!-- רקע תמונה -->
+        <Image Source="ballcourt.jpg"
+               Aspect="AspectFill"
+               Opacity="0.3"
+               IsVisible="True" />
 
+        <!-- תוכן עיקרי עם רקע חצי שקוף -->
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15" BackgroundColor="#66000000">
 
-        <Entry
-            x:Name="Username"
-            HorizontalOptions="Center"
-            Placeholder="הזן שם משתמש"
-            Text="{Binding Username}"
-            TextColor="Black"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            IsVisible="{Binding ShowNameError}"
-            Text="{Binding NameError}"
-            TextColor="Red"
-            VerticalOptions="Center" />
+                <Label Text="Register"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       Margin="0,10" />
 
-        <Entry
-            HorizontalOptions="Center"
-            IsPassword="True"
-            Placeholder="Enter Password"
-            Text="{Binding Password}"
-            TextColor="Black"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            IsVisible="{Binding ShowPasswordError}"
-            Text="{Binding PasswordError}"
-            TextColor="Red"
-            VerticalOptions="Center" />
-        <Entry
-            HorizontalOptions="Center"
-            Placeholder="enter phone number"
-            Text="{Binding Phone}"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <Entry x:Name="Username"
+                       Placeholder="הזן שם משתמש"
+                       Text="{Binding Username}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E" />
 
-        <Label
-            HorizontalOptions="Center"
-            IsVisible="{Binding ShowPhoneError}"
-            Text="{Binding PhoneError}"
-            TextColor="Red"
-            VerticalOptions="Center" />
+                <Label IsVisible="{Binding ShowNameError}"
+                       Text="{Binding NameError}"
+                       TextColor="Red"
+                       FontSize="12" />
 
-        <Entry
-            HorizontalOptions="Center"
-            Placeholder="Enter Email"
-            Text="{Binding Email}"
-            TextColor="Black"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            IsVisible="{Binding ShowEmailError}"
-            Text="{Binding EmailError}"
-            TextColor="Red"
-            VerticalOptions="Center" />
-        <Picker
-            Title="Favorite Team"
-            ItemsSource="{Binding Teams}"
-            SelectedItem="{Binding SelectedFavoriteTeam}" />
+                <Entry IsPassword="True"
+                       Placeholder="Enter Password"
+                       Text="{Binding Password}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E" />
 
-        <DatePicker
-            x:Name="BirthdayPicker"
-            Margin="0,10"
-            BackgroundColor="White"
-            Date="{Binding DateOfBirth}"
-            HorizontalOptions="Center"
-            MaximumDate="{Binding MinDate}"
-            MinimumDate="1950-01-01"
-            VerticalOptions="Center" />
+                <Label IsVisible="{Binding ShowPasswordError}"
+                       Text="{Binding PasswordError}"
+                       TextColor="Red"
+                       FontSize="12" />
 
+                <Entry Placeholder="Enter Phone Number"
+                       Text="{Binding Phone}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E" />
 
-        <Picker
-            x:Name="Gender"
-            Title="Select Gender"
-            HorizontalOptions="Center"
-            SelectedItem="{Binding Gender}"
-            VerticalOptions="Center">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Female</x:String>
-                    <x:String>Male</x:String>
-                    <x:String>Other</x:String>
+                <Label IsVisible="{Binding ShowPhoneError}"
+                       Text="{Binding PhoneError}"
+                       TextColor="Red"
+                       FontSize="12" />
 
-                </x:Array>
+                <Entry Placeholder="Enter Email"
+                       Text="{Binding Email}"
+                       TextColor="White"
+                       PlaceholderColor="LightGray"
+                       BackgroundColor="#1A237E" />
 
-            </Picker.ItemsSource>
+                <Label IsVisible="{Binding ShowEmailError}"
+                       Text="{Binding EmailError}"
+                       TextColor="Red"
+                       FontSize="12" />
 
-        </Picker>
+                <Picker Title="Favorite Team"
+                        ItemsSource="{Binding Teams}"
+                        SelectedItem="{Binding SelectedFavoriteTeam}"
+                        BackgroundColor="#283593"
+                        TextColor="White"
+                        TitleColor="LightGray" />
 
+                <DatePicker x:Name="BirthdayPicker"
+                            Date="{Binding DateOfBirth}"
+                            MaximumDate="{Binding MinDate}"
+                            MinimumDate="1950-01-01"
+                            BackgroundColor="#3949AB"
+                            TextColor="White"
+                            Format="dd/MM/yyyy" />
 
+                <Picker x:Name="Gender"
+                        Title="Select Gender"
+                        SelectedItem="{Binding Gender}"
+                        BackgroundColor="#283593"
+                        TextColor="White"
+                        TitleColor="LightGray">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Female</x:String>
+                            <x:String>Male</x:String>
+                            <x:String>Other</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
 
+                <Button Text="Register"
+                        Command="{Binding RegisterCommand}"
+                        IsEnabled="{Binding NotInServerCall}"
+                        BackgroundColor="#FF6F00"
+                        TextColor="White"
+                        CornerRadius="10"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        Margin="0,10" />
 
-
-
-
-
-
-
-
-
-        <Button
-            Command="{Binding RegisterCommand}"
-            HorizontalOptions="Center"
-            IsEnabled="{Binding NotInServerCall}"
-            Text="Register"
-            VerticalOptions="Center" />
-
-
-
-
-
-
-
-
-
-
-    </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
