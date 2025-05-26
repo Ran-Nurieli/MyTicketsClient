@@ -95,12 +95,7 @@
                        HorizontalTextAlignment="Center"
                        Margin="10,0" />
 
-                <Button Text="Publish Ticket"
-                        Command="{Binding PublishFileCommand}"
-                        BackgroundColor="#43A047"
-                        TextColor="White"
-                        CornerRadius="10"
-                        FontAttributes="Bold" />
+
 
                 <Button Text="Sell Ticket"
                         Command="{Binding SellTicketCommand}"
