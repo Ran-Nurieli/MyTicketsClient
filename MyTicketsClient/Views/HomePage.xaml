@@ -3,10 +3,32 @@
     x:Class="MyTicketsClient.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Home Page">
-    <VerticalStackLayout Padding="20">
+    Title="Home Page"
+    BackgroundColor="#F4F6F8">
 
-        <Label Text="Welcome!" />
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
+
+    <VerticalStackLayout Padding="20" Spacing="25" VerticalOptions="Center" HorizontalOptions="Center">
+
+        <Image Source="logo.png"
+               HeightRequest="80"
+               Margin="0,0,0,20"
+               HorizontalOptions="Center" />
+
+        <Label Text="Welcome to MyTickets!"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               />
+
+        <Label Text="Your gateway to top European basketball events"
+               FontSize="18"
+               TextColor="Red"
+               HorizontalTextAlignment="Center"
+               Margin="10,0" />
 
 
 

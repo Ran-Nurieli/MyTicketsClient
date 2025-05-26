@@ -4,332 +4,142 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
-    Title="רכישת כרטיסים"
-    BackgroundColor="#F5F5F5"
+    Title="Buy Ticket!"
+    BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:BuyTicketViewModel">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- צבעים בסגנון כדורסל אירופאי מודרני -->
-            <Color x:Key="PrimaryColor">#003399</Color>
-            <!-- כחול יורוליג -->
-            <Color x:Key="SecondaryColor">#FF6600</Color>
-            <!-- כתום יורוליג -->
-            <Color x:Key="SuccessColor">#2E8B57</Color>
-            <!-- ירוק -->
-            <Color x:Key="NeutralColor">#F5F5DC</Color>
-            <!-- בז' -->
-            <Color x:Key="TextColor">#333333</Color>
-            <Color x:Key="CardColor">#FFFFFF</Color>
-            <Color x:Key="AccentColor">#FFD700</Color>
-            <!-- זהב - לכרטיסים מיוחדים -->
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
 
-            <!-- סגנונות לכפתורים -->
-            <Style x:Key="ActionButtonStyle" TargetType="Button">
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="Padding" Value="15,8" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="WidthRequest" Value="150" />
-                <Setter Property="HeightRequest" Value="45" />
-            </Style>
+    <ScrollView Margin="10">
+        <StackLayout Spacing="20">
 
-            <Style x:Key="FilterButtonStyle" TargetType="Button">
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Padding" Value="12,6" />
-                <Setter Property="BackgroundColor" Value="{StaticResource NeutralColor}" />
-                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-                <Setter Property="WidthRequest" Value="120" />
-            </Style>
+            <Image Source="iconnew.png"
+                   HeightRequest="60"
+                   HorizontalOptions="Center" />
 
-            <Style x:Key="BuyButtonStyle" TargetType="Button">
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="CornerRadius" Value="25" />
-                <Setter Property="Padding" Value="20,12" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="{StaticResource SuccessColor}" />
-                <Setter Property="WidthRequest" Value="200" />
-                <Setter Property="HeightRequest" Value="55" />
-                <Setter Property="FontSize" Value="18" />
-            </Style>
-
-            <!-- סגנון לכרטיסי המשחקים -->
-            <Style x:Key="TicketCardStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{StaticResource CardColor}" />
-                <Setter Property="CornerRadius" Value="12" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="Margin" Value="0,8" />
-                <Setter Property="HasShadow" Value="True" />
-                <Setter Property="BorderColor" Value="#DDDDDD" />
-            </Style>
-
-            <!-- סגנון ל-Picker -->
-            <Style x:Key="CustomPickerStyle" TargetType="Picker">
-                <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Margin" Value="0,10" />
-                <Setter Property="HeightRequest" Value="50" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <Grid RowDefinitions="Auto,*,Auto" Padding="15">
-        <!-- כותרת ראשית -->
-        <StackLayout Grid.Row="0" Margin="0,10,0,20">
-            <Label 
-                Text="רכישת כרטיסים למשחקים"
-                FontSize="24"
-                FontAttributes="Bold"
+            <Grid
+                ColumnDefinitions="*"
                 HorizontalOptions="Center"
-                TextColor="{StaticResource PrimaryColor}"
-                Margin="0,0,0,5"/>
-
-            <Label 
-                Text="בחר כרטיס מהרשימה ושער כניסה"
-                FontSize="16"
-                HorizontalOptions="Center"
-                TextColor="{StaticResource TextColor}"
-                Opacity="0.8"
-                Margin="0,0,0,10"/>
-
-            <!-- פס הפרדה בצבעי הקבוצה -->
-            <Grid ColumnDefinitions="*,2*,*">
-                <BoxView 
-                    Grid.Column="0"
-                    HeightRequest="3" 
-                    HorizontalOptions="Fill"
-                    Color="{StaticResource PrimaryColor}"/>
-                <BoxView 
-                    Grid.Column="1"
-                    HeightRequest="3" 
-                    HorizontalOptions="Fill"
-                    Color="{StaticResource SecondaryColor}"/>
-                <BoxView 
-                    Grid.Column="2"
-                    HeightRequest="3" 
-                    HorizontalOptions="Fill"
-                    Color="{StaticResource PrimaryColor}"/>
+                RowDefinitions="auto"
+                RowSpacing="2">
+                <HorizontalStackLayout
+                    Margin="0,5,0,0"
+                    HorizontalOptions="Center"
+                    Spacing="10">
+                    <Button
+                        BackgroundColor="#1E8449"
+                        CornerRadius="10"
+                        TextColor="White"
+                       
+                        Command="{Binding LoadTicketsCommand}"
+                        Text="Load Ticket"
+                        WidthRequest="120" />
+                    <Button
+                        BackgroundColor="#F8C471"
+                        CornerRadius="10"
+                        TextColor="Black"
+                        
+                        Command="{Binding ClearFilterCommand}"
+                        Text="Clear Filter"
+                        WidthRequest="120" />
+                </HorizontalStackLayout>
             </Grid>
-        </StackLayout>
 
-        <ScrollView Grid.Row="1">
-            <StackLayout Spacing="15">
-                <!-- אזור כפתורי פעולה ראשיים -->
-                <Frame 
-                    BackgroundColor="#F0F0F0"
-                    Padding="15" 
-                    CornerRadius="12"
-                    HasShadow="True"
-                    BorderColor="#DDDDDD"
-                    Margin="0,5,0,10">
-
-                    <Grid ColumnDefinitions="*,*">
-                        <Button
-                            Grid.Column="0"
-                            Style="{StaticResource ActionButtonStyle}"
-                            BackgroundColor="{StaticResource SuccessColor}"
-                            Command="{Binding LoadTicketsCommand}"
-                            Text="טען כרטיסים"
-                            Margin="5" />
-
-                        <Button
-                            Grid.Column="1"
-                            Style="{StaticResource ActionButtonStyle}"
-                            BackgroundColor="{StaticResource NeutralColor}"
-                            TextColor="Black"
-                            Command="{Binding ClearFilterCommand}"
-                            Text="נקה סינון"
-                            Margin="5" />
-                    </Grid>
-                </Frame>
-
-                <!-- רשימת כרטיסים -->
-                <Frame 
-                    BackgroundColor="White"
-                    Padding="10" 
-                    CornerRadius="12"
-                    HasShadow="True"
-                    BorderColor="#DDDDDD"
-                    MinimumHeightRequest="250">
-
-                    <CollectionView 
-                        ItemsSource="{Binding TicketsToDisp}" 
-                        SelectedItem="{Binding SelectedTicket}" 
-                        SelectionMode="Single"
-                        Margin="0,5">
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="ViewModel:TicketDisp">
-                                <Frame Style="{StaticResource TicketCardStyle}">
-                                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
-                                        <!-- אייקון כרטיס -->
-                                        <Image
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            Grid.Column="0"
-                                            Source="ticket_icon.png"
-                                            HeightRequest="40"
-                                            WidthRequest="40"
-                                            Aspect="AspectFit"
-                                            VerticalOptions="Center"
-                                            Margin="0,0,15,0" />
-
-                                        <!-- תיאור הכרטיס -->
-                                        <Label 
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            FontSize="18" 
-                                            FontAttributes="Bold"
-                                            Text="{Binding Description}" 
-                                            TextColor="{StaticResource TextColor}" />
-
-                                        <!-- מחיר הכרטיס -->
-                                        <Label 
-                                            Grid.Row="1"
-                                            Grid.Column="1"
-                                            FontSize="16" 
-                                            Text="{Binding PriceDescription}"
-                                            TextColor="{StaticResource TextColor}"
-                                            Opacity="0.8" />
-
-                                        <!-- סימון מחיר -->
-                                        <Frame 
-                                            Grid.Row="0"
-                                            Grid.Column="2"
-                                            BackgroundColor="{StaticResource SecondaryColor}"
-                                            Padding="10,5"
-                                            CornerRadius="15"
-                                            HasShadow="False"
-                                            VerticalOptions="Start">
-
-                                            <Label 
-                                                Text="{Binding PriceTag}"
-                                                TextColor="White"
-                                                FontAttributes="Bold"
-                                                FontSize="14"
-                                                HorizontalOptions="Center" />
-                                        </Frame>
-
-                                        <!-- קו הפרדה -->
-                                        <BoxView 
-                                            Grid.Row="2"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="3"
-                                            HeightRequest="1"
-                                            Color="#EEEEEE"
-                                            Margin="0,10,0,5"
-                                            IsVisible="{Binding ShowDetails}" />
-                                    </Grid>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                        <!-- תצוגה כשאין פריטים -->
-                        <CollectionView.EmptyView>
-                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="20" VerticalOptions="Center">
-                                <Image
-                                    Grid.Row="0"
-                                    Source="basketball_empty.png"
-                                    HeightRequest="120"
-                                    Opacity="0.6"
-                                    HorizontalOptions="Center" />
-
-                                <Label
-                                    Grid.Row="1"
-                                    Text="אין כרטיסים זמינים כרגע"
-                                    FontSize="18"
-                                    TextColor="{StaticResource TextColor}"
-                                    Opacity="0.7"
-                                    HorizontalOptions="Center"
-                                    Margin="0,20,0,10" />
-
-                                <Label
-                                    Grid.Row="2"
-                                    Text="לחץ על 'טען כרטיסים' כדי לראות את הכרטיסים הזמינים"
-                                    FontSize="14"
-                                    TextColor="{StaticResource TextColor}"
-                                    Opacity="0.5"
-                                    HorizontalOptions="Center" />
-                            </Grid>
-                        </CollectionView.EmptyView>
-                    </CollectionView>
-                </Frame>
-
-                <!-- בחירת שער -->
-                <Frame 
-                    BackgroundColor="White"
-                    Padding="15" 
-                    CornerRadius="12"
-                    HasShadow="True"
-                    BorderColor="#DDDDDD"
-                    Margin="0,5,0,10">
-
-                    <StackLayout Spacing="10">
-                        <Label 
-                            Text="בחר שער כניסה"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            TextColor="{StaticResource TextColor}"
-                            Margin="0,0,0,5" />
-
-                        <Picker
-                            Style="{StaticResource CustomPickerStyle}"
-                            Title="בחר שער כניסה"
-                            ItemsSource="{Binding Gates}"
-                            SelectedItem="{Binding SelectedGate}" />
-
-                        <Grid ColumnDefinitions="*,*" Margin="0,10,0,0">
-                            <Button
-                                Grid.Column="0"
-                                Style="{StaticResource FilterButtonStyle}"
-                                Text="סנן"
-                                Command="{Binding FilterCommand}"
-                                Margin="5,0" />
-
-                            <Button
-                                Grid.Column="1"
-                                Style="{StaticResource FilterButtonStyle}"
-                                Text="נקה סינון"
-                                Command="{Binding ClearFilterCommand}"
-                                Margin="5,0" />
-                        </Grid>
+            <CollectionView Margin="10"
+                            ItemsSource="{Binding TicketsToDisp}"
+                            SelectedItem="{Binding SelectedTicket}"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModel:TicketDisp">
+                        <Frame
+                            BorderColor="#D3D3D3"
+                            CornerRadius="12"
+                            BackgroundColor="White"
+                            Padding="10"
+                            HasShadow="True">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="ticket_icon.png"
+                                       WidthRequest="30"
+                                       HeightRequest="30" />
+                                <StackLayout>
+                                    <Label FontSize="Medium"
+                                           Text="{Binding Description}"
+                                           TextColor="#1E3D59" />
+                                    <Label FontSize="Small"
+                                           Text="{Binding PriceDescription}"
+                                           TextColor="#4B6584" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout
+                        Margin="10"
+                        BackgroundColor="#E0E0E0"
+                        HeightRequest="180"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Padding="20">
+                        <Image Source="empty_tickets.png"
+                               HeightRequest="80"/>
+                        <Label Text="No tickets available."
+                               TextColor="Gray"
+                               HorizontalOptions="Center" />
                     </StackLayout>
-                </Frame>
-            </StackLayout>
-        </ScrollView>
+                </CollectionView.EmptyView>
+            </CollectionView>
 
-        <!-- אזור הודעת שגיאה וכפתור קנייה -->
-        <StackLayout Grid.Row="2" Margin="0,10,0,0" Spacing="15">
-            <Frame 
-                BackgroundColor="#FFEBEB"
-                Padding="15" 
-                CornerRadius="8"
-                HasShadow="False"
-                BorderColor="#FFD0D0"
-                IsVisible="{Binding ShowErrorMessage}">
+            <Picker
+                Title="Select Gate"
+                TitleColor="#1E3D59"
+                TextColor="Black"
+                BackgroundColor="White"
+                ItemsSource="{Binding Gates}"
+                SelectedItem="{Binding SelectedGate}" />
 
-                <Label
-                    Text="{Binding ErrorMessage}"
-                    TextColor="Red"
-                    FontSize="16"
-                    HorizontalOptions="Center" />
-            </Frame>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button
+                    Command="{Binding FilterCommand}"
+                    Text="סנן"
+                    BackgroundColor="#2980B9"
+                    TextColor="White"
+                    CornerRadius="10"
+                    WidthRequest="100"
+                    />
+                <Button
+                    Command="{Binding ClearFilterCommand}"
+                    Text="נקה סינון"
+                    BackgroundColor="#D6EAF8"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    WidthRequest="100"
+                   />
+            </HorizontalStackLayout>
+
+            <Label
+                HorizontalOptions="Center"
+                IsVisible="{Binding ShowErrorMessage}"
+                Text="{Binding ErrorMessage}"
+                TextColor="Red"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
 
             <Button
                 Style="{StaticResource BuyButtonStyle}"
                 Text="רכוש כרטיס"
                 Command="{Binding BuyTicketCommand}"
                 HorizontalOptions="Center"
-                Margin="0,10,0,20">
-                <Button.Shadow>
-                    <Shadow Brush="#88000000" Offset="0,4" Radius="4" Opacity="0.5" />
-                </Button.Shadow>
-            </Button>
+                BackgroundColor="#2E86C1"
+                TextColor="White"
+                CornerRadius="10"
+                WidthRequest="150"
+                Text="Buy Ticket"
+                FontAttributes="Bold"
+                Command="{Binding BuyTicketCommand}"
+               />
         </StackLayout>
-    </Grid>
+    </ScrollView>
 </ContentPage>

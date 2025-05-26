@@ -4,208 +4,92 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
-    Title="ניהול משתמשים"
-    BackgroundColor="#F5F5F5"
+    Title="AdminPage"
+    BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:AdminPageViewModel">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- צבעים בסגנון כדורסל אירופאי מודרני -->
-            <Color x:Key="PrimaryColor">#003399</Color>
-            <!-- כחול יורוליג -->
-            <Color x:Key="SecondaryColor">#FF6600</Color>
-            <!-- כתום יורוליג -->
-            <Color x:Key="DangerColor">#D10A28</Color>
-            <!-- אדום -->
-            <Color x:Key="BackgroundColor">#F5F5F5</Color>
-            <Color x:Key="TextColor">#333333</Color>
-            <Color x:Key="CardColor">#FFFFFF</Color>
+    <ContentPage.BackgroundImageSource>
+        <!-- תמונה דקה עדינה של קווים ממגרש כדורסל -->
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
 
-            <!-- סגנונות לכפתורים -->
-            <Style x:Key="ActionButtonStyle" TargetType="Button">
-                <Setter Property="FontFamily" Value="Arial" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="Padding" Value="15,8" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="WidthRequest" Value="150" />
-            </Style>
+    <ScrollView Margin="10">
+        <StackLayout Spacing="20">
 
-            <!-- סגנון לכרטיסי משתמשים -->
-            <Style x:Key="UserCardStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{StaticResource CardColor}" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="Margin" Value="0,5" />
-                <Setter Property="HasShadow" Value="True" />
-                <Setter Property="BorderColor" Value="#DDDDDD" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+            <Image 
+                Source="logo.png"
+                HeightRequest="60" 
+                HorizontalOptions="Center" />
 
-    <Grid RowDefinitions="Auto,*" Padding="15">
-        <!-- כותרת ראשית עם סגנון כדורסל -->
-        <StackLayout Grid.Row="0" Margin="0,10,0,20">
-            <Label 
-                Text="ניהול משתמשי המערכת"
-                FontSize="24"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                TextColor="{StaticResource PrimaryColor}"/>
-
-            <Label 
-                Text="בחר משתמש לניהול או טען רשימת משתמשים"
-                FontSize="16"
-                HorizontalOptions="Center"
-                TextColor="{StaticResource TextColor}"
-                Opacity="0.8"
-                Margin="0,5,0,15"/>
-
-            <!-- פס הפרדה בצבעי הקבוצה -->
-            <BoxView 
-                HeightRequest="4" 
-                HorizontalOptions="Fill"
-                Color="{StaticResource SecondaryColor}"
-                Margin="50,0" />
-        </StackLayout>
-
-        <Grid Grid.Row="1" RowDefinitions="Auto,*">
-            <!-- אזור כפתורי פעולה -->
-            <Frame 
-                Grid.Row="0"
-                BackgroundColor="#F0F0F0"
-                Padding="15" 
-                Margin="0,0,0,15"
-                CornerRadius="12"
-                HasShadow="True"
-                BorderColor="#DDDDDD">
-
-                <Grid ColumnDefinitions="*,*">
+            <Grid>
+                <HorizontalStackLayout
+                    Margin="15"
+                    HorizontalOptions="Center"
+                    Spacing="15">
                     <Button
-                        Grid.Column="0"
-                        Style="{StaticResource ActionButtonStyle}"
-                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BackgroundColor="#1E3D59"
+                        CornerRadius="10"
                         Command="{Binding LoadUsersCommand}"
-                        IsEnabled="True"
-                        Text="טען משתמשים"
-                        FontSize="16"
-                        Margin="5" />
-
+                        Text="Load Users"
+                        TextColor="White"
+                        WidthRequest="120"
+                        />
                     <Button
-                        Grid.Column="1"
-                        Style="{StaticResource ActionButtonStyle}"
-                        BackgroundColor="{StaticResource DangerColor}"
+                        BackgroundColor="#FF6B6B"
+                        CornerRadius="10"
                         Command="{Binding DeleteUserCommand}"
-                        Text="מחק משתמש"
-                        FontSize="16"
-                        Margin="5" />
-                </Grid>
-            </Frame>
+                        Text="Delete User"
+                        TextColor="White"
+                        WidthRequest="120"
+                         />
+                </HorizontalStackLayout>
+            </Grid>
 
-            <!-- רשימת משתמשים -->
-            <Frame 
-                Grid.Row="1"
-                BackgroundColor="White"
-                Padding="10" 
-                CornerRadius="12"
-                HasShadow="True"
-                BorderColor="#DDDDDD">
+            <CollectionView
+                x:Name="colview"
+                ItemsSource="{Binding Users}"
+                SelectedItem="{Binding SelectedUser}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModel:UserDisp">
+                        <Frame
+                            BorderColor="#D3D3D3"
+                            CornerRadius="12"
+                            Padding="10"
+                            BackgroundColor="#FFFFFF"
+                            HasShadow="True">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image 
+                                    Source="player_icon.png" 
+                                    WidthRequest="30" 
+                                    HeightRequest="30" />
+                                <StackLayout>
+                                    <Label FontSize="Medium" Text="{Binding Username}" TextColor="#1E3D59"/>
+                                    <Label FontSize="Small" Text="{Binding Email}" TextColor="#4B6584"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                <CollectionView
-                    x:Name="colview"
-                    ItemsSource="{Binding Users}"
-                    SelectedItem="{Binding SelectedUser}"
-                    SelectionMode="Single"
-                    Margin="0,5">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="6" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="ViewModel:UserDisp">
-                            <Frame Style="{StaticResource UserCardStyle}" Margin="5,8">
-                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                                    <!-- אייקון משתמש -->
-                                    <Frame
-                                        Grid.Row="0"
-                                        Grid.RowSpan="2"
-                                        Grid.Column="0"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        CornerRadius="20"
-                                        Padding="0"
-                                        IsClippedToBounds="True"
-                                        BackgroundColor="{StaticResource PrimaryColor}"
-                                        VerticalOptions="Center"
-                                        Margin="0,0,15,0">
+                <CollectionView.EmptyView>
+                    <StackLayout
+                        Margin="10"
+                        BackgroundColor="#E0E0E0"
+                        HeightRequest="180"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Padding="20">
+                        <Image Source="empty_court.png" HeightRequest="80"/>
+                        <Label Text="No users found." TextColor="Gray" HorizontalOptions="Center" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
 
-                                        <Label
-                                            Text="{Binding Username, Converter={StaticResource FirstLetterConverter}}"
-                                            TextColor="White"
-                                            FontSize="18"
-                                            FontAttributes="Bold"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center" />
-                                    </Frame>
-
-                                    <!-- פרטי משתמש -->
-                                    <Label 
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        FontSize="18" 
-                                        FontAttributes="Bold"
-                                        Text="{Binding Username}" 
-                                        TextColor="{StaticResource TextColor}"
-                                        Margin="0,0,0,5" />
-
-                                    <StackLayout
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        Spacing="10">
-                                        <Label 
-                                            FontSize="14" 
-                                            Text="{Binding Email}"
-                                            TextColor="{StaticResource TextColor}"
-                                            Opacity="0.7" />
-                                    </StackLayout>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="0" Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
-
-                    <!-- תצוגה כשאין פריטים -->
-                    <CollectionView.EmptyView>
-                        <StackLayout
-                            Margin="20"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center">
-
-                            <Image
-                                Source="basketball_empty.png"
-                                HeightRequest="120"
-                                Opacity="0.6"
-                                HorizontalOptions="Center" />
-
-                            <Label
-                                Text="לא נמצאו משתמשים במערכת"
-                                FontSize="18"
-                                TextColor="{StaticResource TextColor}"
-                                Opacity="0.7"
-                                HorizontalOptions="Center"
-                                Margin="0,20,0,10" />
-
-                            <Label
-                                Text="לחץ על 'טען משתמשים' כדי לרענן את הרשימה"
-                                FontSize="14"
-                                TextColor="{StaticResource TextColor}"
-                                Opacity="0.5"
-                                HorizontalOptions="Center" />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
-                </CollectionView>
-            </Frame>
-        </Grid>
-    </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

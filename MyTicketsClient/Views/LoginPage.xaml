@@ -4,64 +4,67 @@
              xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
              x:DataType="ViewModel:LoginPageViewModel"
              x:Class="MyTicketsClient.Views.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout Padding="20">
+             Title="Login"
+             BackgroundColor="#F4F6F8">
+
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
+
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
+
+        <Image Source="newprofilepic.png"
+               HeightRequest="80"
+               HorizontalOptions="Center" />
 
         <Label 
-            Text="Login Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            TextColor="Black"
-            BackgroundColor="White"
-            FontSize="Large"
-            
-            />
-
-        <Entry
-            x:Name="Email"
-            Placeholder="Enter Email"
-            TextColor="Black"   
+            Text="Welcome Back!"
             HorizontalOptions="Center"
-            VerticalOptions="Center" 
-            Text="{Binding Email}"
-            IsEnabled="{Binding NotInServerCall}"
-            />
+            FontSize="32"
+            FontAttributes="Bold"
+            TextColor="#1E3D59" />
 
-        <Entry
-            Placeholder="הזן סיסמה"
-            TextColor="Black"
-            IsPassword="True"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"  
-            Text="{Binding Password}"
-            IsEnabled="{Binding NotInServerCall}"
-            />
+        <Frame BackgroundColor="White" CornerRadius="16" Padding="20" HasShadow="True" WidthRequest="300">
+            <VerticalStackLayout Spacing="15">
 
+                <Entry
+                    x:Name="Email"
+                    Placeholder="Email"
+                    TextColor="Black"
+                    BackgroundColor="#ECF0F1"
+                    HeightRequest="50"
+                    FontSize="16"
+                    Text="{Binding Email}"
+                    IsEnabled="{Binding NotInServerCall}" />
 
+                <Entry
+                    Placeholder="Password"
+                    IsPassword="True"
+                    TextColor="Black"
+                    BackgroundColor="#ECF0F1"
+                    HeightRequest="50"
+                    FontSize="16"
+                    Text="{Binding Password}"
+                    IsEnabled="{Binding NotInServerCall}" />
 
+                <Button
+                    Text="Login"
+                    BackgroundColor="#2E86C1"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="45"
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding NotInServerCall}" />
 
-        <Button
-            Text="Login"
-            VerticalOptions="Center" HorizontalOptions="Center"
-            Command="{Binding LoginCommand}"  IsEnabled="{Binding NotInServerCall}"
-            />
+                <Label
+                    Text="{Binding ErrorMsg}"
+                    TextColor="Red"
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding ErrorMsg, Converter={StaticResource StringNotEmptyConverter}}" />
+            </VerticalStackLayout>
+        </Frame>
 
-        <Label
-            Text="{Binding ErrorMsg}"
-            TextColor="Red"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-
-
-
-
-
-        <Button Text="Forgot Password? Click!"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                IsEnabled="{Binding NotInServerCall}"
-                
-                />
     </VerticalStackLayout>
 </ContentPage>

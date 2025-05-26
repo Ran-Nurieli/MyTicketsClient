@@ -3,42 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
              x:DataType="ViewModel:PurchaseStatusViewModel"
-             xmlns:Model="clr-namespace:MyTicketsClient.Models"
              x:Class="MyTicketsClient.Views.PurchaseStatus"
-             Title="PurchaseStatus">
+             Title="Purchase Status"
+             BackgroundColor="#1E1E2F">
+    <!-- כחול-שחור מודרני -->
 
-    <CollectionView Margin="10" ItemsSource="{Binding tickets}">
+    <CollectionView Margin="15"
+                    ItemsSource="{Binding tickets}"
+                    SelectionMode="None">
+
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="ViewModel:MyTicketDisp">
-                <StackLayout Padding="10">
-                    <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding IsSold}" Value="True">
-                            <Setter Property="BackgroundColor" Value="DarkGray" />
-                        </DataTrigger>
-                    </StackLayout.Triggers>
-                    <Label FontSize="Medium" Text="{Binding Description}" />
-                    <Label FontSize="Medium" Text="{Binding PriceDescription}"/>
-                    <Label FontSize="Medium" Text="{Binding BuyerDescription}" IsVisible="{Binding IsPurchasePending}"/>
-                    <Button Text="Accept"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}},Path=AcceptedCommand}" 
-                            CommandParameter="{Binding .}"
-                            IsVisible="{Binding IsPurchasePending}"/>
-                    <Button Text="Reject" 
-                            CommandParameter="{Binding .}"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}},Path=RejectedCommand}" 
-                            IsVisible="{Binding IsPurchasePending}"/>
-                </StackLayout>
+                <Frame Margin="0,0,0,15"
+                       Padding="15"
+                       CornerRadius="12"
+                       HasShadow="True"
+                       BackgroundColor="{Binding IsSold, Converter={StaticResource SoldColorConverter}}">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding Description}"
+                               FontAttributes="Bold"
+                               FontSize="16"
+                               TextColor="Black" />
+
+                        <Label Text="{Binding PriceDescription}"
+                               FontSize="14"
+                               TextColor="#F39C12" />
+                        <!-- כתום כהה -->
+
+                        <Label Text="{Binding BuyerDescription}"
+                               FontSize="13"
+                               TextColor="#EC7063"
+                               IsVisible="{Binding IsPurchasePending}" />
+
+                        <HorizontalStackLayout IsVisible="{Binding IsPurchasePending}" Spacing="12">
+                            <Button Text="Accept"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}}, Path=AcceptedCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#27AE60"
+                                    TextColor="Black"
+                                    CornerRadius="10"
+                                    WidthRequest="100"
+                                    HeightRequest="40" />
+
+                            <Button Text="Reject"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:PurchaseStatusViewModel}}, Path=RejectedCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#C0392B"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    WidthRequest="100"
+                                    HeightRequest="40" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
+
         <CollectionView.EmptyView>
-            <StackLayout
-                        Margin="10"
-                        BackgroundColor="LightBlue"
-                        HeightRequest="200"
-                        VerticalOptions="Start" />
+            <StackLayout Padding="20" BackgroundColor="#2C3E50" HeightRequest="200">
+                <Label Text="No tickets found"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="16" />
+            </StackLayout>
         </CollectionView.EmptyView>
-
-
 
     </CollectionView>
 </ContentPage>

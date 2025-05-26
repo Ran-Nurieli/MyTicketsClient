@@ -4,80 +4,50 @@
              xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
              x:DataType="ViewModel:ProfilePageViewModel"
              x:Class="MyTicketsClient.Views.NewProfile"
-             Title="Profile">
-    <VerticalStackLayout Padding="20">
+             Title="Edit Profile"
+             BackgroundColor="#F4F6F8">
 
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="ballcourt.jpg" />
+    </ContentPage.BackgroundImageSource>
 
-        <Label
-            Text="enter new Username:"
-            BackgroundColor="White"
-            TextColor="Black"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-        <Entry
-            Text="{Binding Name}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            TextColor="Black"
-            BackgroundColor="White"
-            />
-        <Label
-            Text="{Binding NameError}" IsVisible="{Binding ShowNameError}"
-            TextColor="Red"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
 
+            <Image Source="newprofilepic.png"
+                   HeightRequest="80"
+                   HorizontalOptions="Center" />
 
-        <Label
-            Text="enter new Email"
-            BackgroundColor="White"
-            TextColor="Black"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-        <Entry
-            Text="{Binding Email}"
-            BackgroundColor="White"
-            TextColor="Black"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-        <Label
-            Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}"
-            TextColor="Red"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+            <Frame BackgroundColor="White" CornerRadius="16" Padding="20" HasShadow="True" WidthRequest="320">
+                <VerticalStackLayout Spacing="15">
 
-        <Label
-            Text="Enter new Password"
-            TextColor="Black"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-        <Entry
-            Text="{Binding Password}" IsVisible="{Binding PasswordError}"
-            TextColor="Black"
-            BackgroundColor="White"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-        <Label
-            Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}"
-            TextColor="Red"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+                    <!-- Username -->
+                    <Label Text="Username" FontSize="14" TextColor="#1E3D59" />
+                    <Entry Text="{Binding Name}" BackgroundColor="#ECF0F1" TextColor="Black" />
+                    <Label Text="{Binding NameError}" TextColor="Red" FontSize="12" IsVisible="{Binding ShowNameError}" />
 
-        <Button
-            Text="Edit profile"
-            TextColor="Green"
-            Command="{Binding SaveCommand}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
+                    <!-- Email -->
+                    <Label Text="Email" FontSize="14" TextColor="#1E3D59" />
+                    <Entry Text="{Binding Email}" BackgroundColor="#ECF0F1" TextColor="Black" />
+                    <Label Text="{Binding EmailError}" TextColor="Red" FontSize="12" IsVisible="{Binding ShowEmailError}" />
 
-    </VerticalStackLayout>
+                    <!-- Password -->
+                    <Label Text="Password" FontSize="14" TextColor="#1E3D59" />
+                    <Entry Text="{Binding Password}" IsPassword="True" BackgroundColor="#ECF0F1" TextColor="Black" />
+                    <Label Text="{Binding PasswordError}" TextColor="Red" FontSize="12" IsVisible="{Binding ShowPasswordError}" />
+
+                    <!-- Save Button -->
+                    <Button Text="Save Changes"
+                            Command="{Binding SaveCommand}"
+                            BackgroundColor="#2E86C1"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontAttributes="Bold"
+                            HeightRequest="45" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

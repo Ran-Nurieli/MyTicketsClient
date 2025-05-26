@@ -459,7 +459,7 @@ namespace MyTicketsClient.ViewModels
             if (!ShowNameError && !ShowEmailError && !ShowPasswordError && !ShowDateOfBirthError && !ShowPhoneError)
             {
   
-                var user = new User { Username = username, Password = password,Phone = phone, Email = email, IsAdmin = false, Age = age, Gender = gender };
+                var user = new User { Username = username, Password = password,Phone = phone, Email = email, IsAdmin = false, Age = age, Gender = gender ,FavoriteTeamId = SelectedFavoriteTeam.TeamId};
                 int? u = await this.proxy.Register(user);
                 if(u != null)
                 {
