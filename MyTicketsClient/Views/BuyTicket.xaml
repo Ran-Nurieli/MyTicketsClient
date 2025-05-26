@@ -129,7 +129,6 @@
 
             <Button
                 Style="{StaticResource BuyButtonStyle}"
-                Text="רכוש כרטיס"
                 Command="{Binding BuyTicketCommand}"
                 HorizontalOptions="Center"
                 BackgroundColor="#2E86C1"
@@ -138,7 +137,6 @@
                 WidthRequest="150"
                 Text="Buy Ticket"
                 FontAttributes="Bold"
-                Command="{Binding BuyTicketCommand}"
                />
         </StackLayout>
     </ScrollView>

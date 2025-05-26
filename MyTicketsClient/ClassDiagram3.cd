@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyTicketsClient.ViewModels.AdminPageViewModel" Collapsed="true">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACIAAABAAAgFQAAAAAAAAAAAAAAAAIIAAACAAAA=</HashCode>
+      <FileName>ViewModels\AdminPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.UserDisp" Collapsed="true">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AdminPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.AppShellViewModel" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAABgAACAAAAAAAAAAAABAAAAAAASAAAAAIA=</HashCode>
+      <FileName>ViewModels\AppShellViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.BuyTicketViewModel" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QwAIEAEMgBBIFQgAQAUAAAAAAAAAAgAAAEAAAAIAAAA=</HashCode>
+      <FileName>ViewModels\BuyTicketViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.TicketDisp" Collapsed="true">
+    <Position X="8.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAhAAAAAgAAAAAAAAgAABAAAAAAAAAhAAA=</HashCode>
+      <FileName>ViewModels\BuyTicketViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.HomePageViewModel" Collapsed="true">
+    <Position X="8.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\HomePageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.LoginPageViewModel" Collapsed="true">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAggAAAAAgAAAAABAACGQAAAAkCAAAA=</HashCode>
+      <FileName>ViewModels\LoginPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.ProfilePageViewModel" Collapsed="true">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIABAAgAAyAMAAggBIAAIAQgAAAHIgACAAIBAoAEAQA=</HashCode>
+      <FileName>ViewModels\ProfilePageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.PurchaseStatusViewModel" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAEAAACAAgABAAAAAAAAAAAAAAAAAAAAAAAggA=</HashCode>
+      <FileName>ViewModels\PurchaseStatusViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.MyTicketDisp" Collapsed="true">
+    <Position X="7" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAhAAAQAgAAAAAAABggABEAAAAAAAQhAAA=</HashCode>
+      <FileName>ViewModels\PurchaseStatusViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.RegisterViewModel" Collapsed="true">
+    <Position X="15.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UIQBCDgEAzgMQIikBYCYpA0oAAAXIgCmAA5BIogAAQA=</HashCode>
+      <FileName>ViewModels\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.SellTicketViewModel" Collapsed="true">
+    <Position X="16.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBJGEABaQpQAggCAgkQgAICAAgQAiAYAgkAgJApAAg=</HashCode>
+      <FileName>ViewModels\SellTicketViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAABAAAAgQAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MyTicketsClient.Views.AdminPage" Collapsed="true">
+    <Position X="20.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AdminPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.BuyTicket" Collapsed="true">
+    <Position X="22.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\BuyTicket.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.HomePage" Collapsed="true">
+    <Position X="24.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HomePage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.LoginPage" Collapsed="true">
+    <Position X="20.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\LoginPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.NewProfile" Collapsed="true">
+    <Position X="22.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\NewProfile.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.PurchaseStatus" Collapsed="true">
+    <Position X="24.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PurchaseStatus.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.Register" Collapsed="true">
+    <Position X="20.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Register.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Views.SellTicket" Collapsed="true">
+    <Position X="22.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\SellTicket.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyTicketsClient.Services.MyTicketServerClientApi" Collapsed="true">
+    <Position X="18.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YgEAQBAEABAAAAAAAAEAAAACQQABAgAAAAAQJAAAgAE=</HashCode>
+      <FileName>Services\MyTicketServerClientApi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
