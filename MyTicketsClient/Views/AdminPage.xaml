@@ -8,10 +8,7 @@
     BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:AdminPageViewModel">
 
-    <ContentPage.BackgroundImageSource>
-        <!-- תמונה דקה עדינה של קווים ממגרש כדורסל -->
-        <FileImageSource File="ballcourt.jpg" />
-    </ContentPage.BackgroundImageSource>
+
 
     <ScrollView Margin="10">
         <StackLayout Spacing="20">
@@ -52,23 +49,11 @@
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ViewModel:UserDisp">
-                        <Frame
-                            BorderColor="#D3D3D3"
-                            CornerRadius="12"
-                            Padding="10"
-                            BackgroundColor="#FFFFFF"
-                            HasShadow="True">
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Image 
-                                    Source="player_icon.png" 
-                                    WidthRequest="30" 
-                                    HeightRequest="30" />
+
                                 <StackLayout>
                                     <Label FontSize="Medium" Text="{Binding Username}" TextColor="#1E3D59"/>
                                     <Label FontSize="Small" Text="{Binding Email}" TextColor="#4B6584"/>
                                 </StackLayout>
-                            </StackLayout>
-                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 

@@ -8,9 +8,7 @@
     BackgroundColor="#F4F6F8"
     x:DataType="ViewModel:BuyTicketViewModel">
 
-    <ContentPage.BackgroundImageSource>
-        <FileImageSource File="ballcourt.jpg" />
-    </ContentPage.BackgroundImageSource>
+
 
     <ScrollView Margin="10">
         <StackLayout Spacing="20">
@@ -53,26 +51,22 @@
                             SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ViewModel:TicketDisp">
-                        <Frame
-                            BorderColor="#D3D3D3"
-                            CornerRadius="12"
-                            BackgroundColor="White"
-                            Padding="10"
-                            HasShadow="True">
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Image Source="ticket_icon.png"
-                                       WidthRequest="30"
-                                       HeightRequest="30" />
+
                                 <StackLayout>
-                                    <Label FontSize="Medium"
+                                    <Label FontSize="Small"
+                                           Text="{Binding Game}"
+                                           TextColor="#1E3D59"
+                                           LineBreakMode="WordWrap"/>
+                                    <Label FontSize="Small"
                                            Text="{Binding Description}"
-                                           TextColor="#1E3D59" />
+                                           TextColor="#1E3D59"
+                                           LineBreakMode="WordWrap"/>
+
                                     <Label FontSize="Small"
                                            Text="{Binding PriceDescription}"
-                                           TextColor="#4B6584" />
+                                           TextColor="#4B6584"
+                                           LineBreakMode="WordWrap"/>
                                 </StackLayout>
-                            </StackLayout>
-                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>

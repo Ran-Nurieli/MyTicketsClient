@@ -135,6 +135,7 @@ namespace MyTicketsClient.ViewModels
             UpdateGate();
             ClearFilter();
             selectedGate = null;
+            OnPropertyChanged();
 
         }
 
@@ -169,7 +170,8 @@ namespace MyTicketsClient.ViewModels
         public int Seats { get; set; }
         public string? HomeTeam { get; set; } = null!;
         public string? AwayTeam { get; set; } = null!;
-        public string Description { get => $"Gate: {Gate},Seat: {Seats} Home Team: {HomeTeam} Away Team: {AwayTeam}"; }
+        public string Description { get => $"Gate: {Gate}\nSeat: {Seats}"; }
+        public string Game { get => $"{HomeTeam} vs {AwayTeam}"; }
         public string PriceDescription { get => $"Price: {Price}"; }
         public TicketDisp(int ticketId,int price, int Gate, int seats,string homeTeam,string awayTeam)
         {
