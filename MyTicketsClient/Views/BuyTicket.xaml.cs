@@ -8,5 +8,15 @@ public partial class BuyTicket : ContentPage
 	{
         this.BindingContext = vm;
         InitializeComponent();
+
+
 	}
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is BuyTicketViewModel vm)
+        {
+            Task.Run(async () => await vm.LoadTickets());
+        }
+    }
 }

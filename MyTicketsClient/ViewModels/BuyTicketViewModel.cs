@@ -123,7 +123,7 @@ namespace MyTicketsClient.ViewModels
 
 
 
-        private async Task LoadTickets()
+        public async Task LoadTickets()
         {
             _ticketList = await service.GetTickets();
             ticketsToDisp.Clear();

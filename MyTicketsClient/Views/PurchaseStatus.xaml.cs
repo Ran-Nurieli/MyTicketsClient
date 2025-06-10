@@ -8,5 +8,15 @@ public partial class PurchaseStatus : ContentPage
 	{
 		this.BindingContext = vm;
 		InitializeComponent();
-	}
+
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is PurchaseStatusViewModel vm)
+        {
+            Task.Run(async () => await vm.UpdateTickets());
+        }
+    }
 }
