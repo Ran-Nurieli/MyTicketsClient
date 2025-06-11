@@ -13,8 +13,8 @@ namespace MyTicketsClient
         public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-
-            MainPage = new AppShell(serviceProvider.GetService<AppShellViewModel>());
+            MainPage = serviceProvider.GetService<LoginTabs>();
+            
         }
     }
 }

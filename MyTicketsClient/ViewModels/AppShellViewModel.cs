@@ -64,7 +64,9 @@ namespace MyTicketsClient.ViewModels
         public void Refresh()
         {
             this.currentUser = ((App)Application.Current).LoggedInUser;
-            OnPropertyChanged();
+            OnPropertyChanged("IsLoggedIn");
+            OnPropertyChanged("IsManager");
+            OnPropertyChanged("IsGuest");
         }
     }
 }

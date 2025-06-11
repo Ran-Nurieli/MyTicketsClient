@@ -118,10 +118,8 @@ public class LoginPageViewModel : ViewModelBase
         {
             ErrorMsg = "";
             //Navigate to the main page
-            AppShell shell = serviceProvider.GetService<AppShell>();
-            AppShellViewModel appShellViewModel = serviceProvider.GetService<AppShellViewModel>();
-            appShellViewModel.Refresh();
-            await Shell.Current.GoToAsync("///profile");
+            Application.Current.MainPage = serviceProvider.GetService<AppShell>();
+            
         }
     }
 

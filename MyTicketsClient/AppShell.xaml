@@ -2,72 +2,44 @@
 <Shell
     x:Class="MyTicketsClient.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
-    x:DataType="ViewModel:AppShellViewModel"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModel="clr-namespace:MyTicketsClient.ViewModels"
     xmlns:local="clr-namespace:MyTicketsClient.Views"
     Title="MyTicketsClient"
-    Shell.FlyoutBehavior="Disabled">
+    x:DataType="ViewModel:AppShellViewModel"
+    Shell.FlyoutBehavior="Flyout">
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
 
         <ShellContent
-            Title="Home Page"
-            ContentTemplate="{DataTemplate local:HomePage}"
-            IsEnabled="{Binding IsGuest}"
-            IsVisible="{Binding IsGuest}"
-            Route="Home Page" />
-
-        <ShellContent
-            Title="Login"
-            ContentTemplate="{DataTemplate local:LoginPage}"
-            IsEnabled="{Binding IsGuest}"
-            IsVisible="{Binding IsGuest}"
-            Route="Login" />
-
-        <ShellContent
-            Title="Register"
-            ContentTemplate="{DataTemplate local:Register}"
-            IsEnabled="{Binding IsGuest}"
-            IsVisible="{Binding IsGuest}"
-            Route="Register" />
+            Title="Profile Page"
+            ContentTemplate="{DataTemplate local:NewProfile}"
+            Route="profile" />
         <ShellContent
             Title="Buy Ticket"
             ContentTemplate="{DataTemplate local:BuyTicket}"
-            IsEnabled="{Binding IsLoggedIn}"
-            IsVisible="{Binding IsLoggedIn}"
             Route="Buy Ticket" />
 
         <ShellContent
             Title="Sell Ticket"
             ContentTemplate="{DataTemplate local:SellTicket}"
-            IsEnabled="{Binding IsLoggedIn}"
-            IsVisible="{Binding IsLoggedIn}"
             Route="Sell Ticket" />
-        <ShellContent
-            Title="Profile Page"
-            ContentTemplate="{DataTemplate local:NewProfile}"
-            IsEnabled="{Binding IsLoggedIn}"
-            IsVisible="{Binding IsLoggedIn}"
-            Route="profile" />
+
         <ShellContent
             Title="AdminPage"
             ContentTemplate="{DataTemplate local:AdminPage}"
-            IsEnabled="{Binding IsManager}"
             IsVisible="{Binding IsManager}"
-            Route="Admin Page" />       
+            Route="Admin Page" />
         <ShellContent
             Title="PurchaseStatus"
             ContentTemplate="{DataTemplate local:PurchaseStatus}"
-            IsEnabled="{Binding IsLoggedIn}"
-            IsVisible="{Binding IsLoggedIn}"
             Route="Purchase Status" />
 
 
 
     </FlyoutItem>
-    <MenuItem Text="Logout" Command="{Binding LogoutCommand}"  />
+    <MenuItem Command="{Binding LogoutCommand}" Text="Logout" />
 
 
 
