@@ -21,6 +21,7 @@ namespace MyTicketsClient.Models
         public int? FavoriteTeamId { get; set; } = null!;
 
 
+
         public User() { }
 
         public User(Models.User user)

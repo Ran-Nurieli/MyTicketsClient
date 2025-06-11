@@ -25,12 +25,12 @@ namespace MyTicketsClient.Services
 
         //with tunnel
         // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
-        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://ht0ck9lb-5198.euw.devtunnels.ms/api/TicketServerApi/" : "http://localhost:5198/api/TicketServerApi/";
-        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5198.uks1.devtunnels.ms/images/" : "http://localhost:5198/images/";
+        //public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://ht0ck9lb-5198.euw.devtunnels.ms/api/TicketServerApi/" : "http://localhost:5198/api/TicketServerApi/";
+        //public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5198.uks1.devtunnels.ms/images/" : "http://localhost:5198/images/";
 
 
-        //public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5198/api/TicketServerApi/" : "http://localhost:5198/api/TicketServerApi/";
-        //public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5198/images/" : "http://localhost:5198/images/";
+        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5198/api/TicketServerApi/" : "http://localhost:5198/api/TicketServerApi/";
+        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5198/images/" : "http://localhost:5198/images/";
 
 
         // אובייקט של מחלקת השירות שמכיל את כתובת הבסיס לשרת

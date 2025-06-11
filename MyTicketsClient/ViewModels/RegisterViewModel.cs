@@ -47,7 +47,8 @@ namespace MyTicketsClient.ViewModels
             RegisterCommand = new Command(OnRegister);
             CancelCommand = new Command(OnCancel);
             ShowPasswordCommand = new Command(OnShowPassword);
-            Task.Run(async () => await LoadTeams());
+            Teams = new ObservableCollection<Team>();
+            LoadTeams();
             IsPassword = true;
             PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
             NameError = "Name is required";
@@ -56,10 +57,11 @@ namespace MyTicketsClient.ViewModels
             this.serviceProvider = serviceProvider;
         }
 
-        public async Task LoadTeams()
+        public async void LoadTeams()
         {
             var teamsList = await proxy.GetTeams();
-            this.Teams = new ObservableCollection<Team>(teamsList);
+            if (teamsList != null)
+                this.Teams = new ObservableCollection<Team>(teamsList);
         }
 
         #region UsernameValidation
@@ -463,7 +465,12 @@ namespace MyTicketsClient.ViewModels
                 int? u = await this.proxy.Register(user);
                 if(u != null)
                 {
-                    await Shell.Current.GoToAsync("///Login");
+                    //await Shell.Current.GoToAsync("///Login");
+                    User loggedInUser = await proxy.LoginAsync(new LoginInfo { Email = user.Email, Password = user.Password });
+                    ((App)(Application.Current)).LoggedInUser = loggedInUser;
+                    Application.Current.MainPage = serviceProvider.GetService<AppShell>();
+                    
+                    InServerCall = false;
                 }
             }
 
