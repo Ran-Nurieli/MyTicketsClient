@@ -16,44 +16,52 @@
             Title="Home Page"
             ContentTemplate="{DataTemplate local:HomePage}"
             IsEnabled="{Binding IsGuest}"
+            IsVisible="{Binding IsGuest}"
             Route="Home Page" />
 
         <ShellContent
             Title="Login"
             ContentTemplate="{DataTemplate local:LoginPage}"
             IsEnabled="{Binding IsGuest}"
+            IsVisible="{Binding IsGuest}"
             Route="Login" />
 
         <ShellContent
             Title="Register"
             ContentTemplate="{DataTemplate local:Register}"
             IsEnabled="{Binding IsGuest}"
+            IsVisible="{Binding IsGuest}"
             Route="Register" />
         <ShellContent
             Title="Buy Ticket"
             ContentTemplate="{DataTemplate local:BuyTicket}"
             IsEnabled="{Binding IsLoggedIn}"
+            IsVisible="{Binding IsLoggedIn}"
             Route="Buy Ticket" />
 
         <ShellContent
             Title="Sell Ticket"
             ContentTemplate="{DataTemplate local:SellTicket}"
             IsEnabled="{Binding IsLoggedIn}"
+            IsVisible="{Binding IsLoggedIn}"
             Route="Sell Ticket" />
         <ShellContent
             Title="Profile Page"
             ContentTemplate="{DataTemplate local:NewProfile}"
             IsEnabled="{Binding IsLoggedIn}"
+            IsVisible="{Binding IsLoggedIn}"
             Route="profile" />
         <ShellContent
             Title="AdminPage"
             ContentTemplate="{DataTemplate local:AdminPage}"
             IsEnabled="{Binding IsManager}"
+            IsVisible="{Binding IsManager}"
             Route="Admin Page" />       
         <ShellContent
             Title="PurchaseStatus"
             ContentTemplate="{DataTemplate local:PurchaseStatus}"
             IsEnabled="{Binding IsLoggedIn}"
+            IsVisible="{Binding IsLoggedIn}"
             Route="Purchase Status" />
 
 
