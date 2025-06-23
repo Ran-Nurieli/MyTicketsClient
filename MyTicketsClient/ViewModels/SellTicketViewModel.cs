@@ -318,8 +318,9 @@ namespace MyTicketsClient.ViewModels
             ValidateGate();
             ValidatePrice();
             ValidateRow();
-            ValidateSeats();    
-            if (!ShowGateError && !ShowPriceError && !ShowRowError && !showSeatsError)
+            ValidateSeats();
+            ValidateTeams();
+            if (!ShowGateError && !ShowPriceError && !ShowRowError && !showSeatsError && !showTeamsError)
             {
                 var Ticket = new Ticket(ticketPrice, gateNum, Row, Seats, SelectedHomeTeam.TeamId,SelectedAwayTeam.TeamId);
                 var result = await proxy.SellTicket(Ticket);
@@ -356,6 +357,8 @@ namespace MyTicketsClient.ViewModels
         private bool ShowRowError { get => showRowError; set { showRowError = value; OnPropertyChanged("ShowRowError"); } }
 
         
+        private bool showTeamsError;
+        public bool ShowTeamsError { get => showTeamsError; set { showTeamsError = value; OnPropertyChanged("ShowTeamsError"); } }
 
         public void ValidatePrice()
         {
@@ -377,6 +380,18 @@ namespace MyTicketsClient.ViewModels
             else
             {
                 this.ShowGateError = false;
+            }
+        }
+
+        public void ValidateTeams()
+        {
+            if (SelectedHomeTeam == null || SelectedAwayTeam == null)
+            {
+                this.ShowTeamsError = true;
+            }
+            else
+            {
+                this.ShowTeamsError = false;
             }
         }
 
